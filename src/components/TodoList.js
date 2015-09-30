@@ -1,14 +1,13 @@
 'use strict'
 
 import React from 'react-native'
-import styles from '../styles/styles';
+import styles from '../styles/styles'
+
+import TodoItem from './TodoItem'
 
 var {
   StyleSheet,
-  View,
   ListView,
-  TouchableHighlight,
-  Text
 } = React
 
 export default class TodoList extends React.Component {
@@ -40,26 +39,10 @@ export default class TodoList extends React.Component {
     return(
       <ListView
         dataSource={this.state.dataSource}
-        renderRow={this._renderRow}
+        renderRow={(rowData) => <TodoItem item={rowData} />}
         style={styles.todosList}
         contentContainerStyle={styles.todosListContainer}
       />
     )
-  }
-
-  _renderRow(rowData: string, sectionID: number, rowID: number) {
-    return (
-      <View>
-        <TouchableHighlight>
-          <View style={styles.todo}>
-            <Text style={[styles.text, rowData.complete && styles.completed]}>
-               {rowData.text}
-            </Text>
-          </View>
-        </TouchableHighlight>
-
-        <View style={styles.hr}/>
-      </View>
-    );
   }
 }
