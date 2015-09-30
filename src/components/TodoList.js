@@ -11,7 +11,7 @@ var {
   Text
 } = React
 
-export default class MainComponent extends React.Component {
+export default class TodoList extends React.Component {
   constructor(props, context) {
     super(props, context);
 
@@ -28,7 +28,7 @@ export default class MainComponent extends React.Component {
           text: 'This is the second todo',
           complete: false
         }, {
-          id: 4,
+          id: 3,
           text: 'This is the third todo',
           complete: false
         }
@@ -41,7 +41,8 @@ export default class MainComponent extends React.Component {
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this._renderRow}
-        style={styles.listView}
+        style={styles.todosList}
+        contentContainerStyle={styles.todosListContainer}
       />
     )
   }
@@ -50,8 +51,8 @@ export default class MainComponent extends React.Component {
     return (
       <View>
         <TouchableHighlight>
-          <View style={styles.container}>
-            <Text style={styles.text}>
+          <View style={styles.todo}>
+            <Text style={[styles.text, rowData.complete && styles.completed]}>
                {rowData.text}
             </Text>
           </View>

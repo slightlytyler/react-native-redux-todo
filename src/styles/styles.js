@@ -5,9 +5,23 @@ import React from 'react-native';
 var { StyleSheet } = React;
 
 export default StyleSheet.create({
-    navigator: {flex: 1},
+    navigator: {
+        flex: 1
+    },
 
-    container: {
+    todosContainer: {
+        flex: 1
+    },
+
+    todosList: {
+        flex: 1
+    },
+
+    todosListContainer: {
+        flex: 1
+    },
+
+    todo: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
@@ -23,7 +37,7 @@ export default StyleSheet.create({
     },
 
     button: {
-        height: 36,
+        height: 50,
         backgroundColor: '#48BBEC',
         alignSelf: 'stretch',
         justifyContent: 'center'
@@ -40,13 +54,6 @@ export default StyleSheet.create({
         borderRadius: 0,
     },
 
-    todo: {
-        marginTop: 100,
-        flex: 1,
-        padding: 10,
-        backgroundColor: '#ffffff',
-    },
-
     text: {
         fontSize: 18,
         marginLeft: 5,
@@ -55,7 +62,8 @@ export default StyleSheet.create({
     },
 
     completed: {
-        color: '#cccccc'
+        color: '#5bbd72',
+        textDecorationLine: 'line-through'
     },
 
     hr: {

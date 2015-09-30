@@ -5,10 +5,9 @@ import { Provider } from 'react-redux/native'
 
 import configureStore from '../configureStore'
 
-import ExampleApp from './example'
-import TodosApp from './todos'
-
 import styles from '../styles/styles';
+
+import Todos from './todos'
 
 var { NavigatorIOS } = React;
 
@@ -20,7 +19,8 @@ export default class react_native_starter extends React.Component {
       <Provider store={configureStore()}>
         {() => <NavigatorIOS
                 style={styles.navigator}
-                initialRoute={{component: TodosApp, title: 'Todos'}}/>}
+                initialRoute={{component: Todos, title: 'Todos'}}/>
+        }
       </Provider>
     )
   }
