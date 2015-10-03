@@ -1,8 +1,8 @@
 'use strict'
 
 import React from 'react-native'
-import styles from '../styles/styles'
 
+import styles from '../styles/styles'
 import TodoItem from './TodoItem'
 
 var {
@@ -17,21 +17,7 @@ export default class TodoList extends React.Component {
     var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
     this.state = {
-      dataSource: ds.cloneWithRows([
-        {
-          id: 1,
-          text: 'This is the first todo',
-          complete: true
-        }, {
-          id: 2,
-          text: 'This is the second todo',
-          complete: false
-        }, {
-          id: 3,
-          text: 'This is the third todo',
-          complete: false
-        }
-      ])
+      dataSource: ds.cloneWithRows(this.props.todos.toJS())
     };
   }
 

@@ -12,12 +12,14 @@ var {
 
 export default class TodoItem extends React.Component {
   render() {
+    const { item } = this.props;
+
     return(
       <View>
         <TouchableHighlight>
           <View style={styles.todo}>
-            <Text style={[styles.text, this.props.item.complete && styles.completed]}>
-               {this.props.item.text}
+            <Text style={[styles.text, item.complete && styles.completed]}>
+               {item.text}
             </Text>
           </View>
         </TouchableHighlight>

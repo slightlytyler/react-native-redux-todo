@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react-native'
+import { bindActionCreators } from 'redux';
 import { connect, dispatch } from 'react-redux/native'
 
 import styles from '../styles/styles';
@@ -15,7 +16,14 @@ var {
   TouchableHighlight
 } = React
 
-export default class TodosApp extends React.Component {
+@connect(state => {
+  console.log(state);
+  return {
+    todos: state.get('todos')
+  }
+})
+
+export default class Todos extends React.Component {
   openItem(rowData, rowID) {
     this.props.navigator.push({
       title: rowData && rowData.txt || 'New Item',
@@ -27,7 +35,7 @@ export default class TodosApp extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <TodoList />
+        <TodoList todos={this.props.todos}/>
 
         <TouchableHighlight
             style={[styles.button, styles.newButton]}
