@@ -39,17 +39,35 @@ var styles = StyleSheet.create({
 });
 
 export default class EditTodo extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      text: this.props ? this.props.text || '' : ''
+    };
+  }
+
+  handleChange(e) {
+    this.setState({ text: e.nativeEvent.text });
+  }
+
+  submit() {
+    this.setState({ text: '' });
+  }
+
   render() {
     return(
       <View style={styles.todoForm}>
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Title</Text>
-          <TextInput value="test" style={styles.input}/>
+          <Text style={styles.label}>Text</Text>
+          <TextInput style={styles.input}
+                     value={this.state.text}
+                     onChange={this.handleChange.bind(this)}/>
         </View>
 
         <TouchableHighlight
             style={[mainStyles.button, mainStyles.saveButton]}
-            underlayColor='#99d9f4'>
+            underlayColor='#99d9f4'
+            onPress={this.submit.bind(this)}>
           <Text style={mainStyles.buttonText}>Save</Text>
         </TouchableHighlight>
       </View>

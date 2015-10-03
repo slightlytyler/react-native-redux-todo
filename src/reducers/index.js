@@ -1,10 +1,10 @@
 'use strict'
 
 import { combineReducers } from 'redux'
-import * as exampleReducer from './example'
+import todosReducer from './todos'
 
 const appReducers = combineReducers({
-  ...exampleReducer
+  todosReducer
 })
 
 export default appReducers
