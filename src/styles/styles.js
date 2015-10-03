@@ -30,15 +30,6 @@ export default StyleSheet.create({
         backgroundColor: '#ffffff',
     },
 
-    editTodo: {
-        marginTop: 74,
-        margin: 10,
-        padding: 10,
-        height: 40,
-        backgroundColor: '#f9f9f9',
-        borderRadius: 12
-    },
-
     buttonText: {
         fontSize: 18,
         color: 'white',
@@ -53,6 +44,7 @@ export default StyleSheet.create({
     },
 
     saveButton: {
+        marginTop: 24,
         borderColor: '#48BBEC',
         borderWidth: 1,
         borderRadius: 8,
