@@ -45,7 +45,7 @@ var styles = StyleSheet.create({
 
 @connect()
 
-export default class EditTodo extends React.Component {
+export default class TodoForm extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {

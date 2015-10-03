@@ -3,8 +3,8 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import EditTodo from './../components/EditTodo'
 import TodoList from './../components/TodoList'
+import TodoForm from './../components/TodoForm'
 
 import styles from '../styles/styles';
 
@@ -25,7 +25,7 @@ export default class Todos extends React.Component {
   openItem(rowData, rowID) {
     this.props.navigator.push({
       title: rowData && rowData.txt || 'New Item',
-      component: EditTodo,
+      component: TodoForm,
       passProps: {item: rowData, id: rowID}
     });
   }
