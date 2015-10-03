@@ -1,13 +1,18 @@
 'use strict'
 
 import { List, Map, fromJS } from 'immutable'
+import getNewId from '../helpers/getNewId'
 
 function setState(state, newState) {
   return state.merge(newState);
 }
 
-function addTodo(todosState, title) {
-  console.log('it worked!');
+function addTodo(todosState, text) {
+  return fromJS([{
+    id: getNewId(todosState),
+    text: text,
+    isComplete: false
+  }, ...todosState]);
 }
 
 export default function (state=Map(), action) {

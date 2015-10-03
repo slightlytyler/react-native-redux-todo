@@ -14,17 +14,15 @@ export default class TodoList extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
     this.state = {
-      dataSource: ds.cloneWithRows(this.props.todos.toJS())
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     };
   }
 
   render() {
     return(
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={this.state.dataSource.cloneWithRows(this.props.todos.toJS())}
         renderRow={(rowData) => <TodoItem item={rowData} />}
         style={styles.todosList}
         contentContainerStyle={styles.todosListContainer}

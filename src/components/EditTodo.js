@@ -1,6 +1,11 @@
 'use strict'
 
 import React from 'react-native'
+import { connect } from 'react-redux/native'
+
+import { addTodo } from '../actions/todos'
+import TodosContainer from '../containers/todos'
+
 import mainStyles from '../styles/styles';
 
 var {
@@ -38,6 +43,8 @@ var styles = StyleSheet.create({
   }
 });
 
+@connect()
+
 export default class EditTodo extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -51,7 +58,11 @@ export default class EditTodo extends React.Component {
   }
 
   submit() {
+    this.props.dispatch(addTodo(this.state.text));
+
     this.setState({ text: '' });
+
+    this.props.navigator.pop();
   }
 
   render() {

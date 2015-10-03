@@ -1,13 +1,12 @@
 'use strict'
 
 import React from 'react-native'
-import { bindActionCreators } from 'redux';
-import { connect, dispatch } from 'react-redux/native'
-
-import styles from '../styles/styles';
+import { connect } from 'react-redux/native'
 
 import EditTodo from './../components/EditTodo'
 import TodoList from './../components/TodoList'
+
+import styles from '../styles/styles';
 
 var {
   StyleSheet,
@@ -17,7 +16,6 @@ var {
 } = React
 
 @connect(state => {
-  console.log(state);
   return {
     todos: state.get('todos')
   }
