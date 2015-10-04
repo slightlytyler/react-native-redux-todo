@@ -1,11 +1,8 @@
 'use strict'
 
 import React from 'react-native'
-import { connect } from 'react-redux/native'
 
-import { toggleComplete } from '../../actions';
 import TodoItem from './Item'
-
 import styles from '../../../../styles/styles'
 
 var {
@@ -13,7 +10,6 @@ var {
   ListView,
 } = React
 
-@connect()
 export default class TodoList extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -23,19 +19,17 @@ export default class TodoList extends React.Component {
     };
   }
 
-  toggleComplete(id) {
-    this.props.dispatch(toggleComplete(id));
-  }
-
   render() {
+    const { todos, toggleComplete, editTodo } = this.props;
+
     return(
       <ListView
-        dataSource={this.state.dataSource.cloneWithRows(this.props.todos.toJS())}
+        dataSource={this.state.dataSource.cloneWithRows(todos.toJS())}
         renderRow={(rowData, rowID) =>
                     <TodoItem rowData={rowData}
                               rowID={rowID}
-                              toggleComplete={this.toggleComplete.bind(this)}
-                              editTodo={this.props.editTodo} />}
+                              editTodo={editTodo}
+                              toggleComplete={toggleComplete} />}
         style={styles.todosList}
         contentContainerStyle={styles.todosListContainer}
       />

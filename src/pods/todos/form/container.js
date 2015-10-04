@@ -42,12 +42,11 @@ var styles = StyleSheet.create({
 });
 
 @connect()
-
 export default class TodoForm extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: this.props ? this.props.item.text || '' : ''
+      text: this.props.item ? this.props.item.text : ''
     };
   }
 

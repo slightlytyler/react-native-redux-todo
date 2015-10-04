@@ -3,7 +3,7 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import { deleteTodo } from '../actions'
+import { deleteTodo, toggleComplete } from '../actions'
 
 import TodoList from './components/List'
 import TodoForm from '../form/container'
@@ -49,11 +49,16 @@ export default class TodosIndexContainer extends React.Component {
     });
   }
 
+  toggleComplete(id) {
+    this.props.dispatch(toggleComplete(id));
+  }
+
   render() {
     return (
       <View style={{flex: 1}}>
         <TodoList todos={this.props.todos}
-                  editTodo={this.editTodo.bind(this)} />
+                  editTodo={this.editTodo.bind(this)}
+                  toggleComplete={this.toggleComplete.bind(this)} />
 
         <TouchableHighlight
             style={[styles.button, styles.newButton]}
