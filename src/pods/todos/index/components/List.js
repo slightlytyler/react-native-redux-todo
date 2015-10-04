@@ -6,7 +6,6 @@ import TodoItem from './Item'
 import styles from 'styles/styles'
 
 var {
-  StyleSheet,
   ListView,
 } = React
 

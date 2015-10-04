@@ -4,7 +4,6 @@ import React from 'react-native'
 import styles from 'styles/styles'
 
 var {
-  StyleSheet,
   View,
   TouchableHighlight,
   Text

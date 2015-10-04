@@ -11,7 +11,6 @@ import TodoForm from '../form/container'
 import styles from 'styles/styles';
 
 var {
-  StyleSheet,
   View,
   Text,
   TouchableHighlight,
