@@ -31,9 +31,11 @@ export default class TodoList extends React.Component {
     return(
       <ListView
         dataSource={this.state.dataSource.cloneWithRows(this.props.todos.toJS())}
-        renderRow={(rowData) =>
-                    <TodoItem item={rowData}
-                              toggleComplete={this.toggleComplete.bind(this)} />}
+        renderRow={(rowData, rowID) =>
+                    <TodoItem rowData={rowData}
+                              rowID={rowID}
+                              toggleComplete={this.toggleComplete.bind(this)}
+                              editTodo={this.props.editTodo} />}
         style={styles.todosList}
         contentContainerStyle={styles.todosListContainer}
       />

@@ -15,6 +15,14 @@ function addTodo(todosState, text) {
   }, ...todosState]);
 }
 
+function updateTodo(todosState, id, text) {
+  return todosState.map(todo =>
+    todo.get('id') === id ?
+    todo.set('text', text) :
+    todo
+  );
+}
+
 function toggleComplete(todosState, id) {
   return todosState.map(todo =>
     todo.get('id') === id ?
@@ -28,7 +36,9 @@ export default function (state=Map(), action) {
   case 'SET_STATE':
     return setState(state, action.state);
   case 'ADD_TODO':
-    return state.update('todos', todosState => addTodo(todosState, action.title));
+    return state.update('todos', todosState => addTodo(todosState, action.text));
+  case 'UPDATE_TODO':
+    return state.update('todos', todosState => updateTodo(todosState, action.id, action.text))
   case 'TOGGLE_COMPLETE':
     return state.update('todos', todosState => toggleComplete(todosState, action.id));
   }

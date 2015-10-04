@@ -3,7 +3,7 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import { addTodo } from '../actions/todos'
+import { addTodo, updateTodo } from '../actions/todos'
 import TodosContainer from '../containers/todos'
 
 import mainStyles from '../styles/styles';
@@ -49,7 +49,7 @@ export default class TodoForm extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: this.props ? this.props.text || '' : ''
+      text: this.props ? this.props.item.text || '' : ''
     };
   }
 
@@ -58,7 +58,14 @@ export default class TodoForm extends React.Component {
   }
 
   submit() {
-    this.props.dispatch(addTodo(this.state.text));
+    const { item, rowID, dispatch } = this.props;
+    const { text } = this.state;
+
+    if (rowID) {
+      dispatch(updateTodo(item.id, text));
+    } else {
+      dispatch(addTodo(text));
+    }
 
     this.setState({ text: '' });
 
@@ -72,6 +79,7 @@ export default class TodoForm extends React.Component {
           <Text style={styles.label}>Text</Text>
           <TextInput style={styles.input}
                      value={this.state.text}
+                     autoFocus={true}
                      onChange={this.handleChange.bind(this)}/>
         </View>
 

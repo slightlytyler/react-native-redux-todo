@@ -22,23 +22,25 @@ var {
 })
 
 export default class Todos extends React.Component {
-  openItem(rowData, rowID) {
+  editTodo(rowData, rowID) {
+    console.log(rowData, rowID);
     this.props.navigator.push({
-      title: rowData && rowData.txt || 'New Item',
+      title: rowData && rowData.text || 'New Item',
       component: TodoForm,
-      passProps: {item: rowData, id: rowID}
+      passProps: {item: rowData, rowID: rowID}
     });
   }
 
   render() {
     return (
       <View style={{flex: 1}}>
-        <TodoList todos={this.props.todos}/>
+        <TodoList todos={this.props.todos}
+                  editTodo={this.editTodo.bind(this)} />
 
         <TouchableHighlight
             style={[styles.button, styles.newButton]}
             underlayColor='#99d9f4'
-            onPress={this.openItem.bind(this)}>
+            onPress={this.editTodo.bind(this)}>
             <Text style={styles.buttonText}>+ New Todo</Text>
         </TouchableHighlight>
       </View>
