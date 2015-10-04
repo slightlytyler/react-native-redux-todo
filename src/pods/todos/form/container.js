@@ -41,8 +41,7 @@ var styles = StyleSheet.create({
   }
 });
 
-@connect()
-export default class TodoForm extends React.Component {
+export class TodoFormComponent extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -90,3 +89,5 @@ export default class TodoForm extends React.Component {
     )
   }
 }
+
+export const TodoFormContainer = connect()(TodoFormComponent);

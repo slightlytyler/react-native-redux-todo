@@ -8,7 +8,7 @@ import configureStore from '../configureStore'
 
 import { setState } from 'pods/todos/actions'
 
-import TodosIndexContainer from 'pods/todos/index/container'
+import { TodosIndexContainer } from 'pods/todos/index/container'
 import styles from 'styles/styles'
 
 var { NavigatorIOS } = React;

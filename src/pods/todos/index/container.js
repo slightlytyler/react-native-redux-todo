@@ -6,7 +6,7 @@ import { connect } from 'react-redux/native'
 import { deleteTodo, toggleComplete } from '../actions'
 
 import TodoList from './components/List'
-import TodoForm from '../form/container'
+import { TodoFormContainer } from '../form/container'
 
 import styles from 'styles/styles';
 
@@ -19,11 +19,11 @@ var {
 
 @connect(state => {
   return {
-    todos: state.todosReducer.get('todos')
+
   }
 })
 
-export default class TodosIndexContainer extends React.Component {
+export class TodosIndexComponent extends React.Component {
   editTodo(rowData, rowID) {
     AlertIOS.alert(
       'Quick Menu',
@@ -43,7 +43,7 @@ export default class TodosIndexContainer extends React.Component {
   openTodo(rowData, rowID) {
     this.props.navigator.push({
       title: rowData && rowData.text || 'New Item',
-      component: TodoForm,
+      component: TodoFormContainer,
       passProps: {item: rowData, rowID: rowID}
     });
   }
@@ -69,3 +69,9 @@ export default class TodosIndexContainer extends React.Component {
     )
   }
 }
+
+export const TodosIndexContainer = connect(state => {
+  return {
+    todos: state.todosReducer.get('todos')
+  }
+})(TodosIndexComponent);
