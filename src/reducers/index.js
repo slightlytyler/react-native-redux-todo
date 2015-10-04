@@ -15,12 +15,22 @@ function addTodo(todosState, text) {
   }, ...todosState]);
 }
 
+function toggleComplete(todosState, id) {
+  return todosState.map(todo =>
+    todo.get('id') === id ?
+    todo.set('complete', !todo.get('complete')) :
+    todo
+  );
+}
+
 export default function (state=Map(), action) {
   switch (action.type) {
   case 'SET_STATE':
     return setState(state, action.state);
   case 'ADD_TODO':
     return state.update('todos', todosState => addTodo(todosState, action.title));
+  case 'TOGGLE_COMPLETE':
+    return state.update('todos', todosState => toggleComplete(todosState, action.id));
   }
   return state;
 }

@@ -16,7 +16,7 @@ export default class TodoItem extends React.Component {
 
     return(
       <View>
-        <TouchableHighlight>
+        <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}>
           <View style={styles.todo}>
             <Text style={[styles.text, item.complete && styles.completed]}>
                {item.text}

@@ -7,3 +7,7 @@ export function setState(state) {
 export function addTodo(title) {
   return { type: 'ADD_TODO', title };
 }
+
+export function toggleComplete(id) {
+  return { type: 'TOGGLE_COMPLETE', id };
+}
