@@ -3,8 +3,10 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import TodoList from './../components/TodoList'
-import TodoForm from './../components/TodoForm'
+import { deleteTodo } from '../actions/todos'
+
+import TodoList from '../components/TodoList'
+import TodoForm from '../components/TodoForm'
 
 import styles from '../styles/styles';
 
@@ -12,7 +14,8 @@ var {
   StyleSheet,
   View,
   Text,
-  TouchableHighlight
+  TouchableHighlight,
+  AlertIOS
 } = React
 
 @connect(state => {
@@ -23,7 +26,22 @@ var {
 
 export default class Todos extends React.Component {
   editTodo(rowData, rowID) {
-    console.log(rowData, rowID);
+    AlertIOS.alert(
+      'Quick Menu',
+      null,
+      [
+        { text: 'Edit', onPress: () => this.openTodo(rowData, rowID) },
+        { text: 'Delete', onPress: () => this.deleteTodo(rowData.id) },
+        { text: 'Cancel' }
+      ]
+    );
+  }
+
+  deleteTodo(id) {
+    this.props.dispatch(deleteTodo(id));
+  }
+
+  openTodo(rowData, rowID) {
     this.props.navigator.push({
       title: rowData && rowData.text || 'New Item',
       component: TodoForm,
@@ -40,7 +58,7 @@ export default class Todos extends React.Component {
         <TouchableHighlight
             style={[styles.button, styles.newButton]}
             underlayColor='#99d9f4'
-            onPress={this.editTodo.bind(this)}>
+            onPress={this.openTodo.bind(this)}>
             <Text style={styles.buttonText}>+ New Todo</Text>
         </TouchableHighlight>
       </View>

@@ -12,6 +12,10 @@ export function updateTodo(id, text) {
   return { type: 'UPDATE_TODO', id, text };
 }
 
+export function deleteTodo(id) {
+  return { type: 'DELETE_TODO', id };
+}
+
 export function toggleComplete(id) {
   return { type: 'TOGGLE_COMPLETE', id };
 }
