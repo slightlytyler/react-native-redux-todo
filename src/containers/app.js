@@ -7,7 +7,7 @@ import { fromJS } from 'immutable'
 import configureStore from '../configureStore'
 
 import styles from '../styles/styles';
-import Todos from './todos'
+import TodosIndexContainer from '../pods/todos/index/container'
 import { setState } from '../actions/todos';
 
 var { NavigatorIOS } = React;
@@ -36,7 +36,7 @@ export default class react_native_starter extends React.Component {
       <Provider store={store}>
         {() => <NavigatorIOS
                 style={styles.navigator}
-                initialRoute={{component: Todos, title: 'Todos'}}/>
+                initialRoute={{component: TodosIndexContainer, title: 'Todos'}}/>
         }
       </Provider>
     )

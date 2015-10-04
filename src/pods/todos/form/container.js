@@ -3,10 +3,8 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import { addTodo, updateTodo } from '../actions/todos'
-import TodosContainer from '../containers/todos'
-
-import mainStyles from '../styles/styles';
+import { addTodo, updateTodo } from '../actions'
+import mainStyles from '../../../styles/styles';
 
 var {
   StyleSheet,

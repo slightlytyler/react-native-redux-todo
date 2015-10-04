@@ -3,12 +3,12 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import { deleteTodo } from '../actions/todos'
+import { deleteTodo } from '../actions'
 
-import TodoList from '../components/TodoList'
-import TodoForm from '../components/TodoForm'
+import TodoList from './components/List'
+import TodoForm from '../form/container'
 
-import styles from '../styles/styles';
+import styles from '../../../styles/styles';
 
 var {
   StyleSheet,
@@ -20,11 +20,11 @@ var {
 
 @connect(state => {
   return {
-    todos: state.get('todos')
+    todos: state.todosReducer.get('todos')
   }
 })
 
-export default class Todos extends React.Component {
+export default class TodosIndexContainer extends React.Component {
   editTodo(rowData, rowID) {
     AlertIOS.alert(
       'Quick Menu',

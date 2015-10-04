@@ -3,10 +3,10 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import { toggleComplete } from '../actions/todos';
+import { toggleComplete } from '../../actions';
+import TodoItem from './Item'
 
-import TodoItem from './TodoItem'
-import styles from '../styles/styles'
+import styles from '../../../../styles/styles'
 
 var {
   StyleSheet,
