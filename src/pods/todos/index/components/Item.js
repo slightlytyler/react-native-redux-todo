@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react-native'
-import styles from '../../../../styles/styles'
+import styles from 'styles/styles'
 
 var {
   StyleSheet,

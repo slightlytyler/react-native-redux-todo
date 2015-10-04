@@ -3,7 +3,7 @@
 import React from 'react-native'
 
 import TodoItem from './Item'
-import styles from '../../../../styles/styles'
+import styles from 'styles/styles'
 
 var {
   StyleSheet,

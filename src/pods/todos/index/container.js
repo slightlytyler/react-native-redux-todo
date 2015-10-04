@@ -8,7 +8,7 @@ import { deleteTodo, toggleComplete } from '../actions'
 import TodoList from './components/List'
 import TodoForm from '../form/container'
 
-import styles from '../../../styles/styles';
+import styles from 'styles/styles';
 
 var {
   StyleSheet,

@@ -31,6 +31,17 @@ var config = {
 
   plugins: [],
 
+  resolve: {
+    alias: {
+      src: path.join(__dirname, "src"),
+      pods: path.join(__dirname, "src/pods"),
+      containers: path.join(__dirname, "src/containers"),
+      components: path.join(__dirname, "src/components"),
+      helpers: path.join(__dirname, "src/helpers"),
+      styles: path.join(__dirname, "src/styles")
+    }
+  }
+
 };
 
 // Hot loader

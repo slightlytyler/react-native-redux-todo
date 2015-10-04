@@ -6,9 +6,10 @@ import { fromJS } from 'immutable'
 
 import configureStore from '../configureStore'
 
-import styles from '../styles/styles'
-import TodosIndexContainer from '../pods/todos/index/container'
-import { setState } from '../pods/todos/actions'
+import { setState } from 'pods/todos/actions'
+
+import TodosIndexContainer from 'pods/todos/index/container'
+import styles from 'styles/styles'
 
 var { NavigatorIOS } = React;
 

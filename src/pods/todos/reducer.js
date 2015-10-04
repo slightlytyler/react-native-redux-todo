@@ -3,7 +3,7 @@
 import { List, Map, fromJS } from 'immutable'
 
 import { actionTypes } from './constants'
-import getNewId from '../../helpers/getNewId'
+import getNewId from 'helpers/getNewId'
 
 function setState(state, newState) {
   return state.merge(newState);

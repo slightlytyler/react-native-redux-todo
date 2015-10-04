@@ -4,7 +4,7 @@ import React from 'react-native'
 import { connect } from 'react-redux/native'
 
 import { addTodo, updateTodo } from '../actions'
-import mainStyles from '../../../styles/styles';
+import mainStyles from 'styles/styles';
 
 var {
   StyleSheet,
