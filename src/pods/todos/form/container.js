@@ -22,10 +22,6 @@ var styles = StyleSheet.create({
     marginBottom: 24
   },
 
-  inputContainer: {
-
-  },
-
   label: {
     fontWeight: 'bold',
     fontSize: 18,
@@ -71,7 +67,7 @@ export class TodoFormComponent extends React.Component {
   render() {
     return(
       <View style={styles.todoForm}>
-        <View style={styles.inputContainer}>
+        <View>
           <Text style={styles.label}>Text</Text>
           <TextInput style={styles.input}
                      value={this.state.text}

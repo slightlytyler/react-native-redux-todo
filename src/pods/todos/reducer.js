@@ -9,30 +9,30 @@ function setState(state, newState) {
   return state.merge(newState);
 }
 
-function addTodo(todosState, text) {
+function addTodo(todosListState, text) {
   return fromJS([{
-    id: getNewId(todosState),
+    id: getNewId(todosListState),
     text: text,
     isComplete: false
-  }, ...todosState]);
+  }, ...todosListState]);
 }
 
-function updateTodo(todosState, id, text) {
-  return todosState.map(todo =>
+function updateTodo(todosListState, id, text) {
+  return todosListState.map(todo =>
     todo.get('id') === id ?
     todo.set('text', text) :
     todo
   );
 }
 
-function deleteTodo(todosState, id) {
-  return todosState.filter(todo =>
+function deleteTodo(todosListState, id) {
+  return todosListState.filter(todo =>
     todo.get('id') !== id
   );
 }
 
-function toggleComplete(todosState, id) {
-  return todosState.map(todo =>
+function toggleComplete(todosListState, id) {
+  return todosListState.map(todo =>
     todo.get('id') === id ?
     todo.set('complete', !todo.get('complete')) :
     todo
@@ -44,13 +44,15 @@ export default function (state=Map(), action) {
   case actionTypes.SET_STATE:
     return setState(state, action.state);
   case actionTypes.ADD_TODO:
-    return state.update('todos', todosState => addTodo(todosState, action.text));
+    return state.updateIn(['todos', 'list'], todosListState => addTodo(todosListState, action.text));
   case actionTypes.UPDATE_TODO:
-    return state.update('todos', todosState => updateTodo(todosState, action.id, action.text));
+    return state.updateIn(['todos', 'list'], todosListState => updateTodo(todosListState, action.id, action.text));
   case actionTypes.DELETE_TODO:
-    return state.update('todos', todosState => deleteTodo(todosState, action.id));
+    return state.updateIn(['todos', 'list'], todosListState => deleteTodo(todosListState, action.id));
   case actionTypes.TOGGLE_COMPLETE:
-    return state.update('todos', todosState => toggleComplete(todosState, action.id));
+    return state.updateIn(['todos', 'list'], todosListState => toggleComplete(todosListState, action.id));
+  case actionTypes.FILTER_TODOS:
+    return state.setIn(['todos', 'filter'], action.filter)
   }
   return state;
 }

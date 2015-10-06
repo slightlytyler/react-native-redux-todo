@@ -21,3 +21,7 @@ export function deleteTodo(id) {
 export function toggleComplete(id) {
   return { type: actionTypes.TOGGLE_COMPLETE, id };
 }
+
+export function filterTodos(filter) {
+  return { type: actionTypes.FILTER_TODOS, filter };
+}

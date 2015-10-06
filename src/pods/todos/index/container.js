@@ -3,10 +3,10 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
-import { deleteTodo, toggleComplete } from '../actions'
+import { deleteTodo, toggleComplete, filterTodos } from '../actions'
 
-import TodoList from './components/List'
 import { TodoFormContainer } from '../form/container'
+import TodoList from './components/List'
 
 import styles from 'styles/styles';
 
@@ -16,12 +16,6 @@ var {
   TouchableHighlight,
   AlertIOS
 } = React
-
-@connect(state => {
-  return {
-
-  }
-})
 
 export class TodosIndexComponent extends React.Component {
   editTodo(rowData, rowID) {
@@ -44,7 +38,7 @@ export class TodosIndexComponent extends React.Component {
     this.props.navigator.push({
       title: rowData && rowData.text || 'New Item',
       component: TodoFormContainer,
-      passProps: {item: rowData, rowID: rowID}
+      passProps: { item: rowData, rowID: rowID }
     });
   }
 
@@ -52,12 +46,21 @@ export class TodosIndexComponent extends React.Component {
     this.props.dispatch(toggleComplete(id));
   }
 
+  filterTodos(filter) {
+
+    this.props.dispatch(filterTodos(filter.toLowerCase()));
+  }
+
   render() {
+    const { todos, filter } = this.props;
+
     return (
       <View style={{flex: 1}}>
-        <TodoList todos={this.props.todos}
+        <TodoList todos={todos}
+                  filter={filter}
                   editTodo={this.editTodo.bind(this)}
-                  toggleComplete={this.toggleComplete.bind(this)} />
+                  toggleComplete={this.toggleComplete.bind(this)}
+                  filterTodos={this.filterTodos.bind(this)}/>
 
         <TouchableHighlight
             style={[styles.button, styles.newButton]}
@@ -71,7 +74,14 @@ export class TodosIndexComponent extends React.Component {
 }
 
 export const TodosIndexContainer = connect(state => {
+  const todos = state.todosReducer.getIn(['todos', 'list']);
+  const filter = state.todosReducer.getIn(['todos', 'filter']);
+  const filterBool = filter === 'completed';
+
   return {
-    todos: state.todosReducer.get('todos')
-  }
+      todos: filter === 'all' ?
+             todos :
+             todos.filter(todo => todo.get('complete') === filterBool),
+      filter: filter
+    };
 })(TodosIndexComponent);

@@ -3,6 +3,8 @@
 import React from 'react-native'
 
 import TodoItem from './Item'
+import TodoFilters from './Filters'
+
 import styles from 'styles/styles'
 
 var {
@@ -19,7 +21,13 @@ export default class TodoList extends React.Component {
   }
 
   render() {
-    const { todos, toggleComplete, editTodo } = this.props;
+    const {
+      todos,
+      filter,
+      editTodo,
+      toggleComplete,
+      filterTodos
+    } = this.props;
 
     return(
       <ListView
@@ -29,6 +37,10 @@ export default class TodoList extends React.Component {
                               rowID={rowID}
                               editTodo={editTodo}
                               toggleComplete={toggleComplete} />}
+        renderHeader={() =>
+                      <TodoFilters currentFilter={filter}
+                                   filterTodos={filterTodos} />
+                     }
         style={styles.todosList}
         contentContainerStyle={styles.todosListContainer}
       />
