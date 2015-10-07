@@ -13,7 +13,7 @@ function addTodo(todosListState, text) {
   return fromJS([{
     id: getNewId(todosListState),
     text: text,
-    isComplete: false
+    complete: false
   }, ...todosListState]);
 }
 
