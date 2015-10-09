@@ -44,6 +44,19 @@ export const routeMapper = {
   },
 
   RightButton: function(route, navigator, index, navState) {
+    const RightButton = route.RightButton;
+
+    if (RightButton) {
+      return (
+        <TouchableOpacity style={styles.navBarRightButton}
+                          onPress={() => RightButton.onPress()}>
+          <Text style={styles.navBarButtonText}>
+            {RightButton.text}
+          </Text>
+        </TouchableOpacity>
+      );
+    }
+
     return null;
   },
 
@@ -108,6 +121,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   navBarButtonText: {
-    color: '#5890ff',
+    color: 'rgba(0, 0, 0, 0.5)',
   },
 });
