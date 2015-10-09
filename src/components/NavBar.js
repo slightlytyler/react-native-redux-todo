@@ -85,7 +85,7 @@ var styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: NAV_HEIGHT,
-    backgroundColor: '#99d9f4',
+    backgroundColor: '#46baec',
     paddingBottom: 5,
     borderBottomColor: 'rgba(0, 0, 0, 0.5)',
     borderBottomWidth: 1 / React.PixelRatio.get(),

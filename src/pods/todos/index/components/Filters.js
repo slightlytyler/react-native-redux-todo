@@ -24,6 +24,7 @@ export default class TodoFilters extends React.Component {
 
     return(
       <SegmentedControlIOS style={styles.controls}
+                           tintColor="#46baec"
                            values={filters.map(filter => filter.capitalize())}
                            onValueChange={filterTodos}
                            selectedIndex={filters.indexOf(currentFilter)} />
