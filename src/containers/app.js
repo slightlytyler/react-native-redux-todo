@@ -68,6 +68,6 @@ var styles = StyleSheet.create({
   scene: {
     flex: 1,
     paddingTop: 44,
-    backgroundColor: '#EAEAEA',
+    backgroundColor: 'white',
   }
 });
