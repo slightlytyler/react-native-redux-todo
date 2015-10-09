@@ -1,8 +1,7 @@
 import React from 'react-native';
 
 import { NavBar, routeMapper } from 'components/NavBar';
-import { TodosIndexContainer } from 'pods/todos/index/container'
-import { TodoFormContainer } from 'pods/todos/form/container'
+import TodosIndexRoute from 'pods/todos/index/route';
 
 var {
   View,
@@ -18,22 +17,11 @@ export default class Nav extends React.Component {
         <Component navigator={navigator} route={route} {...route.passProps} />
       </View>
   }
+
   render() {
     return (
       <Navigator  ref="nav"
-                  initialRoute={{
-                    name: 'todos.index',
-                    title: 'Todos',
-                    component: TodosIndexContainer,
-                    RightButton: {
-                      text: 'New',
-                      onPress: () =>
-                        this.refs.nav.push({
-                          name: 'New Todo',
-                          component: TodoFormContainer
-                        })
-                    }
-                  }}
+                  initialRoute={TodosIndexRoute(() => this.refs.nav)}
                   renderScene={this.renderScene}
                   navigationBar={<NavBar routeMapper={routeMapper} />} />
     );

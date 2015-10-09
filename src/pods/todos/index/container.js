@@ -4,10 +4,8 @@ import React from 'react-native'
 import { connect } from 'react-redux/native'
 
 import { deleteTodo, toggleComplete, filterTodos } from '../actions'
-
-import { TodoFormContainer } from '../form/container'
 import TodoList from './components/List'
-import NavigationBar from 'react-native-navbar'
+import TodosEditRoute from 'pods/todos/edit/route';
 
 import styles from 'styles/styles';
 
@@ -36,11 +34,7 @@ export class TodosIndexComponent extends React.Component {
   }
 
   openTodo(rowData, rowID) {
-    this.props.navigator.push({
-      name: rowData.text || 'New Todo',
-      component: TodoFormContainer,
-      passProps: { item: rowData, rowID: rowID }
-    });
+    this.props.navigator.push(TodosEditRoute(rowData, rowID));
   }
 
   toggleComplete(id) {
