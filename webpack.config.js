@@ -20,7 +20,10 @@ var config = {
   module: {
     loaders: [{
       test: /\.js$/,
-      exclude: /node_modules/,
+      include: [
+        path.resolve(__dirname, "src"),
+        path.resolve(__dirname, "node_modules/react-native-navbar")
+      ],
       loader: 'babel',
       query: {
         stage: 0,

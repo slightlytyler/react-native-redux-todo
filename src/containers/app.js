@@ -7,9 +7,14 @@ import { fromJS } from 'immutable'
 import configureStore from '../configureStore'
 
 import { setState } from 'pods/todos/actions'
+import { NavBar, routeMapper } from 'components/NavBar';
 import { TodosIndexContainer } from 'pods/todos/index/container'
 
-var { NavigatorIOS } = React;
+var {
+  View,
+  Navigator,
+  StyleSheet
+} = React;
 
 var store = configureStore();
 
@@ -34,14 +39,35 @@ store.dispatch(setState(fromJS({
 })));
 
 export default class react_native_starter extends React.Component {
+  renderScene(route, navigator) {
+    const Component = route.component;
+
+    return <View style={styles.scene}>
+        <Component navigator={navigator} route={route} {...route.passProps} />
+      </View>
+  }
+
   render() {
     return (
       <Provider store={store}>
-        {() => <NavigatorIOS
-                style={{flex: 1}}
-                initialRoute={{component: TodosIndexContainer, title: 'Todos'}}/>
+        {() =>
+          <Navigator  initialRoute={{
+                        name: 'todos.index',
+                        title: 'Todos',
+                        component: TodosIndexContainer
+                      }}
+                      renderScene={this.renderScene}
+                      navigationBar={<NavBar routeMapper={routeMapper} />} />
         }
       </Provider>
     )
   }
 }
+
+var styles = StyleSheet.create({
+  scene: {
+    flex: 1,
+    paddingTop: 44,
+    backgroundColor: '#EAEAEA',
+  }
+});
