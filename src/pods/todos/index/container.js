@@ -5,7 +5,8 @@ import { connect } from 'react-redux/native'
 
 import { deleteTodo, toggleComplete, filterTodos } from '../actions'
 import TodoList from './components/List'
-import TodosEditRoute from 'pods/todos/edit/route';
+import EditTodoRoute from 'pods/todos/edit/route';
+import NewTodoRoute from 'pods/todos/new/route';
 
 import styles from 'styles/styles';
 
@@ -34,7 +35,11 @@ export class TodosIndexComponent extends React.Component {
   }
 
   openTodo(rowData, rowID) {
-    this.props.navigator.push(TodosEditRoute(rowData, rowID));
+    this.props.navigator.push(EditTodoRoute(rowData, rowID));
+  }
+
+  newTodo() {
+    this.props.navigator.push(NewTodoRoute())
   }
 
   toggleComplete(id) {
@@ -42,7 +47,6 @@ export class TodosIndexComponent extends React.Component {
   }
 
   filterTodos(filter) {
-
     this.props.dispatch(filterTodos(filter.toLowerCase()));
   }
 
@@ -60,7 +64,7 @@ export class TodosIndexComponent extends React.Component {
         <TouchableHighlight
             style={[styles.button, styles.newButton]}
             underlayColor='#99d9f4'
-            onPress={this.openTodo.bind(this)}>
+            onPress={this.newTodo.bind(this)}>
             <Text style={styles.buttonText}>+ New Todo</Text>
         </TouchableHighlight>
       </View>

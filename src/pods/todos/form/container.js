@@ -3,6 +3,8 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 
+import moment from 'moment';
+
 import { addTodo, updateTodo } from '../actions'
 import mainStyles from 'styles/styles';
 
@@ -41,11 +43,14 @@ var styles = StyleSheet.create({
 export class TodoFormComponent extends React.Component {
   constructor(props, context) {
     super(props, context);
+
     const { item } = this.props;
+    const currentDate = new Date();
 
     this.state = {
       text: item ? item.text : '',
-      date: item ? item.date : new Date()
+      date: item ? item.date : moment(currentDate).add(1, 'hour').toDate(),
+      currentDate: currentDate
     };
   }
 
@@ -86,8 +91,9 @@ export class TodoFormComponent extends React.Component {
         <View>
         <DatePickerIOS
             date={this.state.date}
+            minimumDate={this.state.currentDate}
             onDateChange={this.handleDateChange.bind(this)}
-            mode="time"
+            mode="datetime"
           />
         </View>
 
