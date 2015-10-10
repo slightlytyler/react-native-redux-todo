@@ -13,19 +13,7 @@ var store = configureStore();
 
 store.dispatch(setState(fromJS({
   todos: {
-    list: [{
-      id: 1,
-      text: 'Learn react and redux',
-      complete: true
-    }, {
-      id: 2,
-      text: '...',
-      complete: true
-    }, {
-      id: 3,
-      text: 'Profit',
-      complete: false
-    }],
+    list: [],
 
     filter: 'all'
   }

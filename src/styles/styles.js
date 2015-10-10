@@ -18,15 +18,6 @@ export default StyleSheet.create({
     marginTop: 0
   },
 
-  todo: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: 10,
-    backgroundColor: '#ffffff',
-  },
-
   buttonText: {
     fontSize: 18,
     color: 'white',
@@ -50,18 +41,6 @@ export default StyleSheet.create({
   newButton: {
     marginBottom: 0,
     borderRadius: 0,
-  },
-
-  text: {
-    fontSize: 18,
-    marginLeft: 5,
-    marginTop: 2,
-    color: '#222222',
-  },
-
-  completed: {
-    color: '#5bbd72',
-    textDecorationLine: 'line-through'
   },
 
   hr: {

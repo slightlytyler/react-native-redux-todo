@@ -11,7 +11,8 @@ var {
   View,
   Text,
   TouchableHighlight,
-  TextInput
+  TextInput,
+  DatePickerIOS
 } = React
 
 var styles = StyleSheet.create({
@@ -41,22 +42,27 @@ export class TodoFormComponent extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      text: this.props.item ? this.props.item.text : ''
+      text: this.props.item ? this.props.item.text : '',
+      date: new Date()
     };
   }
 
-  handleChange(e) {
-    this.setState({ text: e.nativeEvent.text });
+  handleTextChange(text) {
+    this.setState({ text: text });
+  }
+
+  handleDateChange(date) {
+    this.setState({ date: date });
   }
 
   submit() {
     const { item, rowID, dispatch } = this.props;
-    const { text } = this.state;
+    const { text, date } = this.state;
 
     if (rowID) {
-      dispatch(updateTodo(item.id, text));
+      dispatch(updateTodo(item.id, text, date));
     } else {
-      dispatch(addTodo(text));
+      dispatch(addTodo(text, date));
     }
 
     this.setState({ text: '' });
@@ -72,7 +78,15 @@ export class TodoFormComponent extends React.Component {
           <TextInput style={styles.input}
                      value={this.state.text}
                      autoFocus={true}
-                     onChange={this.handleChange.bind(this)}/>
+                     onChangeText={this.handleTextChange.bind(this)}/>
+        </View>
+
+        <View>
+        <DatePickerIOS
+            date={this.state.date}
+            onDateChange={this.handleDateChange.bind(this)}
+            mode="time"
+          />
         </View>
 
         <TouchableHighlight

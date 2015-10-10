@@ -9,20 +9,25 @@ function setState(state, newState) {
   return state.merge(newState);
 }
 
-function addTodo(todosListState, text) {
+function addTodo(todosListState, text, date) {
+  console.log(date);
   return fromJS([{
     id: getNewId(todosListState),
     text: text,
+    date: date,
     complete: false
   }, ...todosListState]);
 }
 
-function updateTodo(todosListState, id, text) {
-  return todosListState.map(todo =>
-    todo.get('id') === id ?
-    todo.set('text', text) :
-    todo
-  );
+function updateTodo(todosListState, id, text, date) {
+  return todosListState.map(todo => {
+    if (todo.get('id') === id) {
+      return todo.set('text', text)
+                 .set('date', date);
+    }
+
+    return todo;
+  });
 }
 
 function deleteTodo(todosListState, id) {
@@ -41,18 +46,27 @@ function toggleComplete(todosListState, id) {
 
 export default function (state=Map(), action) {
   switch (action.type) {
+
   case actionTypes.SET_STATE:
     return setState(state, action.state);
+
   case actionTypes.ADD_TODO:
-    return state.updateIn(['todos', 'list'], todosListState => addTodo(todosListState, action.text));
+    return state.updateIn(['todos', 'list'], todosListState =>
+              addTodo(todosListState, action.text, action.date));
+
   case actionTypes.UPDATE_TODO:
-    return state.updateIn(['todos', 'list'], todosListState => updateTodo(todosListState, action.id, action.text));
+    return state.updateIn(['todos', 'list'], todosListState =>
+              updateTodo(todosListState, action.id, action.text, action.date));
+
   case actionTypes.DELETE_TODO:
     return state.updateIn(['todos', 'list'], todosListState => deleteTodo(todosListState, action.id));
+
   case actionTypes.TOGGLE_COMPLETE:
     return state.updateIn(['todos', 'list'], todosListState => toggleComplete(todosListState, action.id));
+
   case actionTypes.FILTER_TODOS:
     return state.setIn(['todos', 'filter'], action.filter)
   }
+
   return state;
 }
