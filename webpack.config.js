@@ -41,6 +41,7 @@ var config = {
       containers: path.join(__dirname, "src/containers"),
       components: path.join(__dirname, "src/components"),
       helpers: path.join(__dirname, "src/helpers"),
+      extensions: path.join(__dirname, "src/helpers/extensions"),
       styles: path.join(__dirname, "src/styles")
     }
   }
