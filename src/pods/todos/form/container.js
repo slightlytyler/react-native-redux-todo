@@ -41,9 +41,11 @@ var styles = StyleSheet.create({
 export class TodoFormComponent extends React.Component {
   constructor(props, context) {
     super(props, context);
+    const { item } = this.props;
+
     this.state = {
-      text: this.props.item ? this.props.item.text : '',
-      date: new Date()
+      text: item ? item.text : '',
+      date: item ? item.date : new Date()
     };
   }
 
