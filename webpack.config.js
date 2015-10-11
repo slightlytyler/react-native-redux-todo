@@ -40,6 +40,7 @@ var config = {
       pods: path.join(__dirname, "src/pods"),
       containers: path.join(__dirname, "src/containers"),
       components: path.join(__dirname, "src/components"),
+      reducers: path.join(__dirname, "src/reducers"),
       helpers: path.join(__dirname, "src/helpers"),
       extensions: path.join(__dirname, "src/helpers/extensions"),
       styles: path.join(__dirname, "src/styles")
