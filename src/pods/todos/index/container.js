@@ -2,6 +2,7 @@
 
 import React from 'react-native'
 import { connect } from 'react-redux/native'
+import { List } from 'immutable'
 
 import { deleteTodo, toggleComplete, filterTodos } from '../actions'
 import TodoList from './components/List'
@@ -73,8 +74,8 @@ export class TodosIndexComponent extends React.Component {
 }
 
 export const TodosIndexContainer = connect(state => {
-  const todos = state.todosReducer.getIn(['todos', 'list']);
-  const filter = state.todosReducer.getIn(['todos', 'filter']);
+  const todos = state.todosReducer.getIn(['todos', 'list']) || List();
+  const filter = state.todosReducer.getIn(['todos', 'filter']) || 'all';
   const filterBool = filter === 'completed';
 
   return {

@@ -1,6 +1,6 @@
 'use strict'
 
-import { List, Map, fromJS } from 'immutable'
+import { fromJS } from 'immutable'
 
 import { actionTypes } from './constants'
 import getNewId from 'helpers/getNewId'
@@ -10,7 +10,6 @@ function setState(state, newState) {
 }
 
 function addTodo(todosListState, text, date) {
-  console.log(date);
   return fromJS([{
     id: getNewId(todosListState),
     text: text,
@@ -44,7 +43,11 @@ function toggleComplete(todosListState, id) {
   );
 }
 
-export default function (state=Map(), action) {
+export default function (state=fromJS({
+  todos: {
+    list: []
+  }
+}), action) {
   switch (action.type) {
 
   case actionTypes.SET_STATE:
