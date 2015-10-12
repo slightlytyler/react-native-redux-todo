@@ -4,7 +4,7 @@ import React from 'react-native';
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { NavBar, routeMapper } from 'components/NavBar';
-import TodosIndexRoute from 'pods/todos/index/route';
+import { TodosIndexRoute } from 'pods/todos/routes';
 
 var {
   View,

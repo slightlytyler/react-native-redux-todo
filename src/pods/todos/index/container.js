@@ -7,8 +7,7 @@ import moment from 'moment'
 
 import { deleteTodo, toggleComplete, filterTodos } from '../actions'
 import TodoList from './components/List'
-import EditTodoRoute from 'pods/todos/edit/route';
-import NewTodoRoute from 'pods/todos/new/route';
+import { EditTodoRoute, NewTodoRoute} from 'pods/todos/routes';
 
 import styles from 'styles/styles';
 
