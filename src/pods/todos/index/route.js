@@ -1,3 +1,5 @@
+'use strict'
+
 import { TodosIndexContainer } from 'pods/todos/index/container'
 import NewTodoRoute from 'pods/todos/new/route';
 

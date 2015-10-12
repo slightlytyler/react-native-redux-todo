@@ -1,4 +1,7 @@
+'use strict'
+
 import React from 'react-native';
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import { NavBar, routeMapper } from 'components/NavBar';
 import TodosIndexRoute from 'pods/todos/index/route';
@@ -10,6 +13,8 @@ var {
 } = React;
 
 export default class Nav extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   renderScene(route, navigator) {
     const Component = route.component;
 

@@ -1,4 +1,7 @@
+'use strict'
+
 import React from 'react-native'
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 var {
   Navigator,
@@ -9,6 +12,8 @@ var {
 } = React;
 
 export class NavBar extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   updateProgress(progress, fromIndex, toIndex) {
     this._nav.updateProgress(progress, fromIndex, toIndex);
   }

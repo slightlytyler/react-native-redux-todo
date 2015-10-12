@@ -1,3 +1,5 @@
+'use strict'
+
 import { TodoFormContainer } from 'pods/todos/form/container'
 
 export default function Route() {
