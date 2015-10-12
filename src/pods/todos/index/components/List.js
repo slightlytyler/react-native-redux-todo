@@ -42,8 +42,7 @@ export default class TodoList extends React.Component {
                               toggleComplete={toggleComplete} />}
         renderHeader={() =>
                       <TodoFilters currentFilter={filter}
-                                   filterTodos={filterTodos} />
-                     }
+                                   filterTodos={filterTodos} />}
         style={styles.todosList}
         contentContainerStyle={styles.todosListContainer}
       />

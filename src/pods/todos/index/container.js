@@ -21,8 +21,8 @@ var {
 export class TodosIndexComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  sortedTodos() {
-    return this.props.todos.sort((a, b) => {
+  sortTodos(todos) {
+    return todos.sort((a, b) => {
       let keyA = moment(a.date),
           keyB = moment(b.date);
 
@@ -65,11 +65,11 @@ export class TodosIndexComponent extends React.Component {
   }
 
   render() {
-    const { filter } = this.props;
+    const { todos, filter } = this.props;
 
     return (
       <View style={{flex: 1}}>
-        <TodoList todos={this.sortedTodos()}
+        <TodoList todos={this.sortTodos(todos)}
                   filter={filter}
                   editTodo={this.editTodo.bind(this)}
                   toggleComplete={this.toggleComplete.bind(this)}
