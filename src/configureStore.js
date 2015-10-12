@@ -11,13 +11,16 @@ import { setState } from 'pods/todos/actions'
 export default function configureStore(initialState) {
   // Setup storage
   const reducer = storage.reducer(appReducers);
-  var engine = createEngine('my-save-key');
-      engine = storage.decorators.filter(engine, [
-        ['todosReducer', 'todos', 'list']
-      ]);
-      engine = storage.decorators.immutablejs(engine, [
-        ['todosReducer']
-      ]);
+
+  let engineComposers = [
+    (engine) => storage.decorators.filter(engine, [
+      ['todosReducer', 'todos', 'list']
+    ]),
+    (engine) => storage.decorators.immutablejs(engine, [
+      ['todosReducer']
+    ])
+  ];
+  const engine = compose(...engineComposers)(createEngine('react-native-todo'));
 
   const storageMiddleware = storage.createMiddleware(engine);
 
