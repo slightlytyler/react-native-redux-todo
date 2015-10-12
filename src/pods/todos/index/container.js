@@ -2,6 +2,7 @@
 
 import React from 'react-native'
 import { connect } from 'react-redux/native'
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment'
 
 import { deleteTodo, toggleComplete, filterTodos } from '../actions'
@@ -19,6 +20,8 @@ var {
 } = React
 
 export class TodosIndexComponent extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   sortedTodos() {
     return this.props.todos.sort((a, b) =>
         moment(a.date).diff(moment(b.date)) > 0);

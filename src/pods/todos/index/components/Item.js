@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react-native'
+import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment';
 
 import globalStyles from 'styles/styles'
@@ -13,6 +14,8 @@ var {
 } = React
 
 export default class TodoItem extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   isDueIn() {
     const date = moment(this.props.rowData.date);
     const dueIn = date.diff(moment());

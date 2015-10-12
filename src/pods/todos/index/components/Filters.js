@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react-native'
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 var {
   StyleSheet,
@@ -19,6 +20,8 @@ var styles = StyleSheet.create({
 const filters = ['all', 'active', 'completed'];
 
 export default class TodoFilters extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   render() {
     const { currentFilter, filterTodos } = this.props;
 

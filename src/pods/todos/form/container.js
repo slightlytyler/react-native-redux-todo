@@ -2,6 +2,7 @@
 
 import React from 'react-native'
 import { connect } from 'react-redux/native'
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import moment from 'moment';
 
@@ -41,6 +42,8 @@ var styles = StyleSheet.create({
 });
 
 export class TodoFormComponent extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate;
+
   constructor(props, context) {
     super(props, context);
 
