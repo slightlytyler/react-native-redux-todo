@@ -2,10 +2,10 @@
 
 import { combineReducers } from 'redux'
 
-import todosReducer from 'pods/todos/reducer'
+import todos from 'pods/todos/reducer'
 
 const appReducers = combineReducers({
-  todosReducer
-})
+  todos
+});
 
 export default appReducers

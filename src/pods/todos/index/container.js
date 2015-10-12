@@ -74,8 +74,8 @@ export class TodosIndexComponent extends React.Component {
 }
 
 export const TodosIndexContainer = connect(state => {
-  const todos = state.todosReducer.getIn(['todos', 'list']) || List();
-  const filter = state.todosReducer.getIn(['todos', 'filter']) || 'all';
+  const todos = state.todos.get('list') || List();
+  const filter = state.todos.get('filter') || 'all';
   const filterBool = filter === 'completed';
 
   return {

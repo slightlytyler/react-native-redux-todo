@@ -5,10 +5,6 @@ import { fromJS } from 'immutable'
 import { actionTypes } from './constants'
 import getNewId from 'helpers/getNewId'
 
-function setState(state, newState) {
-  return state.merge(newState);
-}
-
 function addTodo(todosListState, text, date) {
   return fromJS([{
     id: getNewId(todosListState),
@@ -44,31 +40,28 @@ function toggleComplete(todosListState, id) {
 }
 
 export default function (state=fromJS({
-  todos: {
-    list: []
-  }
+  list: []
 }), action) {
   switch (action.type) {
 
-  case actionTypes.SET_STATE:
-    return setState(state, action.state);
-
   case actionTypes.ADD_TODO:
-    return state.updateIn(['todos', 'list'], todosListState =>
+    return state.update('list', todosListState =>
               addTodo(todosListState, action.text, action.date));
 
   case actionTypes.UPDATE_TODO:
-    return state.updateIn(['todos', 'list'], todosListState =>
+    return state.update('list', todosListState =>
               updateTodo(todosListState, action.id, action.text, action.date));
 
   case actionTypes.DELETE_TODO:
-    return state.updateIn(['todos', 'list'], todosListState => deleteTodo(todosListState, action.id));
+    return state.update('list', todosListState =>
+              deleteTodo(todosListState, action.id));
 
   case actionTypes.TOGGLE_COMPLETE:
-    return state.updateIn(['todos', 'list'], todosListState => toggleComplete(todosListState, action.id));
+    return state.update('list', todosListState =>
+              toggleComplete(todosListState, action.id));
 
   case actionTypes.FILTER_TODOS:
-    return state.setIn(['todos', 'filter'], action.filter)
+    return state.set('filter', action.filter)
   }
 
   return state;

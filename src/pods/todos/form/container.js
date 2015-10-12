@@ -49,7 +49,7 @@ export class TodoFormComponent extends React.Component {
 
     this.state = {
       text: item ? item.text : '',
-      date: item ? item.date : moment(currentDate).add(1, 'hour').toDate(),
+      date: item ? moment(item.date).toDate() : moment(currentDate).add(1, 'hour').toDate(),
       currentDate: currentDate
     };
   }

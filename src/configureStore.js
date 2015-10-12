@@ -6,22 +6,19 @@ import storage from 'redux-storage'
 import createEngine from 'redux-storage/engines/reactNativeAsyncStorage';
 
 import appReducers from 'reducers/index'
-import { setState } from 'pods/todos/actions'
 
 export default function configureStore(initialState) {
   // Setup storage
   const reducer = storage.reducer(appReducers);
-
   let engineComposers = [
     (engine) => storage.decorators.filter(engine, [
-      ['todosReducer', 'todos', 'list']
+      ['todos', 'list']
     ]),
     (engine) => storage.decorators.immutablejs(engine, [
-      ['todosReducer']
+      ['todos']
     ])
   ];
   const engine = compose(...engineComposers)(createEngine('react-native-todo'));
-
   const storageMiddleware = storage.createMiddleware(engine);
 
   // Enables your middleware:
@@ -31,7 +28,10 @@ export default function configureStore(initialState) {
   ];
   const finalCreateStore = compose(...composers)(createStore);
 
+  // Create the store
   let store = finalCreateStore(reducer, initialState);
+
+  // Hot reloading
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('./reducers/index', () => {
@@ -39,9 +39,10 @@ export default function configureStore(initialState) {
       store.replaceReducer(nextRootReducer)
     })
   }
-  const load = storage.createLoader(engine);
 
-  load(store).then((loadedState) => store.dispatch(setState(loadedState)));
+  // Load saved state
+  const load = storage.createLoader(engine);
+  load(store);
 
   return store;
 }

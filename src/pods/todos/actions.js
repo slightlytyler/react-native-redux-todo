@@ -2,10 +2,6 @@
 
 import { actionTypes } from './constants'
 
-export function setState(state) {
-  return { type: actionTypes.SET_STATE, state };
-}
-
 export function addTodo(text, date) {
   return { type: actionTypes.ADD_TODO, text, date };
 }
