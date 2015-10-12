@@ -3,6 +3,7 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 import { List } from 'immutable'
+import moment from 'moment'
 
 import { deleteTodo, toggleComplete, filterTodos } from '../actions'
 import TodoList from './components/List'
@@ -19,6 +20,11 @@ var {
 } = React
 
 export class TodosIndexComponent extends React.Component {
+  sortedTodos() {
+    return this.props.todos.sort((a, b) =>
+        moment(a.get('date')).diff(moment(b.get('date'))) > 0);
+  }
+
   editTodo(rowData, rowID) {
     AlertIOS.alert(
       'Quick Menu',
@@ -52,11 +58,11 @@ export class TodosIndexComponent extends React.Component {
   }
 
   render() {
-    const { todos, filter } = this.props;
+    const { filter } = this.props;
 
     return (
       <View style={{flex: 1}}>
-        <TodoList todos={todos}
+        <TodoList todos={this.sortedTodos()}
                   filter={filter}
                   editTodo={this.editTodo.bind(this)}
                   toggleComplete={this.toggleComplete.bind(this)}
