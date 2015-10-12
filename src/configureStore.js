@@ -13,9 +13,6 @@ export default function configureStore(initialState) {
   let engineComposers = [
     (engine) => storage.decorators.filter(engine, [
       ['todos', 'list']
-    ]),
-    (engine) => storage.decorators.immutablejs(engine, [
-      ['todos']
     ])
   ];
   const engine = compose(...engineComposers)(createEngine('react-native-todo'));
@@ -44,7 +41,6 @@ export default function configureStore(initialState) {
   const load = storage.createLoader(engine);
   load(store);
 
-  console.log(store);
   return store;
 }
 

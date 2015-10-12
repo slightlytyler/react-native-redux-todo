@@ -2,7 +2,6 @@
 
 import React from 'react-native'
 import { connect } from 'react-redux/native'
-import { List } from 'immutable'
 import moment from 'moment'
 
 import { deleteTodo, toggleComplete, filterTodos } from '../actions'
@@ -22,7 +21,7 @@ var {
 export class TodosIndexComponent extends React.Component {
   sortedTodos() {
     return this.props.todos.sort((a, b) =>
-        moment(a.get('date')).diff(moment(b.get('date'))) > 0);
+        moment(a.date).diff(moment(b.date)) > 0);
   }
 
   editTodo(rowData, rowID) {
@@ -80,16 +79,14 @@ export class TodosIndexComponent extends React.Component {
 }
 
 export const TodosIndexContainer = connect(state => {
-  console.log('!!!!!');
-  console.log(state.todos);
-  const todos = state.todos.get('list') || List();
-  const filter = state.todos.get('filter') || 'all';
+  const todos = state.todos.list || [];
+  const filter = state.todos.filter || 'all';
   const filterBool = filter === 'completed';
 
   return {
       todos: filter === 'all' ?
              todos :
-             todos.filter(todo => todo.get('complete') === filterBool),
+             todos.filter(todo => todo.complete === filterBool),
       filter: filter
     };
 })(TodosIndexComponent);

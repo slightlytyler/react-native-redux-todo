@@ -1,7 +1,6 @@
 'use strict'
 
 import { combineReducers } from 'redux'
-import { List } from 'immutable'
 
 import { actionTypes } from './constants'
 import getNewId from 'helpers/getNewId'
@@ -11,70 +10,77 @@ var todosReducer = combineReducers({
   filter: filterReducer
 });
 
-function listReducer(state=List(), action) {
+function listReducer(state=[], action) {
   switch (action.type) {
 
   case actionTypes.ADD_TODO:
-    return state.update('list', todosListState =>
-              addTodo(todosListState, action.text, action.date));
+    return addTodo(state, action.text, action.date);
 
   case actionTypes.UPDATE_TODO:
-    return state.update('list', todosListState =>
-              updateTodo(todosListState, action.id, action.text, action.date));
+    return updateTodo(state, action.id, action.text, action.date);
 
   case actionTypes.DELETE_TODO:
-    return state.update('list', todosListState =>
-              deleteTodo(todosListState, action.id));
+    return deleteTodo(state, action.id);
 
   case actionTypes.TOGGLE_COMPLETE:
-    return state.update('list', todosListState =>
-              toggleComplete(todosListState, action.id));
+    return toggleComplete(state, action.id)
   }
   return state;
 }
 
-function filterReducer(state='All', action) {
+function filterReducer(state='all', action) {
   switch (action.type) {
     case actionTypes.FILTER_TODOS:
-      return state.set('filter', action.filter)
+      return action.filter;
   }
 
   return state;
 }
 
-
-function addTodo(todosListState, text, date) {
-  return fromJS([{
-    id: getNewId(todosListState),
+function addTodo(state, text, date) {
+  return [{
+    id: getNewId(state),
     text: text,
     date: date,
-    complete: false
-  }, ...todosListState]);
+    complete: false,
+  }, ...state];
 }
 
-function updateTodo(todosListState, id, text, date) {
-  return todosListState.map(todo => {
-    if (todo.get('id') === id) {
-      return todo.set('text', text)
-                 .set('date', date);
+function updateTodo(state, id, text, date) {
+  return state.map(todo => {
+    if (todo.id === id) {
+      return {
+        id: id,
+        text: text,
+        date: date,
+        complete: todo.complete
+      }
+    } else {
+      return todo;
     }
-
-    return todo;
   });
 }
 
-function deleteTodo(todosListState, id) {
-  return todosListState.filter(todo =>
-    todo.get('id') !== id
+
+function deleteTodo(state, id) {
+  return state.filter(todo =>
+    todo.id !== id
   );
 }
 
-function toggleComplete(todosListState, id) {
-  return todosListState.map(todo =>
-    todo.get('id') === id ?
-    todo.set('complete', !todo.get('complete')) :
-    todo
-  );
+function toggleComplete(state, id) {
+  return state.map(todo => {
+    if (todo.id === id) {
+      return {
+        id: id,
+        text: todo.text,
+        date: todo.date,
+        complete: !todo.complete
+      }
+    } else {
+      return todo;
+    }
+  });
 }
 
 export default todosReducer;
