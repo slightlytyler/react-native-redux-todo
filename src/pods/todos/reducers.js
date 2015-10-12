@@ -1,9 +1,9 @@
 'use strict'
 
 import { combineReducers } from 'redux'
+import shortid from 'shortid'
 
 import { actionTypes } from './constants'
-import getNewId from 'helpers/getNewId'
 
 const todosReducer = combineReducers({
   list: listReducer,
@@ -39,7 +39,7 @@ function filterReducer(state='all', action) {
 
 function addTodo(state, text, date) {
   return [{
-    id: getNewId(state),
+    id: shortid.generate(),
     text: text,
     date: date,
     complete: false,

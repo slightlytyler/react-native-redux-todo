@@ -22,8 +22,14 @@ export class TodosIndexComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   sortedTodos() {
-    return this.props.todos.sort((a, b) =>
-        moment(a.date).diff(moment(b.date)) > 0);
+    return this.props.todos.sort((a, b) => {
+      let keyA = moment(a.date),
+          keyB = moment(b.date);
+
+      if (keyA < keyB) return -1;
+      if (keyA > keyB) return 1;
+      return 0;
+    });
   }
 
   editTodo(rowData, rowID) {
