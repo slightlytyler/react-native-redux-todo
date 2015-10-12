@@ -4,6 +4,7 @@ import { compose, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import storage from 'redux-storage'
 import createEngine from 'redux-storage/engines/reactNativeAsyncStorage';
+import createLogger from 'redux-logger';
 
 import appReducers from 'reducers/index'
 
@@ -18,8 +19,12 @@ export default function configureStore(initialState) {
   const engine = compose(...engineComposers)(createEngine('react-native-todo'));
   const storageMiddleware = storage.createMiddleware(engine);
 
+  // Redux logger
+  const logger = createLogger();
+
   // Enables your middleware:
   let composers = [
+    applyMiddleware(logger),
     applyMiddleware(thunk),
     applyMiddleware(storageMiddleware)
   ];
