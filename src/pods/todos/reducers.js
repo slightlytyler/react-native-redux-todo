@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 import { actionTypes } from './constants'
 import getNewId from 'helpers/getNewId'
 
-var todosReducer = combineReducers({
+const todosReducer = combineReducers({
   list: listReducer,
   filter: filterReducer
 });
@@ -47,20 +47,14 @@ function addTodo(state, text, date) {
 }
 
 function updateTodo(state, id, text, date) {
-  return state.map(todo => {
-    if (todo.id === id) {
-      return {
-        id: id,
-        text: text,
-        date: date,
-        complete: todo.complete
-      }
-    } else {
-      return todo;
-    }
-  });
+  return state.map(todo =>
+    todo.id === id ?
+    Object.assign({}, todo, {
+      text, date
+    }) :
+    todo
+  );
 }
-
 
 function deleteTodo(state, id) {
   return state.filter(todo =>
@@ -69,18 +63,13 @@ function deleteTodo(state, id) {
 }
 
 function toggleComplete(state, id) {
-  return state.map(todo => {
-    if (todo.id === id) {
-      return {
-        id: id,
-        text: todo.text,
-        date: todo.date,
-        complete: !todo.complete
-      }
-    } else {
-      return todo;
-    }
-  });
+  return state.map(todo =>
+    todo.id === id ?
+    Object.assign({}, todo, {
+      complete: !todo.complete
+    }) :
+    todo
+  );
 }
 
 export default todosReducer;
