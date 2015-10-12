@@ -80,6 +80,8 @@ export class TodosIndexComponent extends React.Component {
 }
 
 export const TodosIndexContainer = connect(state => {
+  console.log('!!!!!');
+  console.log(state.todos);
   const todos = state.todos.get('list') || List();
   const filter = state.todos.get('filter') || 'all';
   const filterBool = filter === 'completed';

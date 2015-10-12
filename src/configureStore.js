@@ -44,6 +44,7 @@ export default function configureStore(initialState) {
   const load = storage.createLoader(engine);
   load(store);
 
+  console.log(store);
   return store;
 }
 
