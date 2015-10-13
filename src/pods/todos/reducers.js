@@ -4,6 +4,21 @@ import { combineReducers } from 'redux'
 import shortid from 'shortid'
 
 import { actionTypes } from './constants'
+import { filterTypes } from './constants'
+
+const {
+  ADD_TODO,
+  UPDATE_TODO,
+  DELETE_TODO,
+  TOGGLE_COMPLETE,
+  FILTER_TODOS
+} = actionTypes;
+
+const {
+  SHOW_ALL,
+  SHOW_ACTIVE,
+  SHOW_COMPLETE
+} = filterTypes;
 
 const todosReducer = combineReducers({
   list: listReducer,
@@ -13,24 +28,24 @@ const todosReducer = combineReducers({
 function listReducer(state=[], action) {
   switch (action.type) {
 
-  case actionTypes.ADD_TODO:
+  case ADD_TODO:
     return addTodo(state, action.text, action.date);
 
-  case actionTypes.UPDATE_TODO:
+  case UPDATE_TODO:
     return updateTodo(state, action.id, action.text, action.date);
 
-  case actionTypes.DELETE_TODO:
+  case DELETE_TODO:
     return deleteTodo(state, action.id);
 
-  case actionTypes.TOGGLE_COMPLETE:
+  case TOGGLE_COMPLETE:
     return toggleComplete(state, action.id)
   }
   return state;
 }
 
-function filterReducer(state='all', action) {
+function filterReducer(state=SHOW_ALL, action) {
   switch (action.type) {
-    case actionTypes.FILTER_TODOS:
+    case FILTER_TODOS:
       return action.filter;
   }
 

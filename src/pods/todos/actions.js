@@ -2,22 +2,30 @@
 
 import { actionTypes } from './constants'
 
+const {
+  ADD_TODO,
+  UPDATE_TODO,
+  DELETE_TODO,
+  TOGGLE_COMPLETE,
+  FILTER_TODOS
+} = actionTypes;
+
 export function addTodo(text, date) {
-  return { type: actionTypes.ADD_TODO, text, date };
+  return { type: ADD_TODO, text, date };
 }
 
 export function updateTodo(id, text, date) {
-  return { type: actionTypes.UPDATE_TODO, id, text, date };
+  return { type: UPDATE_TODO, id, text, date };
 }
 
 export function deleteTodo(id) {
-  return { type: actionTypes.DELETE_TODO, id };
+  return { type: DELETE_TODO, id };
 }
 
 export function toggleComplete(id) {
-  return { type: actionTypes.TOGGLE_COMPLETE, id };
+  return { type: TOGGLE_COMPLETE, id };
 }
 
 export function filterTodos(filter) {
-  return { type: actionTypes.FILTER_TODOS, filter };
+  return { type: FILTER_TODOS, filter };
 }

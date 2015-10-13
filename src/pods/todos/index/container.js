@@ -5,7 +5,8 @@ import { connect } from 'react-redux/native'
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment'
 
-import { deleteTodo, toggleComplete, filterTodos } from '../actions'
+import { filterTypes } from 'pods/todos/constants'
+import { deleteTodo, toggleComplete, filterTodos } from 'pods/todos/actions'
 import TodoList from './components/List'
 import { EditTodoRoute, NewTodoRoute} from 'pods/todos/routes';
 
@@ -17,6 +18,12 @@ var {
   TouchableHighlight,
   AlertIOS
 } = React
+
+const {
+  SHOW_ALL,
+  SHOW_ACTIVE,
+  SHOW_COMPLETE
+} = filterTypes;
 
 export class TodosIndexComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -61,7 +68,7 @@ export class TodosIndexComponent extends React.Component {
   }
 
   filterTodos(filter) {
-    this.props.dispatch(filterTodos(filter.toLowerCase()));
+    this.props.dispatch(filterTodos(filter));
   }
 
   render() {
@@ -88,11 +95,11 @@ export class TodosIndexComponent extends React.Component {
 
 export const TodosIndexContainer = connect(state => {
   const todos = state.todos.list || [];
-  const filter = state.todos.filter || 'all';
-  const filterBool = filter === 'completed';
+  const filter = state.todos.filter || SHOW_ALL;
+  const filterBool = filter === SHOW_COMPLETE;
 
   return {
-      todos: filter === 'all' ?
+      todos: filter === SHOW_ALL ?
              todos :
              todos.filter(todo => todo.complete === filterBool),
       filter: filter
