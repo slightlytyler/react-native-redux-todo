@@ -9,7 +9,7 @@ import { filterTypes } from './constants'
 const {
   ADD_TODO,
   UPDATE_TODO,
-  DELETE_TODO,
+  DELETE_TODOS,
   TOGGLE_COMPLETE,
   FILTER_TODOS
 } = actionTypes;
@@ -34,8 +34,8 @@ function listReducer(state=[], action) {
   case UPDATE_TODO:
     return updateTodo(state, action.id, action.text, action.date);
 
-  case DELETE_TODO:
-    return deleteTodo(state, action.id);
+  case DELETE_TODOS:
+    return deleteTodos(state, action.id);
 
   case TOGGLE_COMPLETE:
     return toggleComplete(state, action.id)
@@ -71,9 +71,9 @@ function updateTodo(state, id, text, date) {
   );
 }
 
-function deleteTodo(state, id) {
+function deleteTodos(state, ids) {
   return state.filter(todo =>
-    todo.id !== id
+    ids.indexOf(todo.id) === -1
   );
 }
 

@@ -6,7 +6,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment'
 
 import { filterTypes } from 'pods/todos/constants'
-import { deleteTodo, toggleComplete, filterTodos } from 'pods/todos/actions'
+import { deleteTodos, toggleComplete, clearCompleted, filterTodos } from 'pods/todos/actions'
 import TodoList from './components/List'
 import TodosHeader from './components/Header'
 import { EditTodoRoute, NewTodoRoute} from 'pods/todos/routes';
@@ -22,7 +22,6 @@ var {
 
 const {
   SHOW_ALL,
-  SHOW_ACTIVE,
   SHOW_COMPLETE
 } = filterTypes;
 
@@ -40,20 +39,24 @@ export class TodosIndexComponent extends React.Component {
     });
   }
 
+  completedTodos(todos) {
+    return todos.filter(todo => todo.complete);
+  }
+
   editTodo(rowData, rowID) {
     AlertIOS.alert(
       'Quick Menu',
       null,
       [
         { text: 'Edit', onPress: () => this.openTodo(rowData, rowID) },
-        { text: 'Delete', onPress: () => this.deleteTodo(rowData.id) },
+        { text: 'Delete', onPress: () => this.deleteTodos([rowData.id]) },
         { text: 'Cancel' }
       ]
     );
   }
 
-  deleteTodo(id) {
-    this.props.dispatch(deleteTodo(id));
+  deleteTodos(id) {
+    this.props.dispatch(deleteTodos(id));
   }
 
   openTodo(rowData, rowID) {
@@ -66,6 +69,12 @@ export class TodosIndexComponent extends React.Component {
 
   toggleComplete(id) {
     this.props.dispatch(toggleComplete(id));
+  }
+
+  clearCompleted() {
+    this.props.dispatch(deleteTodos(
+      this.completedTodos(this.props.todos).map(todo => todo.id)
+    ));
   }
 
   toggleAll() {
@@ -83,7 +92,8 @@ export class TodosIndexComponent extends React.Component {
       <View style={{flex: 1}}>
         <TodosHeader filter={filter}
                      filterTodos={this.filterTodos.bind(this)}
-                     toggleAll={this.toggleAll.bind(this)} />
+                     toggleAll={this.toggleAll.bind(this)}
+                     clearCompleted={this.clearCompleted.bind(this)} />
 
         <TodoList todos={this.sortTodos(todos)}
                   editTodo={this.editTodo.bind(this)}

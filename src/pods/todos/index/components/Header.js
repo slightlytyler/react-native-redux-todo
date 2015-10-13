@@ -16,7 +16,12 @@ export default class TodosHeader extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
-    const { filter, filterTodos, toggleAll } = this.props;
+    const {
+      filter,
+      filterTodos,
+      toggleAll,
+      clearCompleted
+    } = this.props;
 
     return(
       <View style={styles.header}>
@@ -29,7 +34,8 @@ export default class TodosHeader extends React.Component {
             <Text style={styles.toggleButtonText}>Toggle All</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.toggleButton}>
+          <TouchableOpacity style={styles.toggleButton}
+                            onPress={clearCompleted}>
             <Text style={styles.toggleButtonText}>Clear Completed</Text>
           </TouchableOpacity>
         </View>
