@@ -45,13 +45,17 @@ export default class TodoItem extends React.Component {
     return(
       <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
                           onLongPress={() => this.props.editTodo(rowData, rowID)}>
-        <View style={styles.todo}>
-          <Text style={[...textStyles, item.complete && styles.strikeThrough]}>
-             {item.text}
-          </Text>
-          <Text style={textStyles}>
-            {this.isDueIn().value}
-          </Text>
+        <View>
+          <View style={styles.todo}>
+            <Text style={textStyles}>
+               {item.text}
+            </Text>
+            <Text style={textStyles}>
+              {this.isDueIn().value}
+            </Text>
+          </View>
+
+          <View style={[styles.strikeThrough, item.complete && styles.strikeThroughShow]} />
         </View>
       </TouchableHighlight>
     )
@@ -62,6 +66,7 @@ var styles = {
   ...globalStyles,
 
   todo: {
+    position: 'relative',
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -84,13 +89,6 @@ var styles = {
     marginTop: 2,
   },
 
-  hr: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    height: 1,
-    marginLeft: 0,
-    marginRight: 0,
-  },
-
   warnSoon: {
     color: '#E5DA3F'
   },
@@ -108,6 +106,14 @@ var styles = {
   },
 
   strikeThrough: {
-    textDecorationLine: 'line-through'
+    bottom: 18,
+    height: 0,
+    marginLeft: 10,
+    marginRight: 10,
+    backgroundColor: '#5bbd72',
+  },
+
+  strikeThroughShow: {
+    height: 1,
   }
 }
