@@ -47,6 +47,6 @@ export default class TodoFilters extends React.Component {
 var styles = StyleSheet.create({
   controls: {
     margin: 10,
-    marginTop: 24
+    marginTop: 32
   }
 });

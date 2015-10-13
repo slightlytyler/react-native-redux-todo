@@ -8,6 +8,7 @@ import moment from 'moment'
 import { filterTypes } from 'pods/todos/constants'
 import { deleteTodo, toggleComplete, filterTodos } from 'pods/todos/actions'
 import TodoList from './components/List'
+import TodosHeader from './components/Header'
 import { EditTodoRoute, NewTodoRoute} from 'pods/todos/routes';
 
 import styles from 'styles/styles';
@@ -67,6 +68,10 @@ export class TodosIndexComponent extends React.Component {
     this.props.dispatch(toggleComplete(id));
   }
 
+  toggleAll() {
+    this.props.dispatch(toggleComplete(this.props.todos.map(todo => todo.id)))
+  }
+
   filterTodos(filter) {
     this.props.dispatch(filterTodos(filter));
   }
@@ -76,8 +81,11 @@ export class TodosIndexComponent extends React.Component {
 
     return (
       <View style={{flex: 1}}>
+        <TodosHeader filter={filter}
+                     filterTodos={this.filterTodos.bind(this)}
+                     toggleAll={this.toggleAll.bind(this)} />
+
         <TodoList todos={this.sortTodos(todos)}
-                  filter={filter}
                   editTodo={this.editTodo.bind(this)}
                   toggleComplete={this.toggleComplete.bind(this)}
                   filterTodos={this.filterTodos.bind(this)} />

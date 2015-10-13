@@ -77,14 +77,28 @@ function deleteTodo(state, id) {
   );
 }
 
-function toggleComplete(state, id) {
-  return state.map(todo =>
-    todo.id === id ?
-    Object.assign({}, todo, {
-      complete: !todo.complete
-    }) :
-    todo
-  );
+function toggleComplete(state, ids) {
+  if (Array.isArray(ids)) {
+    let hasIncomplete = state.some(todo => !todo.complete);
+
+    return state.map(todo =>
+      ids.indexOf(todo.id) !== -1 ?
+      Object.assign({}, todo, {
+        complete: hasIncomplete
+      }) :
+      todo
+    );
+  } else {
+    let id = ids;
+
+    return state.map(todo =>
+      todo.id === id ?
+      Object.assign({}, todo, {
+        complete: !todo.complete
+      }) :
+      todo
+    );
+  }
 }
 
 export default todosReducer;

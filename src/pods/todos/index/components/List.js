@@ -4,7 +4,6 @@ import React from 'react-native'
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import TodoItem from './Item'
-import TodoFilters from './Filters'
 
 var {
   ListView,
