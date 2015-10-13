@@ -20,7 +20,8 @@ export default class TodosHeader extends React.Component {
       filter,
       filterTodos,
       toggleAll,
-      clearCompleted
+      clearCompleted,
+      hasCompletedTodos
     } = this.props;
 
     return(
@@ -34,9 +35,9 @@ export default class TodosHeader extends React.Component {
             <Text style={styles.toggleButtonText}>Toggle All</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.toggleButton}
+          <TouchableOpacity style={[styles.toggleButton, hasCompletedTodos && styles.activeButton]}
                             onPress={clearCompleted}>
-            <Text style={styles.toggleButtonText}>Clear Completed</Text>
+            <Text style={[styles.toggleButtonText, hasCompletedTodos && styles.activeText]}>Clear Completed</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -67,8 +68,16 @@ var styles = StyleSheet.create({
     borderRadius: 5
   },
 
+  activeButton: {
+    borderColor: 'green'
+  },
+
   toggleButtonText: {
     fontSize: 10,
     color: '#999999'
+  },
+
+  activeText: {
+    color: 'green'
   }
 });

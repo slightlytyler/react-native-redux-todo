@@ -59,6 +59,12 @@ export class TodosIndexComponent extends React.Component {
     this.props.dispatch(deleteTodos(id));
   }
 
+  clearCompleted() {
+    this.props.dispatch(deleteTodos(
+      this.completedTodos(this.props.todos).map(todo => todo.id)
+    ));
+  }
+
   openTodo(rowData, rowID) {
     this.props.navigator.push(EditTodoRoute(rowData, rowID));
   }
@@ -68,13 +74,7 @@ export class TodosIndexComponent extends React.Component {
   }
 
   toggleComplete(id) {
-    this.props.dispatch(toggleComplete(id));
-  }
-
-  clearCompleted() {
-    this.props.dispatch(deleteTodos(
-      this.completedTodos(this.props.todos).map(todo => todo.id)
-    ));
+    this.props.dispatch(toggleComplete([id]));
   }
 
   toggleAll() {
@@ -93,7 +93,8 @@ export class TodosIndexComponent extends React.Component {
         <TodosHeader filter={filter}
                      filterTodos={this.filterTodos.bind(this)}
                      toggleAll={this.toggleAll.bind(this)}
-                     clearCompleted={this.clearCompleted.bind(this)} />
+                     clearCompleted={this.clearCompleted.bind(this)}
+                     hasCompletedTodos={this.completedTodos(todos).length > 0}/>
 
         <TodoList todos={this.sortTodos(todos)}
                   editTodo={this.editTodo.bind(this)}

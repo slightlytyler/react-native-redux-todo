@@ -35,10 +35,10 @@ function listReducer(state=[], action) {
     return updateTodo(state, action.id, action.text, action.date);
 
   case DELETE_TODOS:
-    return deleteTodos(state, action.id);
+    return deleteTodos(state, action.ids);
 
   case TOGGLE_COMPLETE:
-    return toggleComplete(state, action.id)
+    return toggleComplete(state, action.ids)
   }
   return state;
 }
@@ -78,27 +78,18 @@ function deleteTodos(state, ids) {
 }
 
 function toggleComplete(state, ids) {
-  if (Array.isArray(ids)) {
-    let hasIncomplete = state.some(todo => !todo.complete);
+  let currentTodos = state.filter(todo =>
+    ids.indexOf(todo.id) !== -1
+  );
+  let hasIncomplete = currentTodos.some(todo => !todo.complete);
 
-    return state.map(todo =>
-      ids.indexOf(todo.id) !== -1 ?
-      Object.assign({}, todo, {
-        complete: hasIncomplete
-      }) :
-      todo
-    );
-  } else {
-    let id = ids;
-
-    return state.map(todo =>
-      todo.id === id ?
-      Object.assign({}, todo, {
-        complete: !todo.complete
-      }) :
-      todo
-    );
-  }
+  return state.map(todo =>
+    ids.indexOf(todo.id) !== -1 ?
+    Object.assign({}, todo, {
+      complete: hasIncomplete
+    }) :
+    todo
+  );
 }
 
 export default todosReducer;

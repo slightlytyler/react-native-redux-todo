@@ -18,12 +18,12 @@ export function updateTodo(id, text, date) {
   return { type: UPDATE_TODO, id, text, date };
 }
 
-export function deleteTodos(id) {
-  return { type: DELETE_TODOS, id };
+export function deleteTodos(ids) {
+  return { type: DELETE_TODOS, ids };
 }
 
-export function toggleComplete(id) {
-  return { type: TOGGLE_COMPLETE, id };
+export function toggleComplete(ids) {
+  return { type: TOGGLE_COMPLETE, ids };
 }
 
 export function filterTodos(filter) {
