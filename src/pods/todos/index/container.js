@@ -80,7 +80,7 @@ export class TodosIndexComponent extends React.Component {
                   filter={filter}
                   editTodo={this.editTodo.bind(this)}
                   toggleComplete={this.toggleComplete.bind(this)}
-                  filterTodos={this.filterTodos.bind(this)}/>
+                  filterTodos={this.filterTodos.bind(this)} />
 
         <TouchableHighlight
             style={[styles.button, styles.newButton]}

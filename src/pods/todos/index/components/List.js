@@ -6,10 +6,9 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import TodoItem from './Item'
 import TodoFilters from './Filters'
 
-import styles from 'styles/styles'
-
 var {
   ListView,
+  StyleSheet
 } = React
 
 export default class TodoList extends React.Component {
@@ -35,17 +34,20 @@ export default class TodoList extends React.Component {
     return(
       <ListView
         dataSource={this.state.dataSource.cloneWithRows(todos)}
+        initialListSize={15}
         renderRow={(rowData, rowID) =>
                     <TodoItem rowData={rowData}
                               rowID={rowID}
                               editTodo={editTodo}
                               toggleComplete={toggleComplete} />}
-        renderHeader={() =>
-                      <TodoFilters currentFilter={filter}
-                                   filterTodos={filterTodos} />}
-        style={styles.todosList}
-        contentContainerStyle={styles.todosListContainer}
+        style={styles.list}
       />
     )
   }
 }
+
+var styles = StyleSheet.create({
+  list: {
+    flex: 1
+  }
+});

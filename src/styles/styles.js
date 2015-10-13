@@ -9,15 +9,6 @@ export default StyleSheet.create({
     flex: 1
   },
 
-  todosList: {
-    flex: 1
-  },
-
-  todosListContainer: {
-    flex: 1,
-    marginTop: 0
-  },
-
   buttonText: {
     fontSize: 18,
     color: 'white',
