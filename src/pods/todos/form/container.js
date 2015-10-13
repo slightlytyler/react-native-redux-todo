@@ -7,7 +7,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment';
 
 import { addTodo, updateTodo } from '../actions'
-import mainStyles from 'styles/styles';
+import globalStyles from 'styles/styles'
 
 var {
   StyleSheet,
@@ -17,29 +17,6 @@ var {
   TextInput,
   DatePickerIOS
 } = React
-
-var styles = StyleSheet.create({
-  todoForm: {
-    marginLeft: 24,
-    marginRight: 24,
-    marginTop: 98,
-    marginBottom: 24
-  },
-
-  label: {
-    fontWeight: 'bold',
-    fontSize: 18,
-    marginBottom: 10,
-  },
-
-  input: {
-    padding: 10,
-    height: 40,
-    borderColor: 'rgba(0,0,0,.3)',
-    borderWidth: 1,
-    borderRadius: 6
-  }
-});
 
 export class TodoFormComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -83,31 +60,63 @@ export class TodoFormComponent extends React.Component {
   render() {
     return(
       <View style={styles.todoForm}>
-        <View>
-          <Text style={styles.label}>Text</Text>
-          <TextInput style={styles.input}
-                     value={this.state.text}
-                     autoFocus={true}
-                     onChangeText={this.handleTextChange.bind(this)}/>
-        </View>
+        <View style={styles.formContainer}>
+          <View>
+            <Text style={styles.label}>Text</Text>
+            <TextInput style={styles.input}
+                       value={this.state.text}
+                       autoFocus={true}
+                       onChangeText={this.handleTextChange.bind(this)}/>
+          </View>
 
-        <View>
-        <DatePickerIOS
-            date={this.state.date}
-            minimumDate={this.state.currentDate}
-            onDateChange={this.handleDateChange.bind(this)}
-            mode="datetime"
-          />
+          <View>
+            <DatePickerIOS
+                date={this.state.date}
+                minimumDate={this.state.currentDate}
+                onDateChange={this.handleDateChange.bind(this)}
+                mode="datetime"
+              />
+          </View>
         </View>
 
         <TouchableHighlight
-            style={[mainStyles.button, mainStyles.saveButton]}
+            style={styles.button}
             underlayColor='#99d9f4'
             onPress={this.submit.bind(this)}>
-          <Text style={mainStyles.buttonText}>Save</Text>
+          <Text style={styles.buttonText}>Save Todo</Text>
         </TouchableHighlight>
       </View>
     )
+  }
+}
+
+var styles = {
+  ...globalStyles,
+
+  todoForm: {
+    flex: 1,
+  },
+
+  formContainer: {
+    flex: 1,
+    marginLeft: 24,
+    marginRight: 24,
+    marginTop: 98,
+    marginBottom: 24
+  },
+
+  label: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginBottom: 10,
+  },
+
+  input: {
+    padding: 10,
+    height: 40,
+    borderColor: 'rgba(0,0,0,.3)',
+    borderWidth: 1,
+    borderRadius: 6
   }
 }
 

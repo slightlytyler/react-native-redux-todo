@@ -5,10 +5,6 @@ import React from 'react-native';
 var { StyleSheet } = React;
 
 export default StyleSheet.create({
-  todosContainer: {
-    flex: 1
-  },
-
   buttonText: {
     fontSize: 18,
     color: 'white',
@@ -16,28 +12,13 @@ export default StyleSheet.create({
   },
 
   button: {
-    height: 50,
-    backgroundColor: '#48BBEC',
     alignSelf: 'stretch',
-    justifyContent: 'center'
-  },
+    justifyContent: 'center',
 
-  saveButton: {
-    marginTop: 24,
-    borderColor: '#48BBEC',
-    borderWidth: 1,
-    borderRadius: 8,
-  },
-
-  newButton: {
+    height: 50,
     marginBottom: 0,
-    borderRadius: 0,
-  },
 
-  hr: {
-    backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    height: 1,
-    marginLeft: 0,
-    marginRight: 0,
+    borderRadius: 0,
+    backgroundColor: '#48BBEC'
   }
 });

@@ -43,21 +43,17 @@ export default class TodoItem extends React.Component {
     ]
 
     return(
-      <View>
-        <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
-                            onLongPress={() => this.props.editTodo(rowData, rowID)}>
-          <View style={styles.todo}>
-            <Text style={[...textStyles, item.complete && styles.strikeThrough]}>
-               {item.text}
-            </Text>
-            <Text style={textStyles}>
-              {this.isDueIn().value}
-            </Text>
-          </View>
-        </TouchableHighlight>
-
-        <View style={styles.hr}/>
-      </View>
+      <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
+                          onLongPress={() => this.props.editTodo(rowData, rowID)}>
+        <View style={styles.todo}>
+          <Text style={[...textStyles, item.complete && styles.strikeThrough]}>
+             {item.text}
+          </Text>
+          <Text style={textStyles}>
+            {this.isDueIn().value}
+          </Text>
+        </View>
+      </TouchableHighlight>
     )
   }
 }
@@ -71,7 +67,11 @@ var styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
+
     backgroundColor: '#ffffff',
+    borderStyle: 'solid',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.4)'
   },
 
   text: {
@@ -82,6 +82,13 @@ var styles = {
     fontSize: 18,
     marginLeft: 5,
     marginTop: 2,
+  },
+
+  hr: {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    height: 1,
+    marginLeft: 0,
+    marginRight: 0,
   },
 
   warnSoon: {

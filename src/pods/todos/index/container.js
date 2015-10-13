@@ -102,7 +102,7 @@ export class TodosIndexComponent extends React.Component {
                   filterTodos={this.filterTodos.bind(this)} />
 
         <TouchableHighlight
-            style={[styles.button, styles.newButton]}
+            style={styles.button}
             underlayColor='#99d9f4'
             onPress={this.newTodo.bind(this)}>
             <Text style={styles.buttonText}>+ New Todo</Text>
