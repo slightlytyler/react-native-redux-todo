@@ -64,12 +64,12 @@ var styles = StyleSheet.create({
 
     borderStyle: 'solid',
     borderWidth: 1,
-    borderColor: '#eeeeee',
+    borderColor: '#999999',
     borderRadius: 5
   },
 
   activeButton: {
-    borderColor: 'green'
+    borderColor: '#5bbd72'
   },
 
   toggleButtonText: {
@@ -78,6 +78,6 @@ var styles = StyleSheet.create({
   },
 
   activeText: {
-    color: 'green'
+    color: '#5bbd72'
   }
 });
