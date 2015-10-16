@@ -6,6 +6,7 @@ export function TodosIndexRoute(getNavigator) {
   return {
     name: 'todos.index',
     title: 'Todos',
+    subTitle: 'A general list',
     component: TodosIndexContainer,
     RightButton: {
       text: 'New',

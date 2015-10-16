@@ -71,16 +71,14 @@ var styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
 
-    backgroundColor: '#ffffff',
     borderStyle: 'solid',
     borderBottomWidth: 1,
     borderColor: 'rgba(0, 0, 0, 0.4)'
   },
 
   text: {
-    color: '#222222',
+    color: 'white',
   },
 
   body: {

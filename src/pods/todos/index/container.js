@@ -90,23 +90,10 @@ export class TodosIndexComponent extends React.Component {
 
     return (
       <View style={{flex: 1}}>
-        <TodosHeader filter={filter}
-                     filterTodos={this.filterTodos.bind(this)}
-                     toggleAll={this.toggleAll.bind(this)}
-                     clearCompleted={this.clearCompleted.bind(this)}
-                     hasCompletedTodos={this.completedTodos(todos).length > 0}/>
-
         <TodoList todos={this.sortTodos(todos)}
                   editTodo={this.editTodo.bind(this)}
                   toggleComplete={this.toggleComplete.bind(this)}
                   filterTodos={this.filterTodos.bind(this)} />
-
-        <TouchableHighlight
-            style={styles.button}
-            underlayColor='#99d9f4'
-            onPress={this.newTodo.bind(this)}>
-            <Text style={styles.buttonText}>+ New Todo</Text>
-        </TouchableHighlight>
       </View>
     )
   }

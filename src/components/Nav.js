@@ -36,7 +36,8 @@ export default class Nav extends React.Component {
 var styles = StyleSheet.create({
   scene: {
     flex: 1,
-    paddingTop: 44,
-    backgroundColor: 'white',
+    padding: 20,
+    paddingTop: 128,
+    backgroundColor: 'black'
   }
 });
