@@ -13,6 +13,8 @@ var {
   StyleSheet
 } = React
 
+import Icon from 'react-native-vector-icons/FontAwesome'
+
 export default class TodoItem extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
@@ -40,6 +42,7 @@ export default class TodoItem extends React.Component {
       <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
                           onLongPress={() => this.props.editTodo(rowData, rowID)}>
         <View style={styles.todo}>
+          <Icon name="rocket" size={30} color="#900" />
           <Text style={textStyles}>
              {item.text}
           </Text>

@@ -22,7 +22,7 @@ var config = {
       test: /\.js$/,
       include: [
         path.resolve(__dirname, "src"),
-        path.resolve(__dirname, "node_modules/react-native-navbar")
+        path.resolve(__dirname, "node_modules/react-native-vector-icons")
       ],
       loader: 'babel',
       query: {
