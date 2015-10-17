@@ -34,28 +34,18 @@ export default class TodoItem extends React.Component {
     const { rowData, rowID } = this.props;
     const item = rowData;
 
-    const textStyles = [
-      styles.text,
-      this.isDueIn().oneHour && styles.warnSoon,
-      this.isDueIn().fifteenMinutes && styles.warnIminent,
-      this.isDueIn().pastDue && styles.warnPastDue,
-      item.complete && styles.completed
-    ]
+    const textStyles = [styles.text, item.complete && styles.completed];
 
     return(
       <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
                           onLongPress={() => this.props.editTodo(rowData, rowID)}>
-        <View>
-          <View style={styles.todo}>
-            <Text style={textStyles}>
-               {item.text}
-            </Text>
-            <Text style={textStyles}>
-              {this.isDueIn().value}
-            </Text>
-          </View>
-
-          <View style={[styles.strikeThrough, item.complete && styles.strikeThroughShow]} />
+        <View style={styles.todo}>
+          <Text style={textStyles}>
+             {item.text}
+          </Text>
+          <Text style={[textStyles, styles.due]}>
+            {this.isDueIn().value}
+          </Text>
         </View>
       </TouchableHighlight>
     )
@@ -72,13 +62,21 @@ var styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
 
+    paddingTop: 12,
+    paddingBottom: 12,
+
     borderStyle: 'solid',
     borderBottomWidth: 1,
-    borderColor: 'rgba(0, 0, 0, 0.4)'
+    borderColor: 'rgba(255, 255, 255, 0.2)'
   },
 
   text: {
-    color: 'white',
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.6)'
+  },
+
+  due: {
+    fontSize: 12
   },
 
   body: {
@@ -100,18 +98,6 @@ var styles = {
   },
 
   completed: {
-    color: '#5bbd72'
-  },
-
-  strikeThrough: {
-    bottom: 18,
-    height: 0,
-    marginLeft: 10,
-    marginRight: 10,
-    backgroundColor: '#5bbd72',
-  },
-
-  strikeThroughShow: {
-    height: 1,
+    opacity: .5
   }
 }
