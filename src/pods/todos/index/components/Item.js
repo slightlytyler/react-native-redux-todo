@@ -1,6 +1,6 @@
 'use strict'
 
-import React from 'react-native'
+import React, { PixelRatio } from 'react-native'
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment';
 
@@ -42,13 +42,16 @@ export default class TodoItem extends React.Component {
       <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
                           onLongPress={() => this.props.editTodo(rowData, rowID)}>
         <View style={styles.todo}>
-          <Icon name="rocket" size={30} color="#900" />
-          <Text style={textStyles}>
+          <View style={[styles.checkbox, item.complete && styles.completed]}>
+            <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />
+          </View>
+          <Text style={[styles.body, textStyles]}>
              {item.text}
           </Text>
           <Text style={[textStyles, styles.due]}>
             {this.isDueIn().value}
           </Text>
+          <Icon name="star-o" style={[styles.important, item.complete && styles.completed]} />
         </View>
       </TouchableHighlight>
     )
@@ -75,17 +78,41 @@ var styles = {
 
   text: {
     fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.6)',
+    textAlign: 'left'
+  },
+
+  checkbox: {
+    flex: 0,
+    marginRight: 14,
+    padding: 3,
+    borderColor: 'rgba(255, 255, 255, 0.6)',
+    borderWidth: 3 / PixelRatio.get(),
+    borderRadius: 5
+  },
+
+  checkmark: {
+    fontSize: 8,
     color: 'rgba(255, 255, 255, 0.6)'
   },
 
+  body: {
+    flex: 5
+  },
+
   due: {
+    flex: 2,
     fontSize: 12
   },
 
-  body: {
-    fontSize: 18,
-    marginLeft: 5,
-    marginTop: 2,
+  important: {
+    flex: 0,
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.6)'
+  },
+
+  hidden: {
+    color: 'transparent'
   },
 
   warnSoon: {
