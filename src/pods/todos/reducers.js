@@ -29,10 +29,10 @@ function listReducer(state=[], action) {
   switch (action.type) {
 
   case ADD_TODO:
-    return addTodo(state, action.text, action.date);
+    return addTodo(state, action.text, action.date, action.notificationsEnabled);
 
   case UPDATE_TODO:
-    return updateTodo(state, action.id, action.text, action.date);
+    return updateTodo(state, action.id, action.text, action.date, action.notificationsEnabled);
 
   case DELETE_TODOS:
     return deleteTodos(state, action.ids);
@@ -52,20 +52,22 @@ function filterReducer(state=SHOW_ALL, action) {
   return state;
 }
 
-function addTodo(state, text, date) {
+function addTodo(state, text, date, notificationsEnabled) {
+  console.log(notificationsEnabled);
   return [{
     id: shortid.generate(),
-    text: text,
-    date: date,
+    text,
+    date,
+    notificationsEnabled,
     complete: false,
   }, ...state];
 }
 
-function updateTodo(state, id, text, date) {
+function updateTodo(state, id, text, date, notificationsEnabled) {
   return state.map(todo =>
     todo.id === id ?
     Object.assign({}, todo, {
-      text, date
+      text, date, notificationsEnabled
     }) :
     todo
   );

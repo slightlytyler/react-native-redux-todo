@@ -31,21 +31,29 @@ export class TodoFormComponent extends React.Component {
     this.state = {
       text: item ? item.text : '',
       date: item ? moment(item.date).toDate() : moment(currentDate).add(1, 'hour').toDate(),
-      currentDate: currentDate
+      currentDate: currentDate,
+      notifactionsEnabled: item ? item.notifactionsEnabled : false
     };
   }
 
   submit() {
     const { item, rowID, dispatch } = this.props;
-    const { text, date } = this.state;
+    const { text, date,  notifactionsEnabled} = this.state;
 
     if (rowID) {
-      dispatch(updateTodo(item.id, text, date));
+      dispatch(updateTodo(
+        item.id,
+        text,
+        date,
+        notifactionsEnabled
+      ));
     } else {
-      dispatch(addTodo(text, date));
+      dispatch(addTodo(
+        text,
+        date,
+        notifactionsEnabled
+      ));
     }
-
-    this.setState({ text: '' });
 
     this.props.navigator.pop();
   }

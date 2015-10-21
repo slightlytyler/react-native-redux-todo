@@ -51,7 +51,7 @@ export default class TodoItem extends React.Component {
           <Text style={[textStyles, styles.due]}>
             {this.isDueIn().value}
           </Text>
-          <Icon name="star-o" style={[styles.important, item.complete && styles.completed]} />
+          <Icon name={item.notificationsEnabled ? "star" : "star-o"} style={[styles.important, item.complete && styles.completed]} />
         </View>
       </TouchableHighlight>
     )
