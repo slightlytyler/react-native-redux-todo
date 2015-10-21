@@ -72,7 +72,7 @@ var styles = StyleSheet.create({
     height: 40,
     padding: 5,
 
-    borderColor: 'rgba(255, 255, 255, .6)',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 6
   },

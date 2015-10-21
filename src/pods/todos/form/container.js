@@ -14,8 +14,9 @@ var {
   StyleSheet,
   View,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   TextInput,
+  SwitchIOS,
 } = React
 
 export class TodoFormComponent extends React.Component {
@@ -32,14 +33,6 @@ export class TodoFormComponent extends React.Component {
       date: item ? moment(item.date).toDate() : moment(currentDate).add(1, 'hour').toDate(),
       currentDate: currentDate
     };
-  }
-
-  handleTextChange(text) {
-    this.setState({ text: text });
-  }
-
-  handleDateChange(date) {
-    this.setState({ date: date });
   }
 
   submit() {
@@ -66,7 +59,7 @@ export class TodoFormComponent extends React.Component {
             <TextInput style={styles.input}
                        value={this.state.text}
                        autoFocus={true}
-                       onChangeText={this.handleTextChange.bind(this)}
+                       onChangeText={(text) => this.setState({ text: text })}
                        multiline={true} />
           </View>
 
@@ -75,18 +68,23 @@ export class TodoFormComponent extends React.Component {
             <TextInputDatePicker
                 date={this.state.date}
                 minimumDate={this.state.currentDate}
-                onDateChange={this.handleDateChange.bind(this)}
+                onDateChange={(date) => this.setState({ date: date })}
                 mode="datetime"
               />
           </View>
+
+          <View style={styles.field}>
+            <Text style={styles.label}>Enable Notifactions?</Text>
+            <SwitchIOS value={this.state.notifactionsEnabled}
+                       onValueChange={(value) => this.setState({ notifactionsEnabled:  value})}/>
+          </View>
         </View>
 
-        <TouchableHighlight
-            style={styles.button}
-            underlayColor='#99d9f4'
-            onPress={this.submit.bind(this)}>
+        <TouchableOpacity style={styles.button}
+                          onPress={this.submit.bind(this)}
+                          activeOpactiy={.6}>
           <Text style={styles.buttonText}>Save Todo</Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -105,13 +103,13 @@ var styles = {
   },
 
   field: {
-    marginBottom: 10
+    marginBottom: 18
   },
 
   label: {
     marginBottom: 10,
-    fontWeight: 'bold',
     fontSize: 18,
+    fontWeight: '400',
 
     color: 'rgba(255, 255, 255, .8)',
   },
@@ -123,7 +121,7 @@ var styles = {
     fontSize: 14,
     color: 'rgba(255, 255, 255, .8)',
 
-    borderColor: 'rgba(255, 255, 255, .6)',
+    borderColor: 'white',
     borderWidth: 1,
     borderRadius: 6
   }
