@@ -8,12 +8,6 @@ export function TodosIndexRoute(getNavigator) {
     title: 'Todos',
     subTitle: 'A general list',
     component: TodosIndexContainer,
-    RightButton: {
-      text: 'New',
-      onPress: () => {
-        getNavigator().push(NewTodoRoute())
-      }
-    }
   }
 }
 
@@ -23,6 +17,7 @@ export function NewTodoRoute() {
   return {
     name: 'todos.new',
     title: 'New Todo',
+    subTitle: 'What needs doing?',
     component: TodoFormContainer
   }
 }

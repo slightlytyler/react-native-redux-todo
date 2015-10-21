@@ -2,23 +2,22 @@
 
 import React from 'react-native'
 import { connect } from 'react-redux/native'
-import shouldPureComponentUpdate from 'react-pure-render/function';
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import moment from 'moment'
 
 import { filterTypes } from 'pods/todos/constants'
 import { deleteTodos, toggleComplete, clearCompleted, filterTodos } from 'pods/todos/actions'
 import TodoList from './components/List'
 import TodosHeader from './components/Header'
-import { EditTodoRoute, NewTodoRoute} from 'pods/todos/routes';
+import AddNewButton from 'components/AddNewButton'
+import { NewTodoRoute, EditTodoRoute } from 'pods/todos/routes'
 
-import styles from 'styles/styles';
+import styles from 'styles/styles'
 
 var {
   View,
-  Text,
-  TouchableHighlight,
   AlertIOS
-} = React
+} = React;
 
 const {
   SHOW_ALL,
@@ -65,12 +64,12 @@ export class TodosIndexComponent extends React.Component {
     ));
   }
 
-  openTodo(rowData, rowID) {
-    this.props.navigator.push(EditTodoRoute(rowData, rowID));
+  newTodo() {
+    this.props.navigator.push(NewTodoRoute());
   }
 
-  newTodo() {
-    this.props.navigator.push(NewTodoRoute())
+  openTodo(rowData, rowID) {
+    this.props.navigator.push(EditTodoRoute(rowData, rowID));
   }
 
   toggleComplete(id) {
@@ -94,6 +93,9 @@ export class TodosIndexComponent extends React.Component {
                   editTodo={this.editTodo.bind(this)}
                   toggleComplete={this.toggleComplete.bind(this)}
                   filterTodos={this.filterTodos.bind(this)} />
+
+        <AddNewButton title="Add New Task"
+                      onPress={() => this.newTodo()} />
       </View>
     )
   }

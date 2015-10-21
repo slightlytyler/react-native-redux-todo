@@ -5,12 +5,6 @@ import React from 'react-native';
 var { StyleSheet } = React;
 
 export default StyleSheet.create({
-  buttonText: {
-    fontSize: 18,
-    color: 'white',
-    alignSelf: 'center'
-  },
-
   button: {
     alignSelf: 'stretch',
     justifyContent: 'center',
@@ -20,5 +14,11 @@ export default StyleSheet.create({
 
     borderRadius: 0,
     backgroundColor: '#48BBEC'
+  },
+
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   }
 });
