@@ -12,13 +12,14 @@ export default StyleSheet.create({
     height: 50,
     marginBottom: 0,
 
-    borderRadius: 0,
-    backgroundColor: '#48BBEC'
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.8)',
+    borderRadius: 6,
   },
 
   buttonText: {
     fontSize: 18,
-    color: 'white',
+    color: 'rgba(255, 255, 255, 0.8)',
     alignSelf: 'center'
   }
 });

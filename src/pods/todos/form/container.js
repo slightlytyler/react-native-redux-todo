@@ -2,11 +2,12 @@
 
 import React from 'react-native'
 import { connect } from 'react-redux/native'
-import shouldPureComponentUpdate from 'react-pure-render/function';
+import shouldPureComponentUpdate from 'react-pure-render/function'
 
-import moment from 'moment';
+import moment from 'moment'
 
 import { addTodo, updateTodo } from '../actions'
+import TextInputDatePicker from 'components/TextInputDatePicker'
 import globalStyles from 'styles/styles'
 
 var {
@@ -15,7 +16,6 @@ var {
   Text,
   TouchableHighlight,
   TextInput,
-  DatePickerIOS
 } = React
 
 export class TodoFormComponent extends React.Component {
@@ -61,16 +61,18 @@ export class TodoFormComponent extends React.Component {
     return(
       <View style={styles.todoForm}>
         <View style={styles.formContainer}>
-          <View>
+          <View style={styles.field}>
             <Text style={styles.label}>Text</Text>
             <TextInput style={styles.input}
                        value={this.state.text}
                        autoFocus={true}
-                       onChangeText={this.handleTextChange.bind(this)}/>
+                       onChangeText={this.handleTextChange.bind(this)}
+                       multiline={true} />
           </View>
 
-          <View>
-            <DatePickerIOS
+          <View style={styles.field}>
+            <Text style={styles.label}>Due Date</Text>
+            <TextInputDatePicker
                 date={this.state.date}
                 minimumDate={this.state.currentDate}
                 onDateChange={this.handleDateChange.bind(this)}
@@ -99,22 +101,29 @@ var styles = {
 
   formContainer: {
     flex: 1,
-    marginLeft: 24,
-    marginRight: 24,
-    marginTop: 98,
-    marginBottom: 24
+    marginTop: 24,
+  },
+
+  field: {
+    marginBottom: 10
   },
 
   label: {
+    marginBottom: 10,
     fontWeight: 'bold',
     fontSize: 18,
-    marginBottom: 10,
+
+    color: 'rgba(255, 255, 255, .8)',
   },
 
   input: {
     padding: 10,
-    height: 40,
-    borderColor: 'rgba(0,0,0,.3)',
+    height: 200,
+
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, .8)',
+
+    borderColor: 'rgba(255, 255, 255, .6)',
     borderWidth: 1,
     borderRadius: 6
   }

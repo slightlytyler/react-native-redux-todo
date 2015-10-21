@@ -22,7 +22,8 @@ var config = {
       test: /\.js$/,
       include: [
         path.resolve(__dirname, "src"),
-        path.resolve(__dirname, "node_modules/react-native-vector-icons")
+        path.resolve(__dirname, "node_modules/react-native-vector-icons"),
+        path.resolve(__dirname, "node_modules/react-native-custom-action-sheet"),
       ],
       loader: 'babel',
       query: {

@@ -19,7 +19,7 @@ export default class AddNewButton extends React.Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.container}
-                          activeOpacity=".6"
+                          activeOpacity={.6}
                           onPress={() => onPress()}>
           <View style={styles.icon}>
             <Text style={styles.iconText}>+</Text>

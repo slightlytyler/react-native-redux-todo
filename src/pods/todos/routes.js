@@ -24,7 +24,9 @@ export function NewTodoRoute() {
 
 export function EditTodoRoute(rowData, rowID) {
   return {
-    name: rowData.text,
+    name: 'todos.edit',
+    title: 'Edit Todo',
+    subTitle:  rowData.text,
     component: TodoFormContainer,
     passProps: { item: rowData, rowID: rowID }
   }
