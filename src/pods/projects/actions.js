@@ -13,9 +13,9 @@ export function addProject(title, subTitle) {
 }
 
 export function updateProject(id, title, subTitle) {
-  return { type: UPDATE_TODO, id, title, subTitle };
+  return { type: UPDATE_PROJECT, id, title, subTitle };
 }
 
 export function deleteProject(id) {
-  return { type: DELETE_TODOS, id };
+  return { type: DELETE_PROJECT, id };
 }

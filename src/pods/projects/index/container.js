@@ -4,7 +4,7 @@ import React from 'react-native'
 import { connect } from 'react-redux/native'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
-import { deleteProject } from 'pods/todos/actions'
+import { deleteProject } from 'pods/projects/actions'
 import ProjectList from './components/List'
 import AddNewButton from 'components/AddNewButton'
 import { NewProjectRoute, EditProjectRoute } from 'pods/projects/routes'
@@ -24,8 +24,24 @@ export class ProjectsIndexComponent extends React.Component {
     this.props.navigator.push(NewProjectRoute());
   }
 
-  editProject() {
+  editProject(rowData, rowID) {
+    AlertIOS.alert(
+      'Quick Menu',
+      null,
+      [
+        { text: 'Edit', onPress: () => this.openProject(rowData, rowID) },
+        { text: 'Delete', onPress: () => this.deleteProject(rowData.id) },
+        { text: 'Cancel' }
+      ]
+    );
+  }
 
+  openProject(rowData, rowID) {
+    this.props.navigator.push(EditProjectRoute(rowData, rowID));
+  }
+
+  deleteProject(id) {
+    this.props.dispatch(deleteProject(id));
   }
 
   selectProject() {

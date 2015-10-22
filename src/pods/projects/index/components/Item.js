@@ -31,7 +31,7 @@ export default class ProjectItem extends React.Component {
     return(
       <TouchableHighlight onPress={() => this.props.selectProject(item.id)}
                           onLongPress={() => this.props.editProject(rowData, rowID)}>
-        <View style={styles.todo}>
+        <View style={styles.container}>
           <View style={styles.checkbox}>
             <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />
           </View>
@@ -50,7 +50,7 @@ export default class ProjectItem extends React.Component {
 var styles = {
   ...globalStyles,
 
-  todo: {
+  container: {
     position: 'relative',
     flex: 1,
     flexDirection: 'row',
