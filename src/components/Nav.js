@@ -4,7 +4,7 @@ import React from 'react-native'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import { NavBar, routeMapper } from 'components/NavBar'
-import { TodosIndexRoute } from 'pods/todos/routes'
+import { ProjectsIndexRoute } from 'pods/projects/routes'
 
 var {
   View,
@@ -29,7 +29,7 @@ export default class Nav extends React.Component {
     return (
       <View style={styles.container}>
         <Navigator  ref="nav"
-                    initialRoute={TodosIndexRoute(() => this.refs.nav)}
+                    initialRoute={ProjectsIndexRoute()}
                     renderScene={this.renderScene}
                     navigationBar={<NavBar routeMapper={routeMapper} />} />
       </View>

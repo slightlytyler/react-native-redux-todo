@@ -53,7 +53,6 @@ function filterReducer(state=SHOW_ALL, action) {
 }
 
 function addTodo(state, text, date, notificationsEnabled) {
-  console.log(notificationsEnabled);
   return [{
     id: shortid.generate(),
     text,

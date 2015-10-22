@@ -107,9 +107,9 @@ export const TodosIndexContainer = connect(state => {
   const filterBool = filter === SHOW_COMPLETE;
 
   return {
-      todos: filter === SHOW_ALL ?
-             todos :
-             todos.filter(todo => todo.complete === filterBool),
-      filter: filter
-    };
+    todos: filter === SHOW_ALL ?
+           todos :
+           todos.filter(todo => todo.complete === filterBool),
+    filter: filter
+  };
 })(TodosIndexComponent);
