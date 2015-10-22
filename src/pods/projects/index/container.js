@@ -7,6 +7,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function'
 import { deleteProject } from 'pods/todos/actions'
 import ProjectList from './components/List'
 import AddNewButton from 'components/AddNewButton'
+import { NewProjectRoute, EditProjectRoute } from 'pods/projects/routes'
 
 import styles from 'styles/styles'
 
@@ -20,7 +21,7 @@ export class ProjectsIndexComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   newProject() {
-    // this.props.navigator.push(NewProjectRoute());
+    this.props.navigator.push(NewProjectRoute());
   }
 
   editProject() {
@@ -49,15 +50,6 @@ export class ProjectsIndexComponent extends React.Component {
 
 export const ProjectsIndexContainer = connect(state => {
   return {
-    projects: state.projects || [
-      {
-        title: 'Test Project 1',
-        subTitle: 'Sub title yeah'
-      },
-      {
-        title: 'Test Project 2',
-        subTitle: 'Sub title yeah'
-      }
-    ]
+    projects: state.projects || []
   };
 })(ProjectsIndexComponent);

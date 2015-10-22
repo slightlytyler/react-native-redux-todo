@@ -3,9 +3,11 @@
 import { combineReducers } from 'redux'
 
 import todos from 'pods/todos/reducers'
+import projects from 'pods/projects/reducers'
 
 const appReducers = combineReducers({
-  todos
+  todos,
+  projects
 });
 
 export default appReducers

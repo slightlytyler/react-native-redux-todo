@@ -13,7 +13,8 @@ export default function configureStore(initialState) {
   const reducer = storage.reducer(appReducers);
   let engineComposers = [
     (engine) => storage.decorators.filter(engine, [
-      ['todos', 'list']
+      ['todos', 'list'],
+      ['projects']
     ])
   ];
   const engine = compose(...engineComposers)(createEngine('react-native-todo'));
