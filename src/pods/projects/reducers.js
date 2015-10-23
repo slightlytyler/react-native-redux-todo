@@ -10,7 +10,7 @@ const {
   DELETE_PROJECT
 } = actionTypes;
 
-export default function reducer(state=[], action) {
+export default function reducer(state={}, action) {
   switch (action.type) {
 
   case ADD_PROJECT:
@@ -26,15 +26,20 @@ export default function reducer(state=[], action) {
 }
 
 function addProject(state, title, subTitle) {
-  return [{
-    id: shortid.generate(),
-    title,
-    subTitle,
-  }, ...state];
+  const id =shortid.generate();
+
+  return {
+    [id]: {
+      id,
+      title,
+      subTitle,
+    },
+    ...state
+  };
 }
 
 function updateProject(state, id, title, subTitle) {
-  return state.map(project =>
+  return _.mapValues(state, project =>
     project.id === id ?
     Object.assign({}, project, {
       title, subTitle
@@ -44,7 +49,7 @@ function updateProject(state, id, title, subTitle) {
 }
 
 function deleteProject(state, id) {
-  return state.filter(project =>
+  return _.pick(state, project =>
     project.id !== id
   );
 }

@@ -66,6 +66,6 @@ export class ProjectsIndexComponent extends React.Component {
 
 export const ProjectsIndexContainer = connect(state => {
   return {
-    projects: state.projects || []
+    projects: state.projects || {}
   };
 })(ProjectsIndexComponent);
