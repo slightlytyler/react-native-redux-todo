@@ -38,8 +38,7 @@ const ProjectsIndexContainer = connect(state => {
 
 
   return {
-    projects: projectsWithCompleteSelector(state),
-    todosByProject: todosByProjectSelector(state)
+    projects: projectsWithCompleteSelector(state)
   };
 })(ProjectsIndexComponent);
 

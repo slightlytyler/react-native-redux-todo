@@ -45,7 +45,6 @@ export default class ProjectsIndexComponent extends React.Component {
 
   deleteProject(id) {
     this.props.dispatch(deleteProject(id));
-    this.props.dispatch(deleteTodos(_.keys(this.props.todosByProject[id])));
   }
 
   selectProject(project) {

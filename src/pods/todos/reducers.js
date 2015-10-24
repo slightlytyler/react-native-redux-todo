@@ -4,6 +4,7 @@ import { combineReducers } from 'redux'
 import shortid from 'shortid'
 
 import { actionTypes } from './constants'
+import { actionTypes as projectsActionTypes } from 'pods/projects/constants'
 import { filterTypes } from './constants'
 
 const {
@@ -13,6 +14,8 @@ const {
   TOGGLE_COMPLETE,
   FILTER_TODOS
 } = actionTypes;
+
+const { DELETE_PROJECT } = projectsActionTypes;
 
 const {
   SHOW_ALL,
@@ -39,6 +42,9 @@ function entitiesReducer(state={}, action) {
 
   case TOGGLE_COMPLETE:
     return toggleComplete(state, action.ids)
+
+  case DELETE_PROJECT:
+    return deleteTodosByProject(state, action.id)
   }
 
   return state;
@@ -97,6 +103,12 @@ function toggleComplete(state, ids) {
       complete: hasIncomplete
     }) :
     todo
+  );
+}
+
+function deleteTodosByProject(state, id) {
+  return _.pick(state, todo =>
+    todo.project !== id
   );
 }
 
