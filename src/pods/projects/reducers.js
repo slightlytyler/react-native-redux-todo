@@ -1,5 +1,6 @@
 'use strict'
 
+import { combineReducers } from 'redux'
 import shortid from 'shortid'
 
 import { actionTypes } from './constants'
@@ -7,10 +8,16 @@ import { actionTypes } from './constants'
 const {
   ADD_PROJECT,
   UPDATE_PROJECT,
-  DELETE_PROJECT
+  DELETE_PROJECT,
+  SELECT_PROJECT
 } = actionTypes;
 
-export default function reducer(state={}, action) {
+const projectsReducer = combineReducers({
+  entities: entitiesReducer,
+  condition: conditionReducer
+});
+
+function entitiesReducer(state={}, action) {
   switch (action.type) {
 
   case ADD_PROJECT:
@@ -22,6 +29,16 @@ export default function reducer(state={}, action) {
   case DELETE_PROJECT:
     return deleteProject(state, action.id);
   }
+
+  return state;
+}
+
+function conditionReducer(state={}, action) {
+  switch (action.type) {
+    case SELECT_PROJECT:
+      return selectProject(state, action.id);
+  }
+
   return state;
 }
 
@@ -53,3 +70,11 @@ function deleteProject(state, id) {
     project.id !== id
   );
 }
+
+function selectProject(state, id) {
+  return Object.assign({}, state, {
+    currentProject: id
+  });
+}
+
+export default projectsReducer;

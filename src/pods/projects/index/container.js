@@ -4,10 +4,11 @@ import React from 'react-native'
 import { connect } from 'react-redux/native'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
-import { deleteProject } from 'pods/projects/actions'
+import { deleteProject, selectProject } from 'pods/projects/actions'
 import ProjectList from './components/List'
 import AddNewButton from 'components/AddNewButton'
 import { NewProjectRoute, EditProjectRoute } from 'pods/projects/routes'
+import { TodosIndexRoute } from 'pods/todos/routes'
 
 import styles from 'styles/styles'
 
@@ -44,8 +45,9 @@ export class ProjectsIndexComponent extends React.Component {
     this.props.dispatch(deleteProject(id));
   }
 
-  selectProject() {
-
+  selectProject(project) {
+    this.props.dispatch(selectProject(project.id));
+    this.props.navigator.push(TodosIndexRoute(project.title, project.subTitle));
   }
 
   render() {
@@ -66,6 +68,7 @@ export class ProjectsIndexComponent extends React.Component {
 
 export const ProjectsIndexContainer = connect(state => {
   return {
-    projects: state.projects || {}
+    projects: state.projects.entities || {},
+    todos: state.todos.entities || {}
   };
 })(ProjectsIndexComponent);

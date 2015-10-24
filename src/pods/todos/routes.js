@@ -2,11 +2,11 @@
 
 import { TodosIndexContainer } from 'pods/todos/index/container'
 
-export function TodosIndexRoute(getNavigator) {
+export function TodosIndexRoute(title, subTitle) {
   return {
     name: 'todos.index',
-    title: 'Todos',
-    subTitle: 'A general list',
+    title: title,
+    subTitle: subTitle,
     component: TodosIndexContainer,
   }
 }

@@ -28,7 +28,7 @@ export class TodosIndexComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   sortTodos(todos) {
-    return todos.sort((a, b) => {
+    return _.sortBy(todos, (a, b) => {
       let keyA = moment(a.date),
           keyB = moment(b.date);
 
@@ -102,14 +102,12 @@ export class TodosIndexComponent extends React.Component {
 }
 
 export const TodosIndexContainer = connect(state => {
-  const todos = state.todos.list || [];
-  const filter = state.todos.filter || SHOW_ALL;
-  const filterBool = filter === SHOW_COMPLETE;
+  const todos = state.todos.entities;
+  const currentProject = state.projects.condition.currentProject;
 
   return {
-    todos: filter === SHOW_ALL ?
-           todos :
-           todos.filter(todo => todo.complete === filterBool),
-    filter: filter
+    todos: _.pick(todos, todo =>
+      todo.project === currentProject
+    ) || {}
   };
 })(TodosIndexComponent);

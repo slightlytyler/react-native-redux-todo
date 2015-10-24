@@ -32,12 +32,12 @@ export class TodoFormComponent extends React.Component {
       text: item ? item.text : '',
       date: item ? moment(item.date).toDate() : moment(currentDate).add(1, 'hour').toDate(),
       currentDate: currentDate,
-      notifactionsEnabled: item ? item.notifactionsEnabled : false
+      notifactionsEnabled: item ? item.notificationsEnabled : false
     };
   }
 
   submit() {
-    const { item, rowID, dispatch } = this.props;
+    const { item, rowID, currentProject, dispatch } = this.props;
     const { text, date,  notifactionsEnabled} = this.state;
 
     if (rowID) {
@@ -51,7 +51,8 @@ export class TodoFormComponent extends React.Component {
       dispatch(addTodo(
         text,
         date,
-        notifactionsEnabled
+        notifactionsEnabled,
+        currentProject
       ));
     }
 
@@ -135,4 +136,8 @@ var styles = {
   }
 }
 
-export const TodoFormContainer = connect()(TodoFormComponent);
+export const TodoFormContainer = connect(state => {
+  return {
+    currentProject: state.projects.condition.currentProject
+  }
+})(TodoFormComponent);

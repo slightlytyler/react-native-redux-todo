@@ -10,8 +10,8 @@ const {
   FILTER_TODOS
 } = actionTypes;
 
-export function addTodo(text, date, notificationsEnabled) {
-  return { type: ADD_TODO, text, date, notificationsEnabled };
+export function addTodo(text, date, notificationsEnabled, project) {
+  return { type: ADD_TODO, text, date, notificationsEnabled, project };
 }
 
 export function updateTodo(id, text, date, notificationsEnabled) {
