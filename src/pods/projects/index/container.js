@@ -5,6 +5,7 @@ import { connect } from 'react-redux/native'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import { deleteProject, selectProject } from 'pods/projects/actions'
+import { deleteTodos } from 'pods/todos/actions'
 import ProjectList from './components/List'
 import AddNewButton from 'components/AddNewButton'
 import { NewProjectRoute, EditProjectRoute } from 'pods/projects/routes'
@@ -43,6 +44,7 @@ export class ProjectsIndexComponent extends React.Component {
 
   deleteProject(id) {
     this.props.dispatch(deleteProject(id));
+    this.props.dispatch(deleteTodos(_.keys(this.props.todosByProject[id])));
   }
 
   selectProject(project) {
@@ -51,11 +53,12 @@ export class ProjectsIndexComponent extends React.Component {
   }
 
   render() {
-    const { projects } = this.props;
+    const { projects, todosByProject } = this.props;
 
     return (
       <View style={{flex: 1}}>
         <ProjectList projects={projects}
+                     todosByProject={todosByProject}
                      editProject={this.editProject.bind(this)}
                      selectProject={this.selectProject.bind(this)} />
 
@@ -67,8 +70,27 @@ export class ProjectsIndexComponent extends React.Component {
 }
 
 export const ProjectsIndexContainer = connect(state => {
+  const { projects, todos } = state;
+
+  const todosByProject = _.mapValues(projects.entities, project => {
+    return _.pick(todos.entities, todo =>
+      todo.project === project.id
+    )
+  });
+
+  const projectsWithComplete = _.mapValues(projects.entities, project => {
+    let complete = _.every(todosByProject[project.id], todo =>
+      todo.complete
+    );
+
+    return Object.assign({}, project, {
+      complete: complete
+    });
+  });
+
+
   return {
-    projects: state.projects.entities || {},
-    todos: state.todos.entities || {}
+    projects: projectsWithComplete,
+    todosByProject: todosByProject
   };
 })(ProjectsIndexComponent);
