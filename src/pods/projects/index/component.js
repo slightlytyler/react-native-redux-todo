@@ -3,14 +3,8 @@
 import React from 'react-native'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
-import { deleteProject, selectProject } from 'pods/projects/actions'
-import { deleteTodos } from 'pods/todos/actions'
-
 import ProjectList from '../components/List'
 import AddNewButton from 'components/AddNewButton'
-
-import { NewProjectRoute, EditProjectRoute } from 'pods/projects/routes'
-import { TodosIndexRoute } from 'pods/todos/routes'
 
 import styles from 'styles/styles'
 
@@ -24,7 +18,9 @@ export default class ProjectsIndexComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   newProject() {
-    this.props.navigator.push(NewProjectRoute());
+    const { navigator, NewProjectRoute } = this.props;
+
+    navigator.push(NewProjectRoute());
   }
 
   editProject(rowData, rowID) {
@@ -40,16 +36,28 @@ export default class ProjectsIndexComponent extends React.Component {
   }
 
   openProject(rowData) {
-    this.props.navigator.push(EditProjectRoute(rowData));
+    const { navigator, EditProjectRoute } = this.props;
+
+    navigator.push(EditProjectRoute(rowData));
   }
 
   deleteProject(id) {
-    this.props.dispatch(deleteProject(id));
+    const { dispatch, deleteProject } = this.props;
+
+    dispatch(deleteProject(id));
   }
 
   selectProject(project) {
-    this.props.dispatch(selectProject(project.id));
-    this.props.navigator.push(TodosIndexRoute(project.title, project.subTitle));
+    const {
+      dispatch,
+      selectProject,
+      navigator,
+      TodosIndexRoute
+    } = this.props;
+    const { id, title, subTitle } = project;
+
+    dispatch(selectProject(id));
+    navigator.push(TodosIndexRoute(title, subTitle));
   }
 
   render() {

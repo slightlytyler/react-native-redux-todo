@@ -3,11 +3,21 @@
 import { connect } from 'react-redux/native'
 import { createSelector } from 'reselect';
 
+import { deleteProject, selectProject } from 'pods/projects/actions'
+
+import { NewProjectRoute, EditProjectRoute } from 'pods/projects/routes'
+import { TodosIndexRoute } from 'pods/todos/routes'
+
 import ProjectsIndexComponent from './component'
 
 const ProjectsIndexContainer = connect(state => {
   return {
-    projects: projectsWithCompleteSelector(state)
+    projects: projectsWithCompleteSelector(state),
+    deleteProject,
+    selectProject,
+    NewProjectRoute,
+    EditProjectRoute,
+    TodosIndexRoute
   };
 })(ProjectsIndexComponent);
 
