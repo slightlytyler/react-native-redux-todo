@@ -1,6 +1,6 @@
 'use strict'
 
-import { ProjectsIndexContainer } from 'pods/projects/index/container'
+import ProjectsIndexContainer from 'pods/projects/index/container'
 
 export function ProjectsIndexRoute() {
   return {
