@@ -32,25 +32,14 @@ export default class ProjectFormComponent extends React.Component {
   submit() {
     const {
       item,
-      rowID,
-      addProject,
-      updateProject,
+      submitAction,
       dispatch
     } = this.props;
     const { title, subTitle } = this.state;
 
-    if (rowID) {
-      dispatch(updateProject(
-        item.id,
-        title,
-        subTitle
-      ));
-    } else {
-      dispatch(addProject(
-        title,
-        subTitle
-      ));
-    }
+    const args = item ? [item.id, title, subTitle] : [title, subTitle];
+
+    dispatch(submitAction(...args));
 
     this.props.navigator.pop();
   }

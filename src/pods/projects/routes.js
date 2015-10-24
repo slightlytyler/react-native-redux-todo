@@ -10,23 +10,25 @@ export function ProjectsIndexRoute() {
   }
 }
 
-import ProjectFormContainer from 'pods/projects/form/container'
+import NewProjectContainer from 'pods/projects/new/container'
 
 export function NewProjectRoute() {
   return {
     name: 'projects.new',
     title: 'New Project',
     subTitle: 'Starting fresh',
-    component: ProjectFormContainer
+    component: NewProjectContainer
   }
 }
 
-export function EditProjectRoute(rowData, rowID) {
+import EditProjectContainer from 'pods/projects/edit/container'
+
+export function EditProjectRoute(item) {
   return {
     name: 'projects.edit',
     title: 'Edit Project',
-    subTitle:  rowData.title,
-    component: ProjectFormContainer,
-    passProps: { item: rowData, rowID: rowID }
+    subTitle:  item.title,
+    component: EditProjectContainer,
+    passProps: { item }
   }
 }

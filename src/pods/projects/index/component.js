@@ -32,15 +32,15 @@ export default class ProjectsIndexComponent extends React.Component {
       'Quick Menu',
       null,
       [
-        { text: 'Edit', onPress: () => this.openProject(rowData, rowID) },
+        { text: 'Edit', onPress: () => this.openProject(rowData) },
         { text: 'Delete', onPress: () => this.deleteProject(rowData.id) },
         { text: 'Cancel' }
       ]
     );
   }
 
-  openProject(rowData, rowID) {
-    this.props.navigator.push(EditProjectRoute(rowData, rowID));
+  openProject(rowData) {
+    this.props.navigator.push(EditProjectRoute(rowData));
   }
 
   deleteProject(id) {
