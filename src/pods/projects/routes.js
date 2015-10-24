@@ -10,7 +10,7 @@ export function ProjectsIndexRoute() {
   }
 }
 
-import { ProjectFormContainer } from 'pods/projects/form/container'
+import ProjectFormContainer from 'pods/projects/form/container'
 
 export function NewProjectRoute() {
   return {
