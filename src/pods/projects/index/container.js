@@ -3,6 +3,7 @@
 import React from 'react-native'
 import { connect } from 'react-redux/native'
 import shouldPureComponentUpdate from 'react-pure-render/function'
+import { createSelector } from 'reselect';
 
 import { deleteProject, selectProject } from 'pods/projects/actions'
 import { deleteTodos } from 'pods/todos/actions'
@@ -70,27 +71,39 @@ export class ProjectsIndexComponent extends React.Component {
 }
 
 export const ProjectsIndexContainer = connect(state => {
-  const { projects, todos } = state;
+  const projectsSelector = state => state.projects.entities;
+  const todosSelector = state => state.todos.entities;
 
-  const todosByProject = _.mapValues(projects.entities, project => {
-    return _.pick(todos.entities, todo =>
-      todo.project === project.id
+
+  const todosByProjectSelector = createSelector(
+    projectsSelector,
+    todosSelector,
+    (projects, todos) => _.mapValues(projects, project =>
+      _.pick(todos, todo =>
+        todo.project === project.id
+      )
     )
-  });
+  );
 
-  const projectsWithComplete = _.mapValues(projects.entities, project => {
-    let complete = _.every(todosByProject[project.id], todo =>
-      todo.complete
-    );
+  const projectsWithCompleteSelector = createSelector(
+    projectsSelector,
+    todosByProjectSelector,
+    (projects, todosByProject) => _.mapValues(projects, project => {
+      let todos = todosByProject[project.id];
 
-    return Object.assign({}, project, {
-      complete: complete
-    });
-  });
+      let complete = !_.isEmpty(todos) && _.every(todos, todo =>
+        todo.complete
+      );
+
+      return Object.assign({}, project, {
+        complete: complete
+      });
+    })
+  );
 
 
   return {
-    projects: projectsWithComplete,
-    todosByProject: todosByProject
+    projects: projectsWithCompleteSelector(state),
+    todosByProject: todosByProjectSelector(state)
   };
 })(ProjectsIndexComponent);
