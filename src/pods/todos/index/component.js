@@ -116,6 +116,9 @@ export default class TodosIndexComponent extends React.Component {
 }
 
 TodosIndexComponent.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  navigator: PropTypes.object.isRequired,
+
   todos: PropTypes.object.isRequired,
   constants: PropTypes.shape({
     filterTypes: PropTypes.object

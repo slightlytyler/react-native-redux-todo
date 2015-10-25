@@ -1,11 +1,12 @@
 'use strict'
 
-import React from 'react-native'
+import React, { PropTypes } from 'react-native'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import moment from 'moment'
 
 import TextInputDatePicker from 'components/TextInputDatePicker'
+
 import globalStyles from 'styles/styles'
 
 var {
@@ -38,7 +39,7 @@ export default class TodoFormComponent extends React.Component {
     const { item, currentProject, dispatch, actions } = this.props;
     const { submit } = actions;
     const { text, date,  notifactionsEnabled} = this.state;
-    console.log(submit);
+
     const baseArgs = [text, date, notifactionsEnabled]
     const args = item ?
         [item.id, ...baseArgs] :
@@ -88,6 +89,16 @@ export default class TodoFormComponent extends React.Component {
     )
   }
 }
+
+TodoFormComponent.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  navigator: PropTypes.object.isRequired,
+
+  currentProject: PropTypes.number,
+  actions: PropTypes.shape({
+    submit: PropTypes.func.isRequired
+  })
+};
 
 var styles = {
   ...globalStyles,
