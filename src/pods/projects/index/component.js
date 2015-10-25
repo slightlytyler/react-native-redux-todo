@@ -19,30 +19,18 @@ import styles from 'styles/styles'
 export default class ProjectsIndexComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
-  newProject() {
-    const { navigator, routes } = this.props;
-    const { NewProjectRoute } = routes;
-
-    navigator.push(NewProjectRoute());
-  }
-
   editProject(item) {
+    const { openProject, deleteProject } = this.props.actions;
+
     AlertIOS.alert(
       'Quick Menu',
       null,
       [
-        { text: 'Edit', onPress: () => this.openProject(item) },
-        { text: 'Delete', onPress: () => this.deleteProject(item.id) },
+        { text: 'Edit', onPress: () => openProject(item) },
+        { text: 'Delete', onPress: () => deleteProject(item.id) },
         { text: 'Cancel' }
       ]
     );
-  }
-
-  openProject(item) {
-    const { navigator, routes } = this.props;
-    const { EditProjectRoute } = routes;
-
-    navigator.push(EditProjectRoute(item));
   }
 
   deleteProject(id) {
@@ -52,45 +40,29 @@ export default class ProjectsIndexComponent extends Component {
     compose(dispatch, deleteProject)(id);
   }
 
-  selectProject(project) {
-    const { dispatch, navigator, actions, routes } = this.props;
-    const { selectProject } = actions;
-    const { TodosIndexRoute } = routes;
-
-    const { id, title, subTitle } = project;
-
-    compose(dispatch, selectProject)(id);
-    navigator.push(TodosIndexRoute(title, subTitle));
-  }
-
   render() {
-    const { projects } = this.props;
+    const { projects, actions } = this.props;
+    const { newProject, selectProject } = actions;
 
     return (
       <View style={{flex: 1}}>
         <ProjectList projects={projects}
                      editProject={this.editProject.bind(this)}
-                     selectProject={this.selectProject.bind(this)} />
+                     selectProject={selectProject} />
 
         <AddNewButton title="Add New Project"
-                      onPress={() => this.newProject()} />
+                      onPress={newProject} />
       </View>
     )
   }
 }
 
 ProjectsIndexComponent.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  navigator: PropTypes.object.isRequired,
-
   projects: PropTypes.object.isRequired,
   actions: PropTypes.shape({
+    newProject: PropTypes.func.isRequired,
     deleteProject: PropTypes.func.isRequired,
-    selectProject: PropTypes.func.isRequired
+    selectProject: PropTypes.func.isRequired,
+    openProject: PropTypes.func.isRequired
   }),
-  routes: PropTypes.shape({
-    NewProjectRoute: PropTypes.func.isRequired,
-    EditProjectRoute: PropTypes.func.isRequired,
-    TodosIndexRoute: PropTypes.func.isRequired
-  })
 };

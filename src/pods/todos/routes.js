@@ -2,7 +2,9 @@
 
 import TodosIndexContainer from 'pods/todos/index/container'
 
-export function TodosIndexRoute(title, subTitle) {
+export function TodosIndexRoute(options) {
+  const { title, subTitle } = options;
+
   return {
     name: 'todos.index',
     title: title,

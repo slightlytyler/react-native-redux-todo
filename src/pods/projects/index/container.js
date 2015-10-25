@@ -1,7 +1,8 @@
 'use strict'
 
 import { connect } from 'react-redux/native'
-import { createSelector } from 'reselect';
+import { bindActionCreators, compose } from 'redux'
+import { createSelector } from 'reselect'
 
 import { deleteProject, selectProject } from 'pods/projects/actions'
 
@@ -10,20 +11,12 @@ import { TodosIndexRoute } from 'pods/todos/routes'
 
 import ProjectsIndexComponent from './component'
 
-const ProjectsIndexContainer = connect(state => {
+function mapStateToProps(state) {
   return {
     projects: projectsWithCompleteSelector(state),
-    actions: {
-      deleteProject,
-      selectProject
-    },
-    routes: {
-      NewProjectRoute,
-      EditProjectRoute,
-      TodosIndexRoute
-    }
-  };
-})(ProjectsIndexComponent);
+
+  }
+}
 
 const projectsSelector = state => state.projects.entities;
 const todosSelector = state => state.todos.entities;
@@ -54,4 +47,40 @@ const projectsWithCompleteSelector = createSelector(
   })
 );
 
-export default ProjectsIndexContainer;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    deleteProject,
+    _selectProject: selectProject
+  }, dispatch);
+}
+
+function mergeProps(stateProps, dispatchProps, ownProps) {
+  const { deleteProject, _selectProject } = dispatchProps;
+  const { navigator } = ownProps;
+
+  return Object.assign({}, stateProps, {
+    actions: {
+      deleteProject,
+      newProject: () => compose(navigator.push, NewProjectRoute)(),
+      selectProject: project => {
+        let { id, title, subTitle } = project;
+
+        _selectProject(id);
+        compose(navigator.push, TodosIndexRoute)({
+          title,
+          subTitle
+        });
+      },
+      openProject: item => compose(navigator.push, EditProjectRoute)({
+        subTitle: item.title,
+        passProps: { item }
+      })
+    }
+  });
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(ProjectsIndexComponent);

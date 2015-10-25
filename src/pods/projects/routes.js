@@ -23,12 +23,14 @@ export function NewProjectRoute() {
 
 import EditProjectContainer from 'pods/projects/edit/container'
 
-export function EditProjectRoute(item) {
+export function EditProjectRoute(options) {
+  const { subTitle, passProps } = options;
+
   return {
     name: 'projects.edit',
     title: 'Edit Project',
-    subTitle:  item.title,
+    subTitle: subTitle,
     component: EditProjectContainer,
-    passProps: { item }
+    passProps: { ...passProps }
   }
 }
