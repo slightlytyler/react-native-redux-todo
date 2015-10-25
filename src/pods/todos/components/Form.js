@@ -12,7 +12,6 @@ import {
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function'
-
 import moment from 'moment'
 
 import TextInputDatePicker from 'components/TextInputDatePicker'
@@ -37,18 +36,16 @@ export default class TodoFormComponent extends Component {
   }
 
   submit() {
-    const { item, currentProject, dispatch, actions } = this.props;
+    const { item, currentProject, actions } = this.props;
     const { submit } = actions;
-    const { text, date,  notifactionsEnabled} = this.state;
+    const { text, date,  notifactionsEnabled } = this.state;
 
     const baseArgs = [text, date, notifactionsEnabled]
     const args = item ?
         [item.id, ...baseArgs] :
         [...baseArgs, currentProject];
 
-    dispatch(submit(...args));
-
-    this.props.navigator.pop();
+    submit(...args);
   }
 
   render() {
@@ -92,9 +89,7 @@ export default class TodoFormComponent extends Component {
 }
 
 TodoFormComponent.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  navigator: PropTypes.object.isRequired,
-
+  item: PropTypes.object,
   currentProject: PropTypes.string,
   actions: PropTypes.shape({
     submit: PropTypes.func.isRequired

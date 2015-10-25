@@ -22,7 +22,7 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
 
   return {
     actions: {
-      submit: () => {
+      submit: function() {
         submit(...arguments);
         navigator.pop();
       }

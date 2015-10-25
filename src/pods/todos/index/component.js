@@ -7,7 +7,6 @@ import {
   AlertIOS
 } from 'react-native'
 
-import { compose } from 'redux'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import moment from 'moment'
