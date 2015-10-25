@@ -1,16 +1,17 @@
 'use strict'
 
-import React from 'react-native'
+import {
+  Component,
+  PropTypes,
+  ListView,
+  StyleSheet
+} from 'react-native'
+
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import ProjectItem from './Item'
 
-var {
-  ListView,
-  StyleSheet
-} = React
-
-export default class ProjectList extends React.Component {
+export default class ProjectList extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props, context) {
@@ -42,6 +43,12 @@ export default class ProjectList extends React.Component {
     )
   }
 }
+
+ProjectList.propTypes = {
+  projects: PropTypes.object.isRequired,
+  editProject: PropTypes.func.isRequired,
+  selectProject: PropTypes.func.isRequired
+};
 
 var styles = StyleSheet.create({
   list: {

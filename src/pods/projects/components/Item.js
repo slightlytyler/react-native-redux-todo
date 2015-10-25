@@ -1,20 +1,22 @@
 'use strict'
 
-import React, { PixelRatio } from 'react-native'
-import shouldPureComponentUpdate from 'react-pure-render/function';
-
-import globalStyles from 'styles/styles'
-
-var {
+import {
+  Component,
+  PropTypes,
+  PixelRatio,
   View,
   TouchableHighlight,
   Text,
   StyleSheet
-} = React
+} from 'react-native'
+
+import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default class ProjectItem extends React.Component {
+import globalStyles from 'styles/styles'
+
+export default class ProjectItem extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
@@ -46,6 +48,13 @@ export default class ProjectItem extends React.Component {
     )
   }
 }
+
+ProjectItem.propType = {
+  rowData: PropTypes.object.isRequired,
+  rowID: PropTypes.string.isRequired,
+  editProject: PropTypes.func.isRequired,
+  selectProject: PropTypes.func.isRequired
+};
 
 var styles = {
   ...globalStyles,

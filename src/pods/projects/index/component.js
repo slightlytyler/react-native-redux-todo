@@ -8,10 +8,9 @@ import {
   AlertIOS
 } from 'react-native'
 
-import { compose } from 'redux'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
-import ProjectList from '../components/List'
+import ProjectList from 'pods/projects/components/List'
 import AddNewButton from 'components/AddNewButton'
 
 import styles from 'styles/styles'
@@ -31,13 +30,6 @@ export default class ProjectsIndexComponent extends Component {
         { text: 'Cancel' }
       ]
     );
-  }
-
-  deleteProject(id) {
-    const { dispatch, actions } = this.props;
-    const { deleteProject } = actions;
-
-    compose(dispatch, deleteProject)(id);
   }
 
   render() {
