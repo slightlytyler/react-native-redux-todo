@@ -9,8 +9,6 @@ import {
 
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
-import moment from 'moment'
-
 import TodoList from 'pods/todos/components/List'
 import TodosHeader from 'pods/todos/components/Header'
 import AddNewButton from 'components/AddNewButton'
@@ -20,17 +18,6 @@ import styles from 'styles/styles'
 
 export default class TodosIndexComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
-
-  sortTodos(todos) {
-    return _.sortBy(todos, (a, b) => {
-      let keyA = moment(a.date),
-          keyB = moment(b.date);
-
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
-      return 0;
-    });
-  }
 
   editTodo(item) {
     const { openTodo, deleteTodos } = this.props.actions;
@@ -52,7 +39,7 @@ export default class TodosIndexComponent extends Component {
 
     return (
       <View style={{flex: 1}}>
-        <TodoList todos={this.sortTodos(todos)}
+        <TodoList todos={todos}
                   editTodo={this.editTodo.bind(this)}
                   toggleComplete={toggleComplete} />
 
@@ -64,7 +51,7 @@ export default class TodosIndexComponent extends Component {
 }
 
 TodosIndexComponent.propTypes = {
-  todos: PropTypes.object.isRequired,
+  todos: PropTypes.array.isRequired,
   actions: PropTypes.shape({
     newTodo: PropTypes.func.isRequired,
     deleteTodos: PropTypes.func.isRequired,

@@ -40,7 +40,7 @@ export default class TodoFormComponent extends Component {
     const { submit } = actions;
     const { text, date,  notifactionsEnabled } = this.state;
 
-    const baseArgs = [text, date, notifactionsEnabled]
+    const baseArgs = [text, date.toJSON(), notifactionsEnabled]
     const args = item ?
         [item.id, ...baseArgs] :
         [...baseArgs, currentProject];
