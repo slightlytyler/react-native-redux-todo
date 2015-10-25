@@ -35,25 +35,16 @@ export default class TodoFormComponent extends React.Component {
   }
 
   submit() {
-    const { item, rowID, currentProject, dispatch, actions } = this.props;
-    const { updateTodo, addTodo } = actions;
+    const { item, currentProject, dispatch, actions } = this.props;
+    const { submit } = actions;
     const { text, date,  notifactionsEnabled} = this.state;
+    console.log(submit);
+    const baseArgs = [text, date, notifactionsEnabled]
+    const args = item ?
+        [item.id, ...baseArgs] :
+        [...baseArgs, currentProject];
 
-    if (rowID) {
-      dispatch(updateTodo(
-        item.id,
-        text,
-        date,
-        notifactionsEnabled
-      ));
-    } else {
-      dispatch(addTodo(
-        text,
-        date,
-        notifactionsEnabled,
-        currentProject
-      ));
-    }
+    dispatch(submit(...args));
 
     this.props.navigator.pop();
   }

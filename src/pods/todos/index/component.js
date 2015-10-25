@@ -70,11 +70,11 @@ export default class TodosIndexComponent extends React.Component {
     navigator.push(NewTodoRoute());
   }
 
-  openTodo(rowData, rowID) {
+  openTodo(rowData) {
     const { navigator, routes } = this.props;
     const { EditTodoRoute } = routes;
 
-    navigator.push(EditTodoRoute(rowData, rowID));
+    navigator.push(EditTodoRoute(rowData));
   }
 
   toggleComplete(id) {

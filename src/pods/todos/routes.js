@@ -11,23 +11,25 @@ export function TodosIndexRoute(title, subTitle) {
   }
 }
 
-import TodoFormContainer from 'pods/todos/form/container'
+import NewTodoContainer from 'pods/todos/new/container'
 
 export function NewTodoRoute() {
   return {
     name: 'todos.new',
     title: 'New Todo',
     subTitle: 'What needs doing?',
-    component: TodoFormContainer
+    component: NewTodoContainer
   }
 }
 
-export function EditTodoRoute(rowData, rowID) {
+import EditTodoContainer from 'pods/todos/edit/container'
+
+export function EditTodoRoute(item) {
   return {
     name: 'todos.edit',
     title: 'Edit Todo',
-    subTitle:  rowData.text,
-    component: TodoFormContainer,
-    passProps: { item: rowData, rowID: rowID }
+    subTitle:  item.text,
+    component: EditTodoContainer,
+    passProps: { item: item }
   }
 }
