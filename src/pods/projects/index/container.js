@@ -13,11 +13,15 @@ import ProjectsIndexComponent from './component'
 const ProjectsIndexContainer = connect(state => {
   return {
     projects: projectsWithCompleteSelector(state),
-    deleteProject,
-    selectProject,
-    NewProjectRoute,
-    EditProjectRoute,
-    TodosIndexRoute
+    actions: {
+      deleteProject,
+      selectProject
+    },
+    routes: {
+      NewProjectRoute,
+      EditProjectRoute,
+      TodosIndexRoute
+    }
   };
 })(ProjectsIndexComponent);
 

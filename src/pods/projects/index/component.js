@@ -1,6 +1,14 @@
 'use strict'
 
-import React from 'react-native'
+import {
+  Component,
+  PropTypes,
+  View,
+  Text,
+  AlertIOS
+} from 'react-native'
+
+import { compose } from 'redux'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import ProjectList from '../components/List'
@@ -8,17 +16,12 @@ import AddNewButton from 'components/AddNewButton'
 
 import styles from 'styles/styles'
 
-var {
-  View,
-  Text,
-  AlertIOS
-} = React;
-
-export default class ProjectsIndexComponent extends React.Component {
+export default class ProjectsIndexComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   newProject() {
-    const { navigator, NewProjectRoute } = this.props;
+    const { navigator, routes } = this.props;
+    const { NewProjectRoute } = routes;
 
     navigator.push(NewProjectRoute());
   }
@@ -35,28 +38,28 @@ export default class ProjectsIndexComponent extends React.Component {
     );
   }
 
-  openProject(rowData) {
-    const { navigator, EditProjectRoute } = this.props;
+  openProject(item) {
+    const { navigator, routes } = this.props;
+    const { EditProjectRoute } = routes;
 
-    navigator.push(EditProjectRoute(rowData));
+    navigator.push(EditProjectRoute(item));
   }
 
   deleteProject(id) {
-    const { dispatch, deleteProject } = this.props;
+    const { dispatch, actions } = this.props;
+    const { deleteProject } = actions;
 
-    dispatch(deleteProject(id));
+    compose(dispatch, deleteProject)(id);
   }
 
   selectProject(project) {
-    const {
-      dispatch,
-      selectProject,
-      navigator,
-      TodosIndexRoute
-    } = this.props;
+    const { dispatch, navigator, actions, routes } = this.props;
+    const { selectProject } = actions;
+    const { TodosIndexRoute } = routes;
+
     const { id, title, subTitle } = project;
 
-    dispatch(selectProject(id));
+    compose(dispatch, selectProject)(id);
     navigator.push(TodosIndexRoute(title, subTitle));
   }
 
@@ -75,3 +78,19 @@ export default class ProjectsIndexComponent extends React.Component {
     )
   }
 }
+
+ProjectsIndexComponent.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  navigator: PropTypes.object.isRequired,
+
+  projects: PropTypes.object.isRequired,
+  actions: PropTypes.shape({
+    deleteProject: PropTypes.func.isRequired,
+    selectProject: PropTypes.func.isRequired
+  }),
+  routes: PropTypes.shape({
+    NewProjectRoute: PropTypes.func.isRequired,
+    EditProjectRoute: PropTypes.func.isRequired,
+    TodosIndexRoute: PropTypes.func.isRequired
+  })
+};
