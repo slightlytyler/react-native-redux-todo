@@ -7,8 +7,8 @@ import moment from 'moment'
 
 import { filterTypes } from 'pods/todos/constants'
 import { deleteTodos, toggleComplete, clearCompleted, filterTodos } from 'pods/todos/actions'
-import TodoList from './components/List'
-import TodosHeader from './components/Header'
+import TodoList from 'pods/todos/components/List'
+import TodosHeader from 'pods/todos/components/Header'
 import AddNewButton from 'components/AddNewButton'
 import { NewTodoRoute, EditTodoRoute } from 'pods/todos/routes'
 
