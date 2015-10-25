@@ -1,16 +1,17 @@
 'use strict'
 
-import React from 'react-native'
+import {
+  Component,
+  PropTypes,
+  ListView,
+  StyleSheet
+} from 'react-native'
+
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import TodoItem from './Item'
 
-var {
-  ListView,
-  StyleSheet
-} = React
-
-export default class TodoList extends React.Component {
+export default class TodoList extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props, context) {
@@ -44,6 +45,13 @@ export default class TodoList extends React.Component {
     )
   }
 }
+
+TodoList.propTypes = {
+  todos: PropTypes.array.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  toggleComplete: PropTypes.func.isRequired,
+  filterTodos: PropTypes.func.isRequired
+};
 
 var styles = StyleSheet.create({
   list: {
