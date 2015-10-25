@@ -1,15 +1,14 @@
 'use strict'
 
-import React from 'react-native'
+import React, { PropTypes } from 'react-native'
+import { compose } from 'redux'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import moment from 'moment'
 
-import { filterTypes } from 'pods/todos/constants'
-import { deleteTodos, toggleComplete, clearCompleted, filterTodos } from 'pods/todos/actions'
+
 import TodoList from 'pods/todos/components/List'
 import TodosHeader from 'pods/todos/components/Header'
 import AddNewButton from 'components/AddNewButton'
-import { NewTodoRoute, EditTodoRoute } from 'pods/todos/routes'
 
 import styles from 'styles/styles'
 
@@ -17,11 +16,6 @@ var {
   View,
   AlertIOS
 } = React;
-
-const {
-  SHOW_ALL,
-  SHOW_COMPLETE
-} = filterTypes;
 
 export default class TodosIndexComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -38,7 +32,7 @@ export default class TodosIndexComponent extends React.Component {
   }
 
   completedTodos(todos) {
-    return todos.filter(todo => todo.complete);
+    return _.pick(todos, todo => todo.complete);
   }
 
   editTodo(rowData, rowID) {
@@ -54,33 +48,54 @@ export default class TodosIndexComponent extends React.Component {
   }
 
   deleteTodos(id) {
-    this.props.dispatch(deleteTodos(id));
+    const { dispatch, actions } = this.props;
+    const { deleteTodos } = actions;
+
+    compose(dispatch, deleteTodos)(id);
   }
 
   clearCompleted() {
-    this.props.dispatch(deleteTodos(
-      this.completedTodos(this.props.todos).map(todo => todo.id)
-    ));
+    const { todos, dispatch, actions } = this.props;
+    const { deleteTodos } = actions;
+
+    const completedTodos = this.completedTodos(todos);
+
+    dispatch(deleteTodos(_.keys(completedTodos)));
   }
 
   newTodo() {
-    this.props.navigator.push(NewTodoRoute());
+    const { navigator, routes } = this.props;
+    const { NewTodoRoute } = routes;
+
+    navigator.push(NewTodoRoute());
   }
 
   openTodo(rowData, rowID) {
-    this.props.navigator.push(EditTodoRoute(rowData, rowID));
+    const { navigator, routes } = this.props;
+    const { EditTodoRoute } = routes;
+
+    navigator.push(EditTodoRoute(rowData, rowID));
   }
 
   toggleComplete(id) {
-    this.props.dispatch(toggleComplete([id]));
+    const { dispatch, actions } = this.props;
+    const { toggleComplete } = actions;
+
+    dispatch(toggleComplete([id]));
   }
 
   toggleAll() {
-    this.props.dispatch(toggleComplete(this.props.todos.map(todo => todo.id)))
+    const { todos, dispatch, actions } = this.props;
+    const { toggleComplete } = actions;
+
+    dispatch(toggleComplete(_.keys(todos)));
   }
 
   filterTodos(filter) {
-    this.props.dispatch(filterTodos(filter));
+    const { dispatch, actions } = this.props;
+    const { filterTodos } = actions;
+
+    dispatch(filterTodos(filter));
   }
 
   render() {
@@ -99,3 +114,19 @@ export default class TodosIndexComponent extends React.Component {
     )
   }
 }
+
+TodosIndexComponent.propTypes = {
+  todos: PropTypes.object.isRequired,
+  constants: PropTypes.shape({
+    filterTypes: PropTypes.object
+  }),
+  actions: PropTypes.shape({
+    deleteTodos: PropTypes.func.isRequired,
+    toggleComplete: PropTypes.func.isRequired,
+    filterTodos: PropTypes.func
+  }),
+  routes: PropTypes.shape({
+    NewTodoRoute: PropTypes.func.isRequired,
+    EditTodoRoute: PropTypes.func.isRequired
+  })
+};
