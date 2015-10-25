@@ -11,7 +11,7 @@ export function TodosIndexRoute(title, subTitle) {
   }
 }
 
-import { TodoFormContainer } from 'pods/todos/form/container'
+import TodoFormContainer from 'pods/todos/form/container'
 
 export function NewTodoRoute() {
   return {
