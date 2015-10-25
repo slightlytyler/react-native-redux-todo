@@ -17,12 +17,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {
-  const { navigator } = ownProps;
   const { submit } = dispatchProps;
+  const { navigator } = ownProps;
 
   return {
     actions: {
-      submit: function() {
+      submit: () => {
         submit(...arguments);
         navigator.pop();
       }
