@@ -1,34 +1,42 @@
 'use strict'
 
 import { connect } from 'react-redux/native'
+import { bindActionCreators, compose } from 'redux'
 
-import { filterTypes } from 'pods/todos/constants'
-import { deleteTodos, toggleComplete, filterTodos } from 'pods/todos/actions'
+import { deleteTodos, toggleComplete } from 'pods/todos/actions'
 import { NewTodoRoute, EditTodoRoute } from 'pods/todos/routes'
 
 import TodosIndexComponent from './component'
 
-const TodosIndexContainer = connect(state => {
+function mapStateToProps(state) {
   const todos = state.todos.entities;
   const currentProject = state.projects.condition.currentProject;
 
   return {
     todos: _.pick(todos, todo =>
       todo.project === currentProject
-    ),
-    constants: {
-      filterTypes
-    },
-    actions: {
-      deleteTodos,
-      toggleComplete,
-      filterTodos
-    },
-    routes: {
-      NewTodoRoute,
-      EditTodoRoute
-    }
+    )
   };
-})(TodosIndexComponent);
+}
 
-export default TodosIndexContainer
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ deleteTodos, toggleComplete }, dispatch);
+}
+
+function mergeProps(stateProps, dispatchProps, ownProps) {
+  const { navigator } = ownProps;
+
+  return Object.assign({}, stateProps, {
+    actions: {
+      ...dispatchProps,
+      newTodo: () => compose(navigator.push, NewTodoRoute)(),
+      openTodo: item => compose(navigator.push, EditTodoRoute)(item)
+    }
+  })
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(TodosIndexComponent);

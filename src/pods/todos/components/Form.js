@@ -95,7 +95,7 @@ TodoFormComponent.propTypes = {
   dispatch: PropTypes.func.isRequired,
   navigator: PropTypes.object.isRequired,
 
-  currentProject: PropTypes.number,
+  currentProject: PropTypes.string,
   actions: PropTypes.shape({
     submit: PropTypes.func.isRequired
   })

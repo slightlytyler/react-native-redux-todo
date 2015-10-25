@@ -50,7 +50,6 @@ TodoList.propTypes = {
   todos: PropTypes.array.isRequired,
   editTodo: PropTypes.func.isRequired,
   toggleComplete: PropTypes.func.isRequired,
-  filterTodos: PropTypes.func.isRequired
 };
 
 var styles = StyleSheet.create({
