@@ -3,8 +3,8 @@
 import React, { PropTypes } from 'react-native'
 import { compose } from 'redux'
 import shouldPureComponentUpdate from 'react-pure-render/function'
-import moment from 'moment'
 
+import moment from 'moment'
 
 import TodoList from 'pods/todos/components/List'
 import TodosHeader from 'pods/todos/components/Header'
@@ -60,7 +60,7 @@ export default class TodosIndexComponent extends React.Component {
 
     const completedTodos = this.completedTodos(todos);
 
-    dispatch(deleteTodos(_.keys(completedTodos)));
+    compose(dispatch, deleteTodos, _.keys)(completedTodos);
   }
 
   newTodo() {
@@ -81,21 +81,21 @@ export default class TodosIndexComponent extends React.Component {
     const { dispatch, actions } = this.props;
     const { toggleComplete } = actions;
 
-    dispatch(toggleComplete([id]));
+    compose(dispatch, toggleComplete)(id);
   }
 
   toggleAll() {
     const { todos, dispatch, actions } = this.props;
     const { toggleComplete } = actions;
 
-    dispatch(toggleComplete(_.keys(todos)));
+    compose(dispatch, toggleComplete, _.keys)(todos);
   }
 
   filterTodos(filter) {
     const { dispatch, actions } = this.props;
     const { filterTodos } = actions;
 
-    dispatch(filterTodos(filter));
+    compose(dispatch, filterTodos)(filter);
   }
 
   render() {
