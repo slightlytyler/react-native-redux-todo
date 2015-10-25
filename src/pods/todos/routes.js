@@ -1,6 +1,6 @@
 'use strict'
 
-import { TodosIndexContainer } from 'pods/todos/index/container'
+import TodosIndexContainer from 'pods/todos/index/container'
 
 export function TodosIndexRoute(title, subTitle) {
   return {
