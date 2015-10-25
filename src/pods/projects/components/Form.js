@@ -11,7 +11,6 @@ import {
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function'
-
 import moment from 'moment'
 
 import globalStyles from 'styles/styles'
@@ -43,8 +42,8 @@ export default class ProjectFormComponent extends React.Component {
 
   render() {
     return(
-      <View style={styles.form}>
-        <View style={styles.formContainer}>
+      <View style={styles.formContainer}>
+        <View style={styles.form}>
           <View style={styles.field}>
             <Text style={styles.label}>Title</Text>
             <TextInput style={styles.input}
@@ -81,13 +80,13 @@ ProjectFormComponent.propTypes = {
 var styles = {
   ...globalStyles,
 
-  form: {
-    flex: 1,
-  },
-
   formContainer: {
     flex: 1,
     marginTop: 24,
+  },
+
+  form: {
+    flex: 1,
   },
 
   field: {
