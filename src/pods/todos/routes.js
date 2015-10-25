@@ -26,12 +26,14 @@ export function NewTodoRoute() {
 
 import EditTodoContainer from 'pods/todos/edit/container'
 
-export function EditTodoRoute(item) {
+export function EditTodoRoute(options) {
+  const { subTitle, passProps } = options;
+
   return {
     name: 'todos.edit',
     title: 'Edit Todo',
-    subTitle:  item.text,
+    subTitle:  subTitle,
     component: EditTodoContainer,
-    passProps: { item: item }
+    passProps: { ...passProps }
   }
 }
