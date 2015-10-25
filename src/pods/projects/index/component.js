@@ -26,13 +26,13 @@ export default class ProjectsIndexComponent extends Component {
     navigator.push(NewProjectRoute());
   }
 
-  editProject(rowData, rowID) {
+  editProject(item) {
     AlertIOS.alert(
       'Quick Menu',
       null,
       [
-        { text: 'Edit', onPress: () => this.openProject(rowData) },
-        { text: 'Delete', onPress: () => this.deleteProject(rowData.id) },
+        { text: 'Edit', onPress: () => this.openProject(item) },
+        { text: 'Delete', onPress: () => this.deleteProject(item) },
         { text: 'Cancel' }
       ]
     );

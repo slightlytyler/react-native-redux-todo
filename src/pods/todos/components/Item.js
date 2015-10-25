@@ -42,7 +42,7 @@ export default class TodoItem extends Component {
 
     return(
       <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
-                          onLongPress={() => this.props.editTodo(rowData, rowID)}>
+                          onLongPress={() => this.props.editTodo(item)}>
         <View style={styles.todo}>
           <View style={[styles.checkbox, item.complete && styles.completed]}>
             <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />

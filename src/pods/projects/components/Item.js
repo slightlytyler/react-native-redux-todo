@@ -30,7 +30,7 @@ export default class ProjectItem extends React.Component {
 
     return(
       <TouchableHighlight onPress={() => this.props.selectProject(item)}
-                          onLongPress={() => this.props.editProject(rowData, rowID)}>
+                          onLongPress={() => this.props.editProject(item)}>
         <View style={styles.container}>
           <View style={styles.checkbox}>
             <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />

@@ -37,13 +37,13 @@ export default class TodosIndexComponent extends Component {
     return _.pick(todos, todo => todo.complete);
   }
 
-  editTodo(rowData, rowID) {
+  editTodo(item) {
     AlertIOS.alert(
       'Quick Menu',
       null,
       [
-        { text: 'Edit', onPress: () => this.openTodo(rowData, rowID) },
-        { text: 'Delete', onPress: () => this.deleteTodos([rowData.id]) },
+        { text: 'Edit', onPress: () => this.openTodo(item) },
+        { text: 'Delete', onPress: () => this.deleteTodos([item.id]) },
         { text: 'Cancel' }
       ]
     );
