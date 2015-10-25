@@ -2,14 +2,14 @@
 
 import { compose, createStore, applyMiddleware } from 'redux'
 import storage from 'redux-storage'
-import createEngine from 'redux-storage/engines/reactNativeAsyncStorage';
+import createEngine from 'redux-storage/engines/reactNativeAsyncStorage'
 import createLogger from 'redux-logger';
 
-import appReducers from 'reducers/index'
+import rootReducer from 'reducers/root'
 
 export default function configureStore(initialState) {
   // Setup storage
-  const reducer = storage.reducer(appReducers);
+  const reducer = storage.reducer(rootReducer);
   let engineComposers = [
     (engine) => storage.decorators.filter(engine, [
       ['todos', 'entities'],
@@ -35,8 +35,8 @@ export default function configureStore(initialState) {
   // Hot reloading
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers/index', () => {
-      const nextRootReducer = require('./reducers/index')
+    module.hot.accept('./reducers/root', () => {
+      const nextRootReducer = require('./reducers/root')
       store.replaceReducer(nextRootReducer)
     })
   }
