@@ -30,7 +30,10 @@ function mergeProps(stateProps, dispatchProps, ownProps) {
     actions: {
       ...dispatchProps,
       newTodo: () => compose(navigator.push, NewTodoRoute)(),
-      openTodo: item => compose(navigator.push, EditTodoRoute)(item)
+      openTodo: item => compose(navigator.push, EditTodoRoute)({
+        subTitle: item.text,
+        passProps: { item }
+      })
     }
   })
 }

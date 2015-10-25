@@ -1,18 +1,20 @@
 'use strict'
 
-import React from 'react-native'
+import {
+  Component,
+  View,
+  Navigator,
+  Image,
+  StyleSheet
+} from 'react-native'
+
 import shouldPureComponentUpdate from 'react-pure-render/function'
+import { BlurView } from 'react-native-blur'
 
 import { NavBar, routeMapper } from 'components/NavBar'
 import { ProjectsIndexRoute } from 'pods/projects/routes'
 
-var {
-  View,
-  Navigator,
-  StyleSheet
-} = React;
-
-export default class Nav extends React.Component {
+export default class Nav extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   renderScene(route, navigator) {
@@ -28,10 +30,14 @@ export default class Nav extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Navigator  ref="nav"
-                    initialRoute={ProjectsIndexRoute()}
-                    renderScene={this.renderScene}
-                    navigationBar={<NavBar routeMapper={routeMapper} />} />
+        <Image source={require('image!bg')} style={styles.bg}>
+          <BlurView blurType="dark" style={{flex: 1}}>
+            <Navigator  ref="nav"
+                        initialRoute={ProjectsIndexRoute()}
+                        renderScene={this.renderScene}
+                        navigationBar={<NavBar routeMapper={routeMapper} />} />
+          </BlurView>
+        </Image>
       </View>
     );
   }
@@ -40,7 +46,12 @@ export default class Nav extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black'
+    backgroundColor: 'transparent'
+  },
+
+  bg: {
+    flex: 1,
+    resizeMode: 'cover'
   },
 
   scene: {
