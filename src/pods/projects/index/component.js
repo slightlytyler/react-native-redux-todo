@@ -32,7 +32,7 @@ export default class ProjectsIndexComponent extends Component {
       null,
       [
         { text: 'Edit', onPress: () => this.openProject(item) },
-        { text: 'Delete', onPress: () => this.deleteProject(item) },
+        { text: 'Delete', onPress: () => this.deleteProject(item.id) },
         { text: 'Cancel' }
       ]
     );

@@ -1,19 +1,20 @@
 'use strict'
 
-import React from 'react-native'
+import {
+  Component,
+  PropTypes,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+} from 'react-native'
+
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import moment from 'moment'
 
 import globalStyles from 'styles/styles'
-
-var {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-} = React
 
 export default class ProjectFormComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -30,18 +31,14 @@ export default class ProjectFormComponent extends React.Component {
   }
 
   submit() {
-    const {
-      item,
-      submitAction,
-      dispatch
-    } = this.props;
+    const { item, actions } = this.props;
+    const { submit } = actions;
     const { title, subTitle } = this.state;
 
-    const args = item ? [item.id, title, subTitle] : [title, subTitle];
+    const baseArgs = [title, subTitle]
+    const args = item ? [item.id, ...baseArgs] : baseArgs;
 
-    dispatch(submitAction(...args));
-
-    this.props.navigator.pop();
+    submit(...args)
   }
 
   render() {
@@ -73,6 +70,13 @@ export default class ProjectFormComponent extends React.Component {
     )
   }
 }
+
+ProjectFormComponent.propTypes = {
+  item: PropTypes.object,
+  actions: PropTypes.shape({
+    submit: PropTypes.func.isRequired
+  }),
+};
 
 var styles = {
   ...globalStyles,
