@@ -1,6 +1,12 @@
 'use strict'
 
-import React, { PropTypes } from 'react-native'
+import {
+  Component,
+  PropTypes,
+  View,
+  AlertIOS
+} from 'react-native'
+
 import { compose } from 'redux'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
@@ -12,12 +18,8 @@ import AddNewButton from 'components/AddNewButton'
 
 import styles from 'styles/styles'
 
-var {
-  View,
-  AlertIOS
-} = React;
 
-export default class TodosIndexComponent extends React.Component {
+export default class TodosIndexComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   sortTodos(todos) {

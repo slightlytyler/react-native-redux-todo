@@ -1,21 +1,23 @@
 'use strict'
 
-import React, { PixelRatio } from 'react-native'
+import {
+  Component,
+  PropTypes,
+  View,
+  TouchableHighlight,
+  Text,
+  StyleSheet,
+  PixelRatio
+} from 'react-native'
+
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment';
 
 import globalStyles from 'styles/styles'
 
-var {
-  View,
-  TouchableHighlight,
-  Text,
-  StyleSheet
-} = React
-
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default class TodoItem extends React.Component {
+export default class TodoItem extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   isDueIn() {
@@ -57,6 +59,13 @@ export default class TodoItem extends React.Component {
     )
   }
 }
+
+TodoItem.propTypes = {
+  rowData: PropTypes.object.isRequired,
+  rowID: PropTypes.string.isRequired,
+  editTodo: PropTypes.func.isRequired,
+  toggleComplete: PropTypes.func.isRequired
+};
 
 var styles = {
   ...globalStyles,

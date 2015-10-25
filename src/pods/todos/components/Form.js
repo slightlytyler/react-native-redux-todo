@@ -1,6 +1,16 @@
 'use strict'
 
-import React, { PropTypes } from 'react-native'
+import {
+  Component,
+  PropTypes,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  SwitchIOS,
+  StyleSheet,
+} from 'react-native'
+
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import moment from 'moment'
@@ -9,16 +19,7 @@ import TextInputDatePicker from 'components/TextInputDatePicker'
 
 import globalStyles from 'styles/styles'
 
-var {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  SwitchIOS,
-} = React
-
-export default class TodoFormComponent extends React.Component {
+export default class TodoFormComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   constructor(props, context) {
