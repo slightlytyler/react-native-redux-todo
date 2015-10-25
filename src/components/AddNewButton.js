@@ -1,16 +1,16 @@
 'use strict'
 
-import React from 'react-native'
-import shouldPureComponentUpdate from 'react-pure-render/function'
-
-var {
+import {
+  Component,
+  PropTypes,
   View,
   Text,
   TouchableOpacity,
   StyleSheet
-} = React;
+} from 'react-native'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 
-export default class AddNewButton extends React.Component {
+export default class AddNewButton extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   render() {
@@ -30,6 +30,11 @@ export default class AddNewButton extends React.Component {
     );
   }
 }
+
+AddNewButton.propTypes = {
+  title: PropTypes.string.isRequired,
+  onPress: PropTypes.func.isRequired
+};
 
 var styles = StyleSheet.create({
   container: {

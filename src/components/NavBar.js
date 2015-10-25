@@ -1,17 +1,17 @@
 'use strict'
 
-import React from 'react-native'
-import shouldPureComponentUpdate from 'react-pure-render/function';
-
-var {
+import {
+  Component,
   Navigator,
   View,
   TouchableOpacity,
   Text,
   StyleSheet
-} = React;
+} from 'react-native'
 
-export class NavBar extends React.Component {
+import shouldPureComponentUpdate from 'react-pure-render/function'
+
+export class NavBar extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   updateProgress(progress, fromIndex, toIndex) {

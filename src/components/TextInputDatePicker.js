@@ -1,23 +1,24 @@
 'use strict';
 
-import React from 'react-native'
-import shouldPureComponentUpdate from 'react-pure-render/function'
-
-import moment from 'moment'
-
-import CustomActionSheet from 'react-native-custom-action-sheet'
-
-var {
+import {
+  Component,
+  PropTypes,
   Text,
   View,
   DatePickerIOS,
   TextInput,
   TouchableWithoutFeedback,
   TouchableOpacity,
-  StyleSheet,
-} = React;
+  StyleSheet
+} from 'react-native'
 
-export default class TextInputDatePicker extends React.Component {
+import shouldPureComponentUpdate from 'react-pure-render/function'
+import moment from 'moment'
+
+import CustomActionSheet from 'react-native-custom-action-sheet'
+
+
+export default class TextInputDatePicker extends Component {
   constructor(props){
     super(props);
 
@@ -54,6 +55,12 @@ export default class TextInputDatePicker extends React.Component {
   }
 }
 
+TextInputDatePicker.propTypes = {
+  date: PropTypes.object,
+  minimumDate: PropTypes.object,
+  onDateChange: PropTypes.func.isRequired,
+  mode: PropTypes.string.isRequired
+};
 
 var styles = StyleSheet.create({
   container: {
