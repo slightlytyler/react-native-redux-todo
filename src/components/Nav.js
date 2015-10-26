@@ -1,42 +1,62 @@
 'use strict'
 
-import React from 'react-native';
-import shouldPureComponentUpdate from 'react-pure-render/function';
-
-import { NavBar, routeMapper } from 'components/NavBar';
-import { TodosIndexRoute } from 'pods/todos/routes';
-
-var {
+import {
+  Component,
   View,
   Navigator,
+  Image,
   StyleSheet
-} = React;
+} from 'react-native'
 
-export default class Nav extends React.Component {
+import shouldPureComponentUpdate from 'react-pure-render/function'
+import { BlurView } from 'react-native-blur'
+
+import { NavBar, routeMapper } from 'components/NavBar'
+import { ProjectsIndexRoute } from 'pods/projects/routes'
+
+export default class Nav extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   renderScene(route, navigator) {
     const Component = route.component;
 
-    return <View style={styles.scene}>
+    return (
+      <View style={styles.scene}>
         <Component navigator={navigator} route={route} {...route.passProps} />
       </View>
+    );
   }
 
   render() {
     return (
-      <Navigator  ref="nav"
-                  initialRoute={TodosIndexRoute(() => this.refs.nav)}
-                  renderScene={this.renderScene}
-                  navigationBar={<NavBar routeMapper={routeMapper} />} />
+      <View style={styles.container}>
+        <Image source={require('image!bg')} style={styles.bg}>
+          <BlurView blurType="dark" style={{flex: 1}}>
+            <Navigator  ref="nav"
+                        initialRoute={ProjectsIndexRoute()}
+                        renderScene={this.renderScene}
+                        navigationBar={<NavBar routeMapper={routeMapper} />} />
+          </BlurView>
+        </Image>
+      </View>
     );
   }
 }
 
 var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent'
+  },
+
+  bg: {
+    flex: 1,
+    resizeMode: 'cover'
+  },
+
   scene: {
     flex: 1,
-    paddingTop: 44,
-    backgroundColor: 'white',
+    padding: 20,
+    paddingTop: 128
   }
 });

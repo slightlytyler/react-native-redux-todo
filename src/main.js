@@ -4,6 +4,7 @@ import React from 'react-native'
 import App from 'containers/app'
 
 import String from 'extensions/String';
+import _ from 'lodash'
 
 var {
   AppRegistry
@@ -11,4 +12,4 @@ var {
 
 String;
 
-AppRegistry.registerComponent('react_native_starter', () => App)
+AppRegistry.registerComponent('ReactNativeReduxTodo', () => App)

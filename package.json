@@ -1,5 +1,5 @@
 {
-  "name": "react_native_starter",
+  "name": "ReactNativeReduxTodo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,14 +8,18 @@
     "bundle": "./node_modules/.bin/react-native-webpack-server bundle"
   },
   "dependencies": {
+    "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "react-native": "^0.11.4",
+    "react-native-blur": "^0.7.5",
+    "react-native-custom-action-sheet": "0.0.4",
+    "react-native-vector-icons": "^0.8.2",
     "react-pure-render": "^1.0.2",
     "react-redux": "^3.0.1",
     "redux": "^3.0.2",
     "redux-logger": "^2.0.3",
-    "redux-storage": "1.3.0",
-    "redux-thunk": "^1.0.0",
+    "redux-storage": "1.3.2",
+    "reselect": "^2.0.0",
     "shortid": "^2.2.2"
   },
   "devDependencies": {

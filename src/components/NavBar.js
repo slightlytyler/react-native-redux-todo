@@ -1,17 +1,17 @@
 'use strict'
 
-import React from 'react-native'
-import shouldPureComponentUpdate from 'react-pure-render/function';
-
-var {
+import {
+  Component,
   Navigator,
   View,
   TouchableOpacity,
   Text,
   StyleSheet
-} = React;
+} from 'react-native'
 
-export class NavBar extends React.Component {
+import shouldPureComponentUpdate from 'react-pure-render/function'
+
+export class NavBar extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   updateProgress(progress, fromIndex, toIndex) {
@@ -32,36 +32,10 @@ export class NavBar extends React.Component {
 
 export const routeMapper = {
   LeftButton: function(route, navigator, index, navState) {
-    if (index === 0) {
-      return null;
-    }
-
-    var previousRoute = navState.routeStack[index - 1];
-
-    return (
-      <TouchableOpacity style={styles.navBarLeftButton}
-                        onPress={() => navigator.pop()}>
-        <Text style={styles.navBarButtonText}>
-          {previousRoute.title || previousRoute.name}
-        </Text>
-      </TouchableOpacity>
-    );
+    return null;
   },
 
   RightButton: function(route, navigator, index, navState) {
-    const RightButton = route.RightButton;
-
-    if (RightButton) {
-      return (
-        <TouchableOpacity style={styles.navBarRightButton}
-                          onPress={() => RightButton.onPress()}>
-          <Text style={styles.navBarButtonText}>
-            {RightButton.text}
-          </Text>
-        </TouchableOpacity>
-      );
-    }
-
     return null;
   },
 
@@ -70,11 +44,23 @@ export const routeMapper = {
       styles.navBarText,
       styles.navBarTitleText
     ];
+    const subTitleStyle = [
+      styles.navBarText,
+      styles.navBarSubTitleText
+    ];
 
     return (
-      <Text style={titleStyle}>
-        {route.title || route.name}
-      </Text>
+      <View style={styles.navBarTitle}>
+        <Text style={titleStyle}
+              numberOfLines={1}>
+          {route.title || route.name}
+        </Text>
+
+        <Text style={subTitleStyle}
+              numberOfLines={1}>
+          {route.subTitle}
+        </Text>
+      </View>
     );
   }
 };
@@ -90,10 +76,9 @@ var styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: NAV_HEIGHT,
-    backgroundColor: '#46baec',
-    paddingBottom: 5,
-    borderBottomColor: 'rgba(0, 0, 0, 0.5)',
-    borderBottomWidth: 1 / React.PixelRatio.get(),
+    margin: 20,
+    marginTop: 42,
+    backgroundColor: 'rgba(0, 0, 0, 0)',
   },
   statusBar: {
     height: STATUS_BAR_HEIGHT
@@ -105,15 +90,22 @@ var styles = StyleSheet.create({
   },
   navBarText: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'left',
+    fontWeight: '300'
   },
   navBarTitleText: {
-    color: '#373e4d',
-    fontWeight: '500',
+    marginRight: 20,
+    color: 'white',
+    fontSize: 40,
+  },
+  navBarSubTitleText: {
+    marginRight: 36,
+    color: 'rgba(255, 255, 255, 0.5)',
+  },
+  navBarTitle: {
     position: 'absolute',
     left: 0,
-    right: 0,
-    bottom: 12,
+    top: 0,
   },
   navBarLeftButton: {
     paddingLeft: 10,

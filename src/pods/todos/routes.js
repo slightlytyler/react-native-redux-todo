@@ -1,35 +1,39 @@
 'use strict'
 
-import { TodosIndexContainer } from 'pods/todos/index/container'
+import TodosIndexContainer from 'pods/todos/index/container'
 
-export function TodosIndexRoute(getNavigator) {
+export function TodosIndexRoute(options) {
+  const { title, subTitle } = options;
+
   return {
     name: 'todos.index',
-    title: 'Todos',
+    title: title,
+    subTitle: subTitle,
     component: TodosIndexContainer,
-    RightButton: {
-      text: 'New',
-      onPress: () => {
-        getNavigator().push(NewTodoRoute())
-      }
-    }
   }
 }
 
-import { TodoFormContainer } from 'pods/todos/form/container'
+import NewTodoContainer from 'pods/todos/new/container'
 
 export function NewTodoRoute() {
   return {
     name: 'todos.new',
     title: 'New Todo',
-    component: TodoFormContainer
+    subTitle: 'What needs doing?',
+    component: NewTodoContainer
   }
 }
 
-export function EditTodoRoute(rowData, rowID) {
+import EditTodoContainer from 'pods/todos/edit/container'
+
+export function EditTodoRoute(options) {
+  const { subTitle, passProps } = options;
+
   return {
-    name: rowData.text,
-    component: TodoFormContainer,
-    passProps: { item: rowData, rowID: rowID }
+    name: 'todos.edit',
+    title: 'Edit Todo',
+    subTitle:  subTitle,
+    component: EditTodoContainer,
+    passProps: { ...passProps }
   }
 }
