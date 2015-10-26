@@ -47,7 +47,8 @@ export default class TodoItem extends Component {
           <View style={[styles.checkbox, item.complete && styles.completed]}>
             <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />
           </View>
-          <Text style={[styles.body, textStyles]}>
+          <Text style={[styles.body, textStyles]}
+                numberOfLines={3}>
              {item.text}
           </Text>
           <Text style={[textStyles, styles.due]}>
