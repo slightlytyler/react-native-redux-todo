@@ -1,4 +1,4 @@
-package com.react_native_starter;
+package com.ReactNativeReduxTodo;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
-        mReactRootView.startReactApplication(mReactInstanceManager, "react_native_starter", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "ReactNativeReduxTodo", null);
 
         setContentView(mReactRootView);
     }

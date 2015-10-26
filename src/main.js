@@ -12,4 +12,4 @@ var {
 
 String;
 
-AppRegistry.registerComponent('react_native_starter', () => App)
+AppRegistry.registerComponent('ReactNativeReduxTodo', () => App)

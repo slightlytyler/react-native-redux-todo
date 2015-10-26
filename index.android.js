@@ -12,7 +12,7 @@ var {
   View,
 } = React;
 
-var react_native_starter = React.createClass({
+var ReactNativeReduxTodo = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
@@ -49,4 +49,4 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('react_native_starter', () => react_native_starter);
+AppRegistry.registerComponent('ReactNativeReduxTodo', () => ReactNativeReduxTodo);
