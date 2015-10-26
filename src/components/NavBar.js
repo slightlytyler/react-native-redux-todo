@@ -55,11 +55,9 @@ export const routeMapper = {
           {route.title || route.name}
         </Text>
 
-        { route.subTitle &&
-          <Text style={subTitleStyle}>
-            {route.subTitle}
-          </Text>
-        }
+        <Text style={subTitleStyle}>
+          {route.subTitle}
+        </Text>
       </View>
     );
   }
