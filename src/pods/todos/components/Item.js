@@ -13,7 +13,7 @@ import {
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment';
 
-import globalStyles from 'styles/styles'
+import itemStyles from 'styles/item'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -43,7 +43,7 @@ export default class TodoItem extends Component {
     return(
       <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
                           onLongPress={() => this.props.editTodo(item)}>
-        <View style={styles.todo}>
+        <View style={styles.container}>
           <View style={[styles.checkbox, item.complete && styles.completed]}>
             <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />
           </View>
@@ -67,55 +67,17 @@ TodoItem.propTypes = {
   toggleComplete: PropTypes.func.isRequired
 };
 
-var styles = {
-  ...globalStyles,
-
-  todo: {
-    position: 'relative',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-
-    paddingTop: 12,
-    paddingBottom: 12,
-
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)'
-  },
-
-  text: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.6)',
-    textAlign: 'left'
-  },
-
-  checkbox: {
-    flex: 0,
-    marginRight: 14,
-    padding: 3,
-    borderColor: 'rgba(255, 255, 255, 0.6)',
-    borderWidth: 3 / PixelRatio.get(),
-    borderRadius: 5
-  },
-
-  checkmark: {
-    fontSize: 8,
-    color: 'rgba(255, 255, 255, 0.6)'
-  },
-
-  body: {
-    flex: 5
-  },
+var styles = StyleSheet.create({
+  ...itemStyles,
 
   due: {
     flex: 2,
-    fontSize: 12
+    fontSize: 10
   },
 
   important: {
     flex: 0,
+
     fontSize: 16,
     color: 'rgba(255, 255, 255, 0.6)'
   },
@@ -124,19 +86,7 @@ var styles = {
     color: 'transparent'
   },
 
-  warnSoon: {
-    color: '#E5DA3F'
-  },
-
-  warnIminent: {
-    color: '#F47216',
-  },
-
-  warnPastDue: {
-    color: '#DB4141'
-  },
-
   completed: {
     opacity: .5
   }
-}
+});

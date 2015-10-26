@@ -14,7 +14,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import globalStyles from 'styles/styles'
+import itemStyles from 'styles/item'
 
 export default class ProjectItem extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -56,56 +56,13 @@ ProjectItem.propType = {
   selectProject: PropTypes.func.isRequired
 };
 
-var styles = {
-  ...globalStyles,
-
-  container: {
-    position: 'relative',
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-
-    paddingTop: 12,
-    paddingBottom: 12,
-
-    borderStyle: 'solid',
-    borderBottomWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)'
-  },
-
-  text: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.6)',
-    textAlign: 'left'
-  },
-
-  checkbox: {
-    flex: 0,
-    marginRight: 14,
-    padding: 3,
-    borderColor: 'rgba(255, 255, 255, 0.6)',
-    borderWidth: 3 / PixelRatio.get(),
-    borderRadius: 5
-  },
-
-  checkmark: {
-    fontSize: 8,
-    color: 'rgba(255, 255, 255, 0.6)'
-  },
-
-  hidden: {
-    opacity: 0
-  },
-
-  body: {
-    flex: 5
-  },
+var styles = StyleSheet.create({
+  ...itemStyles,
 
   arrow: {
-    marginRight: 10,
+    paddingRight: 10,
 
     fontSize: 16,
     color: 'rgba(255, 255, 255, 0.6)'
   }
-}
+});
