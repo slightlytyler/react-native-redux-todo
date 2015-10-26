@@ -10,7 +10,7 @@ import { filterTypes } from './constants'
 const {
   ADD_TODO,
   UPDATE_TODO,
-  DELETE_TODOS,
+  DELETE_TODO,
   TOGGLE_COMPLETE,
   FILTER_TODOS
 } = actionTypes;
@@ -31,14 +31,14 @@ function entitiesReducer(state={}, action) {
   case UPDATE_TODO:
     return updateTodo(state, action.id, action.text, action.date, action.notificationsEnabled);
 
-  case DELETE_TODOS:
-    return deleteTodos(state, action.ids);
+  case DELETE_TODO:
+    return deleteTodo(state, action.id);
 
   case TOGGLE_COMPLETE:
     return toggleComplete(state, action.id)
 
   case DELETE_PROJECT:
-    return deleteTodosByProject(state, action.id)
+    return deleteTodoByProject(state, action.id)
   }
 
   return state;
@@ -77,9 +77,9 @@ function updateTodo(state, id, text, date, notificationsEnabled) {
   );
 }
 
-function deleteTodos(state, ids) {
+function deleteTodo(state, id) {
   return _.pick(state, todo =>
-    ids.indexOf(todo.id) === -1
+    todo.id !== id
   );
 }
 
@@ -93,7 +93,7 @@ function toggleComplete(state, id) {
   );
 }
 
-function deleteTodosByProject(state, id) {
+function deleteTodoByProject(state, id) {
   return _.pick(state, todo =>
     todo.project !== id
   );

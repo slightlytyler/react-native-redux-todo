@@ -5,7 +5,7 @@ import { actionTypes } from './constants'
 const {
   ADD_TODO,
   UPDATE_TODO,
-  DELETE_TODOS,
+  DELETE_TODO,
   TOGGLE_COMPLETE
 } = actionTypes;
 
@@ -17,8 +17,8 @@ export function updateTodo(id, text, date, notificationsEnabled) {
   return { type: UPDATE_TODO, id, text, date, notificationsEnabled };
 }
 
-export function deleteTodos(ids) {
-  return { type: DELETE_TODOS, ids };
+export function deleteTodo(id) {
+  return { type: DELETE_TODO, id };
 }
 
 export function toggleComplete(id) {

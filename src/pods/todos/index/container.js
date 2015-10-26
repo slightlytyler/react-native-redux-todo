@@ -4,7 +4,7 @@ import { connect } from 'react-redux/native'
 import { bindActionCreators, compose } from 'redux'
 import { createSelector } from 'reselect'
 
-import { deleteTodos, toggleComplete } from 'pods/todos/actions'
+import { deleteTodo, toggleComplete } from 'pods/todos/actions'
 import { NewTodoRoute, EditTodoRoute } from 'pods/todos/routes'
 
 import TodosIndexComponent from './component'
@@ -36,7 +36,7 @@ const sortedTodosSelector = createSelector(
 );
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ deleteTodos, toggleComplete }, dispatch);
+  return bindActionCreators({ deleteTodo, toggleComplete }, dispatch);
 }
 
 function mergeProps(stateProps, dispatchProps, ownProps) {

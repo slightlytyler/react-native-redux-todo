@@ -19,14 +19,14 @@ export default class TodosIndexComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   editTodo(item) {
-    const { openTodo, deleteTodos } = this.props.actions;
+    const { openTodo, deleteTodo } = this.props.actions;
 
     AlertIOS.alert(
       'Quick Menu',
       null,
       [
         { text: 'Edit', onPress: () => openTodo(item) },
-        { text: 'Delete', onPress: () => deleteTodos([item.id]) },
+        { text: 'Delete', onPress: () => deleteTodo(item.id) },
         { text: 'Cancel' }
       ]
     );
@@ -53,7 +53,7 @@ TodosIndexComponent.propTypes = {
   todos: PropTypes.array.isRequired,
   actions: PropTypes.shape({
     newTodo: PropTypes.func.isRequired,
-    deleteTodos: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
     toggleComplete: PropTypes.func.isRequired,
     openTodo: PropTypes.func.isRequired
   })
