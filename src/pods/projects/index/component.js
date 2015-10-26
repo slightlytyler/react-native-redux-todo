@@ -13,8 +13,6 @@ import shouldPureComponentUpdate from 'react-pure-render/function'
 import ProjectList from 'pods/projects/components/List'
 import AddNewButton from 'components/AddNewButton'
 
-import styles from 'styles/styles'
-
 export default class ProjectsIndexComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 

@@ -5,7 +5,6 @@ import {
   PropTypes,
   View,
   Text,
-  TouchableOpacity,
   TextInput,
   SwitchIOS,
   StyleSheet,
@@ -15,8 +14,7 @@ import shouldPureComponentUpdate from 'react-pure-render/function'
 import moment from 'moment'
 
 import TextInputDatePicker from 'components/TextInputDatePicker'
-
-import globalStyles from 'styles/styles'
+import SaveButton from 'components/SaveButton'
 
 export default class TodoFormComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -78,11 +76,8 @@ export default class TodoFormComponent extends Component {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button}
-                          onPress={this.submit.bind(this)}
-                          activeOpactiy={.6}>
-          <Text style={styles.buttonText}>Save Todo</Text>
-        </TouchableOpacity>
+        <SaveButton title="Save Todo"
+                    onPress={this.submit.bind(this)} />
       </View>
     )
   }
@@ -96,9 +91,7 @@ TodoFormComponent.propTypes = {
   })
 };
 
-var styles = {
-  ...globalStyles,
-
+var styles = StyleSheet.create({
   todoForm: {
     flex: 1,
   },
@@ -131,4 +124,4 @@ var styles = {
     borderWidth: 1,
     borderRadius: 6
   }
-}
+});

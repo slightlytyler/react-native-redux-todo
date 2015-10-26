@@ -12,8 +12,6 @@ import shouldPureComponentUpdate from 'react-pure-render/function'
 import TodoList from 'pods/todos/components/List'
 import AddNewButton from 'components/AddNewButton'
 
-import styles from 'styles/styles'
-
 
 export default class TodosIndexComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;

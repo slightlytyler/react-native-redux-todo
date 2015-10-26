@@ -5,7 +5,6 @@ import {
   PropTypes,
   View,
   Text,
-  TouchableOpacity,
   TextInput,
   StyleSheet,
 } from 'react-native'
@@ -13,7 +12,7 @@ import {
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import moment from 'moment'
 
-import globalStyles from 'styles/styles'
+import SaveButton from 'components/SaveButton'
 
 export default class ProjectFormComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -60,11 +59,8 @@ export default class ProjectFormComponent extends React.Component {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button}
-                          onPress={this.submit.bind(this)}
-                          activeOpactiy={.6}>
-          <Text style={styles.buttonText}>Save Project</Text>
-        </TouchableOpacity>
+        <SaveButton title="Save Project"
+                    onPress={this.submit.bind(this)} />
       </View>
     )
   }
@@ -77,9 +73,7 @@ ProjectFormComponent.propTypes = {
   }),
 };
 
-var styles = {
-  ...globalStyles,
-
+var styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     marginTop: 24,
@@ -112,4 +106,4 @@ var styles = {
     borderWidth: 1,
     borderRadius: 6
   }
-}
+});
