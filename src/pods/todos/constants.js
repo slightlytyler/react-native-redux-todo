@@ -7,9 +7,3 @@ export const actionTypes = {
   TOGGLE_COMPLETE: 'TOGGLE_COMPLETE',
   FILTER_TODOS: 'FILTER_TODOS'
 }
-
-export const filterTypes = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_ACTIVE: 'SHOW_ACTIVE',
-  SHOW_COMPLETE: 'SHOW_COMPLETE'
-}

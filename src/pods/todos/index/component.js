@@ -10,7 +10,6 @@ import {
 import shouldPureComponentUpdate from 'react-pure-render/function'
 
 import TodoList from 'pods/todos/components/List'
-import TodosHeader from 'pods/todos/components/Header'
 import AddNewButton from 'components/AddNewButton'
 
 import styles from 'styles/styles'

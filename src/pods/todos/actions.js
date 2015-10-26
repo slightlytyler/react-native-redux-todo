@@ -6,8 +6,7 @@ const {
   ADD_TODO,
   UPDATE_TODO,
   DELETE_TODOS,
-  TOGGLE_COMPLETE,
-  FILTER_TODOS
+  TOGGLE_COMPLETE
 } = actionTypes;
 
 export function addTodo(text, date, notificationsEnabled, project) {
@@ -22,10 +21,6 @@ export function deleteTodos(ids) {
   return { type: DELETE_TODOS, ids };
 }
 
-export function toggleComplete(ids) {
-  return { type: TOGGLE_COMPLETE, ids };
-}
-
-export function filterTodos(filter) {
-  return { type: FILTER_TODOS, filter };
+export function toggleComplete(id) {
+  return { type: TOGGLE_COMPLETE, id };
 }

@@ -17,12 +17,6 @@ const {
 
 const { DELETE_PROJECT } = projectsActionTypes;
 
-const {
-  SHOW_ALL,
-  SHOW_ACTIVE,
-  SHOW_COMPLETE
-} = filterTypes;
-
 const todosReducer = combineReducers({
   entities: entitiesReducer,
   condition: conditionReducer
@@ -41,7 +35,7 @@ function entitiesReducer(state={}, action) {
     return deleteTodos(state, action.ids);
 
   case TOGGLE_COMPLETE:
-    return toggleComplete(state, action.ids)
+    return toggleComplete(state, action.id)
 
   case DELETE_PROJECT:
     return deleteTodosByProject(state, action.id)
@@ -52,8 +46,6 @@ function entitiesReducer(state={}, action) {
 
 function conditionReducer(state={}, action) {
   switch (action.type) {
-    case FILTER_TODOS:
-      return action.filter;
   }
 
   return state;
@@ -91,16 +83,11 @@ function deleteTodos(state, ids) {
   );
 }
 
-function toggleComplete(state, ids) {
-  let currentTodos = _.pick(state, todo =>
-    ids.indexOf(todo.id) !== -1
-  );
-  let hasIncomplete = _.some(currentTodos, todo => !todo.complete);
-
+function toggleComplete(state, id) {
   return _.mapValues(state, todo =>
-    ids.indexOf(todo.id) !== -1 ?
+    todo.id === id ?
     Object.assign({}, todo, {
-      complete: hasIncomplete
+      complete: !todo.complete
     }) :
     todo
   );
