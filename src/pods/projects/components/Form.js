@@ -5,12 +5,12 @@ import {
   PropTypes,
   View,
   Text,
-  TextInput,
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import moment from 'moment'
 
+import TextInput from 'components/TextInput'
 import SaveButton from 'components/SaveButton'
 
 import styles from 'styles/Form'

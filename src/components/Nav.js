@@ -3,6 +3,7 @@
 import {
   Component,
   View,
+  ScrollView,
   Navigator,
   Image,
   StyleSheet
@@ -29,7 +30,11 @@ export default class Nav extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}
+                  contentContainerStyle={{flex: 1}}
+                  keyboardShouldPersistTaps={false}
+                  automaticallyAdjustContentInsets={false}
+                  scrollEnabled={false}>
         <Image source={require('image!bg')} style={styles.bg}>
           <BlurView blurType="dark" style={{flex: 1}}>
             <Navigator  ref="nav"
@@ -38,7 +43,7 @@ export default class Nav extends Component {
                         navigationBar={<NavBar routeMapper={routeMapper} />} />
           </BlurView>
         </Image>
-      </View>
+      </ScrollView>
     );
   }
 }
