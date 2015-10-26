@@ -31,8 +31,8 @@
    * on the same Wi-Fi network.
    */
 
-  // jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"];    // Simulator
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"];   // Device
+  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"];    // Simulator
+  // jsCodeLocation = [NSURL URLWithString:@"http://localhost:8080/index.ios.bundle"];   // Device
 
   /**
    * OPTION 2
@@ -44,7 +44,7 @@
    * see http://facebook.github.io/react-native/docs/runningondevice.html
    */
 
-//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  // jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"ReactNativeReduxTodo"
