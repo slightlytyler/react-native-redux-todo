@@ -6,13 +6,14 @@ import {
   View,
   Text,
   TextInput,
-  StyleSheet,
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import moment from 'moment'
 
 import SaveButton from 'components/SaveButton'
+
+import styles from 'styles/Form'
 
 export default class ProjectFormComponent extends React.Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -40,21 +41,23 @@ export default class ProjectFormComponent extends React.Component {
   }
 
   render() {
+    const { title, subTitle } = this.state;
+
     return(
       <View style={styles.formContainer}>
         <View style={styles.form}>
           <View style={styles.field}>
             <Text style={styles.label}>Title</Text>
-            <TextInput style={styles.input}
-                       value={this.state.title}
+            <TextInput style={styles.singleLineInput}
+                       value={title}
                        autoFocus={true}
                        onChangeText={(text) => this.setState({ title: text })} />
           </View>
 
           <View style={styles.field}>
             <Text style={styles.label}>Sub Title</Text>
-            <TextInput style={styles.input}
-                       value={this.state.subTitle}
+            <TextInput style={styles.singleLineInput}
+                       value={subTitle}
                        onChangeText={(text) => this.setState({ subTitle: text })} />
           </View>
         </View>
@@ -72,38 +75,3 @@ ProjectFormComponent.propTypes = {
     submit: PropTypes.func.isRequired
   }),
 };
-
-var styles = StyleSheet.create({
-  formContainer: {
-    flex: 1,
-    marginTop: 24,
-  },
-
-  form: {
-    flex: 1,
-  },
-
-  field: {
-    marginBottom: 18
-  },
-
-  label: {
-    marginBottom: 10,
-    fontSize: 18,
-    fontWeight: '400',
-
-    color: 'rgba(255, 255, 255, .8)',
-  },
-
-  input: {
-    padding: 10,
-    height: 40,
-
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, .8)',
-
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 6
-  }
-});

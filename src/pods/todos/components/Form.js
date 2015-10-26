@@ -7,7 +7,6 @@ import {
   Text,
   TextInput,
   SwitchIOS,
-  StyleSheet,
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function'
@@ -15,6 +14,8 @@ import moment from 'moment'
 
 import TextInputDatePicker from 'components/TextInputDatePicker'
 import SaveButton from 'components/SaveButton'
+
+import styles from 'styles/Form'
 
 export default class TodoFormComponent extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -47,13 +48,20 @@ export default class TodoFormComponent extends Component {
   }
 
   render() {
+    const {
+      text,
+      date,
+      currentDate,
+      notifactionsEnabled
+    } = this.state;
+
     return(
-      <View style={styles.todoForm}>
-        <View style={styles.formContainer}>
+      <View style={styles.formContainer}>
+        <View style={styles.form}>
           <View style={styles.field}>
             <Text style={styles.label}>Text</Text>
-            <TextInput style={styles.input}
-                       value={this.state.text}
+            <TextInput style={styles.multiLineInput}
+                       value={text}
                        autoFocus={true}
                        onChangeText={(text) => this.setState({ text: text })}
                        multiline={true} />
@@ -62,16 +70,16 @@ export default class TodoFormComponent extends Component {
           <View style={styles.field}>
             <Text style={styles.label}>Due Date</Text>
             <TextInputDatePicker
-                date={this.state.date}
-                minimumDate={this.state.currentDate}
-                onDateChange={(date) => this.setState({ date: date })}
+                date={date}
+                minimumDate={currentDate}
+                onDateChange={date => this.setState({ date: date })}
                 mode="datetime"
               />
           </View>
 
           <View style={styles.field}>
             <Text style={styles.label}>Enable Notifactions?</Text>
-            <SwitchIOS value={this.state.notifactionsEnabled}
+            <SwitchIOS value={notifactionsEnabled}
                        onValueChange={(value) => this.setState({ notifactionsEnabled:  value})}/>
           </View>
         </View>
@@ -90,38 +98,3 @@ TodoFormComponent.propTypes = {
     submit: PropTypes.func.isRequired
   })
 };
-
-var styles = StyleSheet.create({
-  todoForm: {
-    flex: 1,
-  },
-
-  formContainer: {
-    flex: 1,
-    marginTop: 24,
-  },
-
-  field: {
-    marginBottom: 18
-  },
-
-  label: {
-    marginBottom: 10,
-    fontSize: 18,
-    fontWeight: '400',
-
-    color: 'rgba(255, 255, 255, .8)',
-  },
-
-  input: {
-    padding: 10,
-    height: 200,
-
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, .8)',
-
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 6
-  }
-});
