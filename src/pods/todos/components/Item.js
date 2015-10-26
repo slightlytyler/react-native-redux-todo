@@ -5,15 +5,13 @@ import {
   PropTypes,
   View,
   TouchableHighlight,
-  Text,
-  StyleSheet,
-  PixelRatio
+  Text
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function';
 import moment from 'moment';
 
-import itemStyles from 'styles/item'
+import itemStyles from 'styles/Item'
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -68,7 +66,7 @@ TodoItem.propTypes = {
   toggleComplete: PropTypes.func.isRequired
 };
 
-var styles = StyleSheet.create({
+var styles = {
   ...itemStyles,
 
   due: {
@@ -90,4 +88,4 @@ var styles = StyleSheet.create({
   completed: {
     opacity: .5
   }
-});
+};

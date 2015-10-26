@@ -3,18 +3,16 @@
 import {
   Component,
   PropTypes,
-  PixelRatio,
   View,
   TouchableHighlight,
   Text,
-  StyleSheet
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import itemStyles from 'styles/item'
+import itemStyles from 'styles/Item'
 
 export default class ProjectItem extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -37,7 +35,8 @@ export default class ProjectItem extends Component {
           <View style={styles.checkbox}>
             <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />
           </View>
-          <Text style={[styles.body, textStyles]}>
+          <Text style={[styles.body, textStyles]}
+                numberOfLines={3}>
              {item.title}
           </Text>
           <View>
@@ -56,7 +55,7 @@ ProjectItem.propType = {
   selectProject: PropTypes.func.isRequired
 };
 
-var styles = StyleSheet.create({
+var styles = {
   ...itemStyles,
 
   arrow: {
@@ -65,4 +64,4 @@ var styles = StyleSheet.create({
     fontSize: 16,
     color: 'rgba(255, 255, 255, 0.6)'
   }
-});
+};

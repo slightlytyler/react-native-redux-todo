@@ -4,12 +4,13 @@ import {
   Component,
   PropTypes,
   ListView,
-  StyleSheet
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import TodoItem from './Item'
+
+import styles from 'styles/List'
 
 export default class TodoList extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -51,9 +52,3 @@ TodoList.propTypes = {
   editTodo: PropTypes.func.isRequired,
   toggleComplete: PropTypes.func.isRequired,
 };
-
-var styles = StyleSheet.create({
-  list: {
-    flex: 1
-  }
-});

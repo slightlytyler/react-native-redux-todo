@@ -3,13 +3,14 @@
 import {
   Component,
   PropTypes,
-  ListView,
-  StyleSheet
+  ListView
 } from 'react-native'
 
 import shouldPureComponentUpdate from 'react-pure-render/function';
 
 import ProjectItem from './Item'
+
+import styles from 'styles/List'
 
 export default class ProjectList extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
@@ -49,9 +50,3 @@ ProjectList.propTypes = {
   editProject: PropTypes.func.isRequired,
   selectProject: PropTypes.func.isRequired
 };
-
-var styles = StyleSheet.create({
-  list: {
-    flex: 1
-  }
-});

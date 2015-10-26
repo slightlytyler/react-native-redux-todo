@@ -1,10 +1,8 @@
 'use strict';
 
-import React from 'react-native';
+import { StyleSheet, PixelRatio } from 'react-native'
 
-var { PixelRatio } = React;
-
-export default {
+export default StyleSheet.create({
   container: {
     position: 'relative',
     flex: 1,
@@ -48,4 +46,4 @@ export default {
     flex: 5,
     marginRight: 14
   }
-};
+});
