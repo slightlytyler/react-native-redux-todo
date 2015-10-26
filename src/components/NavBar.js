@@ -51,11 +51,13 @@ export const routeMapper = {
 
     return (
       <View style={styles.navBarTitle}>
-        <Text style={titleStyle}>
+        <Text style={titleStyle}
+              numberOfLines={1}>
           {route.title || route.name}
         </Text>
 
-        <Text style={subTitleStyle}>
+        <Text style={subTitleStyle}
+              numberOfLines={1}>
           {route.subTitle}
         </Text>
       </View>
@@ -92,10 +94,12 @@ var styles = StyleSheet.create({
     fontWeight: '300'
   },
   navBarTitleText: {
+    marginRight: 20,
     color: 'white',
     fontSize: 40,
   },
   navBarSubTitleText: {
+    marginRight: 36,
     color: 'rgba(255, 255, 255, 0.5)',
   },
   navBarTitle: {
