@@ -19,7 +19,7 @@ export default class TodoItem extends Component {
   shouldComponentUpdate = shouldPureComponentUpdate;
 
   isDueIn() {
-    const date = moment(this.props.rowData.date);
+    const date = moment(this.props.item.date);
     const dueIn = date.diff(moment());
     const second = 1000,
           minute = 60 * second,
@@ -33,17 +33,21 @@ export default class TodoItem extends Component {
     }
   }
   render() {
-    const { rowData, rowID } = this.props;
-    const item = rowData;
+    const {
+      item,
+      toggleComplete,
+      editTodo
+    } = this.props;
 
     const textStyles = [styles.text, item.complete && styles.completed];
 
     return(
-      <TouchableHighlight onPress={() => this.props.toggleComplete(item.id)}
-                          onLongPress={() => this.props.editTodo(item)}>
+      <TouchableHighlight onPress={() => toggleComplete(item.id)}
+                          onLongPress={() => editTodo(item)}>
         <View style={styles.container}>
           <View style={[styles.checkbox, item.complete && styles.completed]}>
-            <Icon name="check" style={[styles.checkmark, !item.complete && styles.hidden]} />
+            <Icon name="check"
+                  style={[styles.checkmark, !item.complete && styles.hidden]} />
           </View>
           <Text style={[styles.body, textStyles]}
                 numberOfLines={3}>
@@ -52,7 +56,8 @@ export default class TodoItem extends Component {
           <Text style={[textStyles, styles.due]}>
             {this.isDueIn().value}
           </Text>
-          <Icon name={item.notificationsEnabled ? "star" : "star-o"} style={[styles.important, item.complete && styles.completed]} />
+          <Icon name={item.notificationsEnabled ? "star" : "star-o"}
+                style={[styles.important, item.complete && styles.completed]} />
         </View>
       </TouchableHighlight>
     )
@@ -60,8 +65,7 @@ export default class TodoItem extends Component {
 }
 
 TodoItem.propTypes = {
-  rowData: PropTypes.object.isRequired,
-  rowID: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
   editTodo: PropTypes.func.isRequired,
   toggleComplete: PropTypes.func.isRequired
 };

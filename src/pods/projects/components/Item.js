@@ -19,12 +19,10 @@ export default class ProjectItem extends Component {
 
   render() {
     const {
-      rowData,
-      rowID,
+      item,
       editProject,
       selectProject
     } = this.props;
-    const item = rowData;
 
     const textStyles = [styles.text, item.complete && styles.completed];
 
@@ -49,8 +47,7 @@ export default class ProjectItem extends Component {
 }
 
 ProjectItem.propType = {
-  rowData: PropTypes.object.isRequired,
-  rowID: PropTypes.string.isRequired,
+  item: PropTypes.object.isRequired,
   editProject: PropTypes.func.isRequired,
   selectProject: PropTypes.func.isRequired
 };

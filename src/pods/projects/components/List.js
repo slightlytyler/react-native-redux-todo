@@ -34,9 +34,8 @@ export default class ProjectList extends Component {
       <ListView
         dataSource={this.state.dataSource.cloneWithRows(projects)}
         initialListSize={15}
-        renderRow={(rowData, rowID) =>
-                    <ProjectItem rowData={rowData}
-                                 rowID={rowID}
+        renderRow={rowData =>
+                    <ProjectItem item={rowData}
                                  editProject={editProject}
                                  selectProject={selectProject} />}
         style={styles.list}

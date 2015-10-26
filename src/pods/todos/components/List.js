@@ -36,9 +36,8 @@ export default class TodoList extends Component {
       <ListView
         dataSource={this.state.dataSource.cloneWithRows(todos)}
         initialListSize={15}
-        renderRow={(rowData, rowID) =>
-                    <TodoItem rowData={rowData}
-                              rowID={rowID}
+        renderRow={rowData =>
+                    <TodoItem item={rowData}
                               editTodo={editTodo}
                               toggleComplete={toggleComplete} />}
         style={styles.list}
